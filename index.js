@@ -19,54 +19,66 @@ const pares = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36];
 const impar = [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35];
 const verme = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 const preto = [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35];
-const entra = [1,2.5,5,20,50,100,500,2000,5000];
+const ventr = [1,2.5,5,10,10,15,22,33,50,75,113,170];
+
+let operacao = {
+    entrada: 0,
+    soma:    0,
+    retorno: 0,
+    lucro:   0
+};
 let analise = {
-    col1: [],
-    col2: [],
-    col3: [],
-    result: []
+    col1:   [],
+    col2:   [],
+    col3:   [],
+    result: [],
+    ents:   [],
+    banca:  0
 };
 
-let numeros = [25,27,1,13,12,22,35,1,5];
-let modalidade = "colunas";
-let alavancagem = 1;
+/***********************************************************/
 
-calcular(numeros, modalidade, alavancagem);
+// Números sorteados
+let numeros = [25,27,2,13,12,9,5,1,22,5];
+
+// Adiciona novos números
+addNumero(19);
+
+// Modalidade, alavancagem, número da entrada
+let modalidade  = "colunas";
+let alavancagem = 3;
+let nentrada    = 0;
+
+// Banca inicial
+addBanca(1200);
+
+// Calcula probabilidade (Números sorteados, modalidade, alavancagem, número da entrada)
+calcular(numeros, modalidade, alavancagem, nentrada);
+
+// Exibe resultado
 Log.info("Resultado da Análise: ", getAnalise());
 
-function calcular(numeros, modalidade, alavancagem) {
+/***********************************************************/
+
+function calcular(numeros, modalidade, alavancagem, nentrada) {
+
+    // Elimina números antigos
+    while (numeros.length > 10) {
+        numeros.shift();
+    }// while (numeros.length > 10)
+
+    Log.info(numeros);
 
     // Aguarda os 9 útimos números sorteados para iniciar a análise probabilística
-    if (numeros.length >= 9) {
+    if (numeros.length >= 10) {
 
         switch (modalidade) {
 
             // 'colunas', 'linhas', 'metades', 'pares-ímpares', 'vermelho-preto'
             case 'colunas':
+
                 Log.success('colunas');
-                if (alavancagem == 1) {
-
-                    Log.success('alavancagem 1');
-
-                    numeros.forEach( num => {
-                        col1.includes(num) ? analise.col1.push(num) : "";
-                        col2.includes(num) ? analise.col2.push(num) : "";
-                        col3.includes(num) ? analise.col3.push(num) : "";
-                    });
-
-                    let countCol1 = analise.col1.length;
-                    let countCol2 = analise.col2.length;
-                    let countCol3 = analise.col3.length;
-
-                    analise.result[0] = Decimals(countCol1 / (countCol1 + countCol2 + countCol3) * 100, 2);
-                    analise.result[1] = Decimals(countCol2 / (countCol1 + countCol2 + countCol3) * 100, 2);
-                    analise.result[2] = Decimals(countCol3 / (countCol1 + countCol2 + countCol3) * 100, 2);
-
-                } else if (alavancagem == 2) {
-                    Log.success('alavancagem 2');
-                } else if (alavancagem == 3) {
-                    Log.success('alavancagem 3');
-                }// else if (alavancagem == 3)
+                colunas({alavancagem, numeros, analise, nentrada});
 
                 break;
             case 'linhas':
@@ -87,9 +99,97 @@ function calcular(numeros, modalidade, alavancagem) {
 
         }// switch (modalidade)
 
-    }// if (numeros.length >= 9)
+    }// if (numeros.length >= 10)
 
 }// function calcular(numeros)
+
+/***********************************************************/
+
+function colunas(dados) {
+
+    let alavancagem = dados.alavancagem;
+    let analise     = dados.analise;
+    let nentrada    = dados.nentrada;
+
+    numeros.forEach( num => {
+        col1.includes(num) ? analise.col1.push(num) : "";
+        col2.includes(num) ? analise.col2.push(num) : "";
+        col3.includes(num) ? analise.col3.push(num) : "";
+    });
+
+    let countCol1 = analise.col1.length;
+    let countCol2 = analise.col2.length;
+    let countCol3 = analise.col3.length;
+
+    analise.result[0] = Decimals(100 - (countCol1 / (countCol1 + countCol2 + countCol3) * 100), 0);
+    analise.result[1] = Decimals(100 - (countCol2 / (countCol1 + countCol2 + countCol3) * 100), 0);
+    analise.result[2] = Decimals(100 - (countCol3 / (countCol1 + countCol2 + countCol3) * 100), 0);
+
+    if (alavancagem == 1) {
+
+        Log.success('alavancagem 1');
+
+    } else if (alavancagem == 2) {
+
+        Log.success('alavancagem 2');
+
+    } else if (alavancagem == 3) {
+
+        Log.success('alavancagem 3');
+
+        if (analise.result[0] > analise.result[1] && analise.result[0] > analise.result[2]) {
+
+            analise.ents[0] = ventr[nentrada];
+            analise.ents[1] = 0;
+            analise.ents[2] = 0;
+
+            analise.banca -= ventr[nentrada];
+
+        } else if (analise.result[1] > analise.result[0] && analise.result[1] > analise.result[2]) {
+
+            analise.ents[0] = 0;
+            analise.ents[1] = ventr[nentrada];
+            analise.ents[2] = 0;
+
+            analise.banca -= ventr[nentrada];
+
+        } else if (analise.result[2] > analise.result[1] && analise.result[2] > analise.result[0]) {
+
+            analise.ents[0] = 0;
+            analise.ents[1] = 0;
+            analise.ents[2] = ventr[nentrada];
+
+            analise.banca -= ventr[nentrada];
+
+        } else {
+
+            Log.info("Espera...");
+
+        }// else
+
+    }// else if (alavancagem == 3)
+
+}// colunas
+
+/***********************************************************/
+
+function addNumero(num) {
+
+    numeros.push(num);
+
+}// addNumero
+
+function addBanca(num) {
+
+    analise.banca = num;
+
+}// addBanca
+
+function getBanca() {
+
+    return analise.banca;
+
+}// getBanca
 
 function getAnalise() {
 
@@ -104,6 +204,9 @@ function getAnalise() {
 /************/
 
 module.exports = {
-    calcular:   calcular,
-    getAnalise: getAnalise,
+    calcular:    calcular,
+    addNumero:   addNumero,
+    addBanca:    addBanca,
+    getBanca:    getBanca,
+    getAnalise:  getAnalise,
 };
