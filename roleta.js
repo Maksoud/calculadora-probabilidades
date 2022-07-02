@@ -2,14 +2,7 @@ const Log        = require("./class/Logs");
 // const Decimals   = require("./class/Decimals");
 const Strategies = require("./class/Strategies");
 
-/***********************************************************/
-
-let operacao = {
-    entrada: 0,
-    soma:    0,
-    retorno: 0,
-    lucro:   0
-};
+/************/
 
 let resultado = {
     duz1:   [],
@@ -20,7 +13,7 @@ let resultado = {
     banca:  0
 };
 
-/***********************************************************/
+/************/
 
 function jogar(modalidade, nentrada) {
 
@@ -85,11 +78,15 @@ function addNumero(num) {
 
 }// addNumero
 
+/************/
+
 function addBanca(num) {
 
     resultado.banca = num;
 
 }// addBanca
+
+/************/
 
 function getBanca() {
 
@@ -97,13 +94,15 @@ function getBanca() {
 
 }// getBanca
 
+/************/
+
 function getResultado() {
 
     return resultado;
 
 }// getResultado
 
-/***********************************************************/
+/************/
 
 module.exports = {
     jogar:        jogar,
