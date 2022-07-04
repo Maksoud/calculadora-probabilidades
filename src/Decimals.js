@@ -5,4 +5,4 @@ module.exports = (num, decimal) => {
 
     return Math.floor(num * places) / places;
 
-}// Decimals
+};// Decimals

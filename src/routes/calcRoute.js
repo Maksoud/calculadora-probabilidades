@@ -1,8 +1,9 @@
 const express    = require('express');
 const router     = express.Router();
-const controller = require('../controllers/roletaController')
+const controller = require('../controllers/roletaController');
 
 router.post('/', controller.post);
+// router.get('/', controller.get);
 // router.put('/:id', controller.put);
 // router.delete('/:id', controller.delete);
 

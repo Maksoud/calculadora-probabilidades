@@ -1,14 +1,21 @@
-const express = require('express');
-const app     = express();
-const router  = express.Router();
+const express    = require('express');
+const app        = express();
+const router     = express.Router();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: false }))
+
+// Content-Type: x-www-form-urlencoded
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
 //Rotas
-const index         = require('./routes/index');
-const addNumRoute   = require('./routes/addNumRoute');
-const addBancaRoute = require('./routes/addBancaRoute');
+const index     = require('./routes/index');
+const calcRoute = require('./routes/calcRoute');
 
 app.use('/', index);
-app.use('/addNum', addNumRoute);
-app.use('/addBanca', addBancaRoute);
+app.use('/calc', calcRoute);
 
 module.exports = app;
