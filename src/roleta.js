@@ -1,5 +1,4 @@
 const Log        = require("./Logs");
-// const Decimals   = require("./Decimals");
 const Strategies = require("./Strategies");
 
 /************/
@@ -31,7 +30,8 @@ exports.jogar = (dados) => {
                 Log.success('vermelho-preto');
                 break;
             default:
-                Log.warning('Não reconhecido');
+                Log.warning('Comando não reconhecido');
+                return "Comando não reconhecido";
                 break;
 
         }// switch (dados.modalidade)
@@ -39,6 +39,7 @@ exports.jogar = (dados) => {
     } else {
 
         Log.warning("Aguardando demais números", dados.numeros);
+        return "Aguardando demais números...";
 
     }// if (dados.numeros.length >= 12)
 

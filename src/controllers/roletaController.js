@@ -16,13 +16,11 @@ exports.post = (req, res, next) => {
         derrotas:   req.body.derrotas
     };
 
-    let result = roleta.jogar(dados);
+    res.status(201).send(roleta.jogar(dados));
 
-    // console.log("Resultado da Análise:", result);
+};
 
-    res.status(201).send(result);
-
-    /*
+/*
     {
         "duz1": [
             2,
@@ -75,9 +73,7 @@ exports.post = (req, res, next) => {
         "vitorias": 7,
         "derrotas": 3
     }
-    */
-
-};
+*/
 
 // exports.get = (req, res, next) => {
 //     console.log("req.params: ", req.params);
