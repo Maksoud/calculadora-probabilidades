@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="http://localhost:3001/calc" method="POST">
+        <form id="form" method="POST">
             <div class="topo">
                 <div class="small-box">
                     <h5><i class="fas fa-wallet"></i> Banca Inicial</h5>
@@ -107,18 +107,32 @@
         </form>
     </div>
     <script>
-        // // Create WebSocket connection.
-        // const socket = new WebSocket('ws://localhost:3001');
 
-        // // Connection opened
-        // socket.addEventListener('open', function (event) {
-        //     socket.send('Hello Server!');
-        // });
+        const form = document.getElementById('form');
+ 
+        form.addEventListener('submit', function(e) {
 
-        // // Listen for messages
-        // socket.addEventListener('message', function (event) {
-        //     console.log('Message from server ', event.data);
-        // });
+            // Prevent default behavior:
+            e.preventDefault();
+
+            // Create new FormData object:
+            const formData = new FormData(form);
+            
+            // Convert formData object to URL-encoded string:
+            const payload = new URLSearchParams(formData);
+
+            // Create payload as new FormData object:
+            // const payload = new FormData(form);
+            
+            fetch('http://localhost:3001/calc', {
+                method: 'POST',
+                body: payload,
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
+        })// form.addEventListener
+
     </script>
 </body>
 </html>
