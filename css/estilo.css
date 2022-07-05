@@ -1,0 +1,228 @@
+.container {
+    background-color: rgb(37, 34, 34);
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.473);
+    color: white;
+    max-width: 400px;
+}
+.topo {
+    display: flex;
+}
+.small-box {
+    background-color: rgb(44, 41, 41);
+    color: white;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
+    padding: 20px;
+    width: 100%;
+    margin: 0 10px;
+    padding-bottom: 5px;
+}
+.small-box h5 {
+    font-size: 10px;
+}
+.small-box h2 {
+    font-size: 18px;
+}
+.small-box i {
+    margin-top: -10px;
+}
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.banca {
+    text-align: left;
+}
+.banca p {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.numeros div {
+    display: inline-flex;
+    margin: 0 10px;
+}
+
+.win {
+    color: yellowgreen;
+}
+
+.inputs {
+    margin-top: 15px;
+    display: flex;
+}
+
+.center {
+    text-align: center;
+}
+
+.inputs p {
+    margin-bottom: 2px;
+}
+
+.inputs div {
+    margin: 0 20px;
+}
+
+.inputs p {
+    font-size: 12px;
+    text-align: center;
+}
+
+.ultimo-sorteado input {
+    border-radius: 12px;
+    border: 2px solid #333;
+    padding: 2px 14px;
+    font-size: 30px;
+    color: white;
+    background: transparent;
+    font-weight: 700;
+}
+
+.ultimo-sorteado button {
+    border-radius: 50%;
+    border: none;
+    padding: 3px 10px;
+    position: absolute;
+    margin-left: -16px;
+    font-size: 22px;
+    margin-top: 6px;
+    background: #ff4500;
+    color: white;
+}
+
+.gray input{
+    color: #696969;
+}
+
+.ultimos-numeros {
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+
+.box-ultimos {
+    width: 100%;
+    background-color: rgb(44, 41, 41);
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
+}
+
+.box-ultimos li {
+    list-style: none;
+    display: inline-flex;
+    background-color: transparent;
+    color: white;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    border: 2px solid #ff4500;
+    font-weight: 700;
+    font-size: 34px;
+    width: 95px;
+    height: 95px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.329);
+}
+
+.box-ultimos div {
+    margin: 12px 0;
+}
+
+.duzias {
+    text-align: center;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.duzias div {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: calc(33% - 16px);
+    background-color: rgb(37, 37, 37);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
+}
+
+.duzias h2 {
+    background-color: green;
+    padding: 4px 22px;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 100%;
+    margin-left: 0px;
+}
+
+.duzias p {
+    padding: 5px;
+    margin-top: -5px;
+    margin-bottom: 0px;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.footer div {
+    margin: 0 20px;
+}
+
+.d-selecionada {
+    display: inline-flex;   
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(37, 37, 37);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
+}
+
+.d-selecionada p{
+    background-color: rgb(0, 47, 255);
+    padding: 6px;
+    border-radius: 10px;
+    font-size:12px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+
+.d-selecionada h1 {
+    margin-top: 5px;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+.valor-entrada {
+    border: 1px solid #fff;
+    background: transparent;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    padding: 5px 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
+}
+
+.box-ultimos strong {
+    position: absolute;
+    margin-left: -110px;
+    border-radius: 50%;
+    background: #ff4500;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
