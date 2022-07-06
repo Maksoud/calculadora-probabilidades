@@ -23,7 +23,6 @@
                 <div class="small-box">
                     <div class="space-between">
                         <h5><i class="far fa-usd-circle"></i> Lucro Total</h5>
-                        <h5>Vitórias: <strong class="win">15</strong></h5>
                     </div>
                     <h2>R$ 4.345,00</h2>
                 </div>
@@ -35,72 +34,100 @@
                     <input type="text" name="duz2" value="13,22,17,21">
                     <input type="text" name="duz3" value="25,27">
                     <input type="text" name="percDuz" value="50,33,16"> -->
-                    <input type="number" name="numeros" value="25" placeholder="Último número sorteado" min="1" max="36">
+                    <input type="number" class="numero_sorteado" name="numeros" value="25" placeholder="Último número sorteado" min="1" max="36">
                     <!-- <input type="text" name="valorDez" value="0,0,0">
                     <input type="text" name="rodadaDez" value="0,0,0">
                     <input type="text" name="banca" value="1023">
                     <input type="text" name="vitorias" value="5">
                     <input type="text" name="derrotas" value="0"> -->
-                    <button type="submit"><i class="fas fa-arrow-alt-right"></i></button>
+                    <button type="submit"><svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00895 0.20156C1.88414 0.139133 1.74431 0.112989 1.60537 0.126102C1.46643 0.139214 1.33396 0.191057 1.22302 0.275733C1.11209 0.360408 1.02715 0.474518 0.977861 0.605081C0.928572 0.735644 0.916915 0.877419 0.944216 1.01428L3.03641 8.24674C3.07542 8.38152 3.15167 8.50256 3.2564 8.59594C3.36112 8.68932 3.49007 8.75126 3.62843 8.77463L12.1135 10.1958C12.5132 10.2748 12.5132 10.8474 12.1135 10.9265L3.62843 12.3476C3.49007 12.371 3.36112 12.4329 3.2564 12.5263C3.15167 12.6197 3.07542 12.7407 3.03641 12.8755L0.944216 20.108C0.916915 20.2448 0.928572 20.3866 0.977861 20.5172C1.02715 20.6477 1.11209 20.7618 1.22302 20.8465C1.33396 20.9312 1.46643 20.983 1.60537 20.9961C1.74431 21.0093 1.88414 20.9831 2.00895 20.9207L21.3949 11.2277C21.5186 11.1657 21.6226 11.0705 21.6953 10.9528C21.768 10.8351 21.8064 10.6995 21.8064 10.5611C21.8064 10.4228 21.768 10.2872 21.6953 10.1694C21.6226 10.0517 21.5186 9.95653 21.3949 9.89454L2.00895 0.20156Z" fill="white"/></svg>
+                        </button>
                 </div>
-    
-                <div class="ultimo-sorteado gray">
-                    <p>Número da rodada</p>
-                    <input type="number" class="center" name="ultimo_numero" value="1" placeholder="Último número sorteado" min="1" max="36" disabled>
+                <div class="flex placar">
+                    <div class="bg-win">
+                        <h2>WIN</h2>
+                        <p>0</p>
+                    </div>
+                    <div class="bg-loss">
+                        <h2>LOSS</h2>
+                        <p>0</p>
+                    </div>
                 </div>
             </div>
             <h2 class="ultimos-numeros">Últimos números</h2>
             <div class="box-ultimos">
                 <ul>
                     <div>
-                        <li>10</li>
-                        <strong>1</strong>
-                        <li>21</li>
-                        <strong>2</strong>
-                        <li>30</li>
-                        <strong>3</strong>
-                    </div>
-                    <div>
-                        <li>14</li>
-                        <strong>4</strong>
-                        <li>15</li>
-                        <strong>5</strong>
-                        <li>16</li>
-                        <strong>6</strong>
-                    </div>
-                    <div>
-                        <li>17</li>
-                        <strong>7</strong>
-                        <li>18</li>
-                        <strong>8</strong>
-                        <li>19</li>
-                        <strong>9</strong>
+
                     </div>
                 </ul>
             </div>
+            <h2 class="ultimos-numeros">Sugestões</h2>
             <div class="duzias">
                 <div>
-                    <h2>D1</h2>
+                    <div class="flex titulo space-between baixo">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 15C6.14348 15 4.36301 14.2625 3.05025 12.9497C1.7375 11.637 1 9.85652 1 8C1 6.14348 1.7375 4.36301 3.05025 3.05025C4.36301 1.7375 6.14348 1 8 1C9.85652 1 11.637 1.7375 12.9497 3.05025C14.2625 4.36301 15 6.14348 15 8C15 9.85652 14.2625 11.637 12.9497 12.9497C11.637 14.2625 9.85652 15 8 15ZM8 16C10.1217 16 12.1566 15.1571 13.6569 13.6569C15.1571 12.1566 16 10.1217 16 8C16 5.87827 15.1571 3.84344 13.6569 2.34315C12.1566 0.842855 10.1217 0 8 0C5.87827 0 3.84344 0.842855 2.34315 2.34315C0.842855 3.84344 0 5.87827 0 8C0 10.1217 0.842855 12.1566 2.34315 13.6569C3.84344 15.1571 5.87827 16 8 16Z" fill="white"/></svg>
+                        <h2>D1</h2>
+                        <p>20%</p>
+                    </div>
                     <p>R$ 00,00</p>
+                    <div class="entradas">
+                        <p>Até 9 entradas</p>
+                    </div>
                 </div>
-    
                 <div>
-                    <h2>D2</h2>
+                    <div class="flex titulo space-between medio">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 15C6.14348 15 4.36301 14.2625 3.05025 12.9497C1.7375 11.637 1 9.85652 1 8C1 6.14348 1.7375 4.36301 3.05025 3.05025C4.36301 1.7375 6.14348 1 8 1C9.85652 1 11.637 1.7375 12.9497 3.05025C14.2625 4.36301 15 6.14348 15 8C15 9.85652 14.2625 11.637 12.9497 12.9497C11.637 14.2625 9.85652 15 8 15ZM8 16C10.1217 16 12.1566 15.1571 13.6569 13.6569C15.1571 12.1566 16 10.1217 16 8C16 5.87827 15.1571 3.84344 13.6569 2.34315C12.1566 0.842855 10.1217 0 8 0C5.87827 0 3.84344 0.842855 2.34315 2.34315C0.842855 3.84344 0 5.87827 0 8C0 10.1217 0.842855 12.1566 2.34315 13.6569C3.84344 15.1571 5.87827 16 8 16Z" fill="white"/></svg>
+                        <h2>D2</h2>
+                        <p>20%</p>
+                    </div>
                     <p>R$ 00,00</p>
+                    <div class="entradas">
+                        <p>Até 9 entradas</p>
+                    </div>
                 </div>
-    
                 <div>
-                    <h2>D3</h2>
+                    <div class="flex titulo space-between alto">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 8C16 10.1217 15.1571 12.1566 13.6569 13.6569C12.1566 15.1571 10.1217 16 8 16C5.87827 16 3.84344 15.1571 2.34315 13.6569C0.842855 12.1566 0 10.1217 0 8C0 5.87827 0.842855 3.84344 2.34315 2.34315C3.84344 0.842855 5.87827 0 8 0C10.1217 0 12.1566 0.842855 13.6569 2.34315C15.1571 3.84344 16 5.87827 16 8ZM12.03 4.97C11.9586 4.89882 11.8735 4.84277 11.7799 4.80522C11.6863 4.76766 11.5861 4.74936 11.4853 4.75141C11.3845 4.75347 11.2851 4.77583 11.1932 4.81717C11.1012 4.85851 11.0185 4.91797 10.95 4.992L7.477 9.417L5.384 7.323C5.24183 7.19052 5.05378 7.1184 4.85948 7.12183C4.66518 7.12525 4.47979 7.20397 4.34238 7.34138C4.20497 7.47879 4.12625 7.66418 4.12283 7.85848C4.1194 8.05278 4.19152 8.24083 4.324 8.383L6.97 11.03C7.04128 11.1012 7.12616 11.1572 7.21958 11.1949C7.313 11.2325 7.41305 11.2509 7.51375 11.2491C7.61444 11.2472 7.71374 11.2251 7.8057 11.184C7.89766 11.1429 7.9804 11.0837 8.049 11.01L12.041 6.02C12.1771 5.8785 12.2523 5.68928 12.2504 5.49296C12.2485 5.29664 12.1698 5.10888 12.031 4.97H12.03Z" fill="white"/></svg>    
+                        <h2>D3</h2>
+                        <p>20%</p>
+                    </div>
                     <p>R$ 00,00</p>
+                    <div class="entradas">
+                        <p>Até 9 entradas</p>
+                    </div>
+                    <button class="confirma">Confirmar</button>
                 </div>
             </div>
-            <div class="footer space-between">
-                <div class="d-selecionada">
-                    <p>D Selecionada</p>
-                    <h1>D2</h1>
+            
+            <h2 class="ultimos-numeros">Em operação</h2>
+            <div class="duzias operacoes">
+                <div>
+                    <div class="titulo">
+                        <h2>D1</h2>
+                    </div>
+                    <p>R$ 00,00</p>
+                    <div class="entradas">
+                        <p>1ª entrada</p>
+                    </div>
                 </div>
                 <div>
-                    <input type="text" class="valor-entrada" value="R$ 100,00">
+                    <div class="titulo">
+                       <h2>D2</h2>
+                    </div>
+                    <p>R$ 00,00</p>
+                    <div class="entradas">
+                        <p>2ª entrada</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="titulo">
+                        <h2>D3</h2>
+                    </div>
+                    <p>R$ 00,00</p>
+                    <div class="entradas">
+                        <p>2ª entrada</p>
+                    </div>
                 </div>
             </div>
             <!-- <input type="submit" value="teste"> -->
@@ -108,12 +135,32 @@
     </div>
     <script>
 
+        let numero_sorteado = document.querySelector('.numero_sorteado');
+        let box_numeros = document.querySelector('.box-ultimos ul div');
+        let numeros = [];
+        let numerosInvertidos = [];
+        let filhos = document.querySelectorAll('.box-ultimos ul div li');
         const form = document.getElementById('form');
+        contador = 0;
  
         form.addEventListener('submit', function(e) {
 
-            // Prevent default behavior:
+            // Previne comportamento padrão de recarregar página
             e.preventDefault();
+
+            box_numeros.innerHTML = '';
+            
+            numeros.push(numero_sorteado.value);
+            // console.log("numeros", numeros);
+
+            numerosInvertidos = [...numeros];
+            numerosInvertidos.reverse();
+            // console.log("invertidos", numerosInvertidos)
+
+            for (i = 0; i <= 11; i++) {
+                box_numeros.innerHTML += numerosInvertidos[i] ? '<li>' + numerosInvertidos[i] + '</li>' : '<li>?</li>';
+                // console.log(numerosInvertidos)
+            }
 
             // Create new FormData object:
             const formData = new FormData(form);
@@ -128,7 +175,8 @@
                 method: 'POST',
                 body: payload,
             })
-            .then(res => res.json())
+
+            // .then(res => res.text())
             .then(data => console.log(data))
 
         })// form.addEventListener
