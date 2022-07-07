@@ -6,6 +6,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.473);
     color: white;
     max-width: 400px;
+    padding-bottom: 30px;
 }
 .topo {
     display: flex;
@@ -250,7 +251,7 @@
 }
 
 .bg-loss p {
-    background-color: #ff4500;
+    background-color: #fd0000;
     border-radius: 10px;
     padding: 10px;
 }
@@ -291,7 +292,7 @@
 }
 
 .baixo {
-    background-color: #ff4500 !important;
+    background-color: #c00000 !important;
 }
 
 .medio {
@@ -320,4 +321,15 @@
 .operacoes .titulo {
     background-color: #00a3ff;
     justify-content: center !important;
+}
+
+.operacao svg {
+    position: absolute;
+    margin-left: -40px;
+    margin-top: -2px !important;
+}
+
+.logo {
+    text-align: center;
+    padding: 20px;
 }
