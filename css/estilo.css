@@ -316,6 +316,8 @@
     color: white;
     padding: 3px 15px;
     margin-top: 15px;
+    outline: none;
+    border: none;
 }
 
 .operacoes .titulo {
