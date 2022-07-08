@@ -5,6 +5,8 @@ const Strategies = require("./Strategies");
 
 exports.jogar = (dados) => {
 
+    // Log.info("Dados", dados);
+
     // Aguarda os 9 útimos números sorteados para iniciar a análise probabilística
     if (dados.numeros.length >= 12) {
 
@@ -19,7 +21,7 @@ exports.jogar = (dados) => {
         dados.valorDuz  = dados.valorDuz.map(Number);
         dados.rodadaDuz = dados.rodadaDuz.map(Number);
 
-        // Coluna
+        // Colunas
         dados.vitCol    = Number(dados.vitCol);
         dados.derCol    = Number(dados.derCol);
         dados.valorCol  = dados.valorCol.map(Number);

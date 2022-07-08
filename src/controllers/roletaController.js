@@ -35,61 +35,6 @@ exports.post = (req, res, next) => {
 
 };
 
-/*
-    {
-        "duz1": [
-            2,
-            12,
-            9,
-            5,
-            1,
-            5
-        ],
-        "duz2": [
-            13,
-            22,
-            17,
-            21
-        ],
-        "duz3": [
-            25,
-            27
-        ],
-        "percDuz": [
-            50,
-            33,
-            16
-        ],
-        "numeros": [
-            25,
-            27,
-            2,
-            13,
-            12,
-            9,
-            5,
-            1,
-            22,
-            5,
-            17,
-            21
-        ],
-        "valorDuz": [
-            0,
-            0,
-            0
-        ],
-        "rodadaDuz": [
-            0,
-            0,
-            0
-        ],
-        "banca": 1310,
-        "vitorias": 7,
-        "derrotas": 3
-    }
-*/
-
 // exports.get = (req, res, next) => {
 //     console.log("req.params: ", req.params);
 //     console.log("req.body: ", req.body);

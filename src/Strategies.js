@@ -143,3 +143,127 @@ exports.duzias = (dados) => {
     return res;
     
 };// duzias
+
+/************/
+
+exports.colunas = (dados) => {
+
+    let res = {
+        colunas: [],
+        percCol: [],
+    };
+
+    // console.log("dados.numeros", dados.numeros);
+
+    /************/
+
+    // Separa cada número sorteado em colunas
+    dados.numeros.forEach( num => {
+        typeof res.colunas[0] == "undefined" ? res.colunas[0] = [] : "";
+        typeof res.colunas[1] == "undefined" ? res.colunas[1] = [] : "";
+        typeof res.colunas[2] == "undefined" ? res.colunas[2] = [] : "";
+        col[0].includes(num) ? res.colunas[0].push(num) : "";
+        col[1].includes(num) ? res.colunas[1].push(num) : "";
+        col[2].includes(num) ? res.colunas[2].push(num) : "";
+    });
+
+    // Log.info("colunas", res.colunas);
+
+    /************/
+
+    // Obtém o tamanho da coluna
+    let countCol = [];
+    for (let i = 0; i <= 2; i++) {
+        countCol[i] = res.duzias[i].length;
+    }// for (let i = 0; i <= 2; i++)
+
+    // Log.info("countCol", countCol);
+
+    /************/
+
+    let somaColunas = (countCol[0] + countCol[1] + countCol[2]);
+
+    /************/
+
+    // Obtém o percentual do tamanho da dúzia
+    for (let i = 0; i <= 2; i++) {
+        res.percCol[i] = Decimals((countCol[i] / somaColunas * 100), 0);
+    }// for (let i = 0; i <= 2; i++)
+
+    // Log.info("perCol", res.percCol);
+
+    /************/
+
+    // Verifica as 3 dúzias
+    for (let i = 0; i <= 2; i++) {
+
+        // Verifica se a dúzia iniciou a rodada
+        if (dados.rodadaCol[i] > 0) {
+
+            // último número sorteado
+            if (duz[i].includes(dados.numeros[11])) {
+                
+                // último número sorteado é da dúzia 1
+                dados.rodadaCol[i] = 0;
+                dados.banca       += valorCol[i] * 3;
+                dados.valorCol[i]  = 0;
+                dados.vitCol++;
+    
+            } else if (rodadaCol[i] < 9) {
+    
+                // incrementa rodada até a 9a entrada
+                dados.rodadaCol[i] += 1;
+                dados.valorCol[i]  += ventr[rodadaCol[i]];
+                dados.banca        -= ventr[rodadaCol[i]];
+                
+            } else {
+    
+                // perdeu
+                dados.rodadaCol[i]  = 0;
+                dados.banca        -= valorCol[i];
+                dados.valorCol[i]   = 0;
+                dados.derCol++;
+                
+            }// if (duz[i].includes(dados.numeros[11]))
+    
+        }// if (dados.rodadaCol[i] > 0)
+
+    }// for (let i = 0; i <= 2; i++)
+
+    /************/
+
+    // Começo do jogo
+    if (dados.rodadaCol[0] == 0 && dados.rodadaCol[1] == 0 && dados.rodadaCol[2] == 0) {
+
+        // Começar com a melhor dúzia
+        if (res.percCol[0] < 10) {
+
+            // dúzia 1 possui maior probabilidade
+            dados.rodadaCol[0] += 1;
+            dados.valorCol[0]   = ventr[0];
+            dados.banca        -= ventr[0];
+
+        } else if (res.percCol[1] < 10) {
+
+            // dúzia 2 possui maior probabilidade
+            dados.rodadaCol[1] += 1;
+            dados.valorCol[1]   = ventr[0];
+            dados.banca        -= ventr[0];
+
+        } else if (res.percCol[2] < 10) {
+
+            // dúzia 3 possui maior probabilidade
+            dados.rodadaCol[2] += 1;
+            dados.valorCol[2]   = ventr[0];
+            dados.banca        -= ventr[0];
+
+        }// else if (res.percCol[2] < 10)
+
+    }// if (dados.rodadaCol[0] == 0 && dados.rodadaCol[1] == 0 && dados.rodadaCol[2] == 0)
+
+    /************/
+
+    // Retorna o resultado
+    return res;
+    
+};// colunas
