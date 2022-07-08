@@ -6,6 +6,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.473);
     color: white;
     max-width: 400px;
+    padding-bottom: 30px;
 }
 .topo {
     display: flex;
@@ -41,11 +42,6 @@
     margin-block-start: 0px;
     margin-block-end: 0px;
 }
-.flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .numeros div {
     display: inline-flex;
     margin: 0 10px;
@@ -69,7 +65,7 @@
 }
 
 .inputs div {
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 .inputs p {
@@ -90,13 +86,18 @@
 .ultimo-sorteado button {
     border-radius: 50%;
     border: none;
-    padding: 3px 10px;
+    padding: 5px 10px;
     position: absolute;
     margin-left: -16px;
     font-size: 22px;
     margin-top: 6px;
-    background: #ff4500;
+    background: #00a3ff;
     color: white;
+}
+
+.ultimo-sorteado svg {
+    margin-top: -5px;
+    margin-left: 3px;
 }
 
 .gray input{
@@ -124,13 +125,13 @@
     border-radius: 50%;
     align-items: center;
     justify-content: center;
-    margin: 0 5px;
+    margin: 5px;
     border: 2px solid #ff4500;
     font-weight: 700;
-    font-size: 34px;
-    width: 95px;
-    height: 95px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.329);
+    font-size: 20px;
+    width: 42px;
+    height: 42px;
+    box-shadow: 0px 0px 5px rgb(0 0 0 / 33%);
 }
 
 .box-ultimos div {
@@ -154,19 +155,34 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
 }
 
-.duzias h2 {
-    background-color: green;
-    padding: 4px 22px;
+.duzias .titulo {
+    padding: 2px 6px;
     border-radius: 10px;
     font-size: 18px;
     width: 100%;
     margin-left: 0px;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 6px;
+}
+
+.duzias .titulo svg {
+    margin-top: -4px;
+}
+
+.duzias .titulo h2 {
+    font-size: 20px;
 }
 
 .duzias p {
     padding: 5px;
     margin-top: -5px;
     margin-bottom: 0px;
+}
+
+.duzias .titulo p {
+    font-size: 12px;
+    padding: 0px;
 }
 
 .footer {
@@ -219,10 +235,103 @@
 
 .box-ultimos strong {
     position: absolute;
-    margin-left: -110px;
+    margin-left: -56px;
     border-radius: 50%;
     background: #ff4500;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
     text-align: center;
+}
+
+.bg-win p {
+    background-color: #00b733;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.bg-loss p {
+    background-color: #fd0000;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.placar h2 {
+    font-size: 18px;
+}
+
+.placar {
+    width: 100%;
+    margin-left: 20px !important;
+}
+
+.placar div {
+    width: 50%;
+    text-align: center;
+}
+
+.placar p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.box-ultimos ul {
+    margin-top: 0px !important;
+    padding-left: 0px !important;
+    text-align: center;
+}
+
+.flex {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.titulo {
+    flex-direction: row !important;
+}
+
+.baixo {
+    background-color: #c00000 !important;
+}
+
+.medio {
+    background-color: #ff9900 !important;
+}
+
+.alto {
+    background-color: #00b733 !important;
+}
+
+.entradas {
+    background-color: #444444 !important;
+    width: 100% !important;
+    font-size: 13px;
+    padding: 2px 0px;
+}
+
+.confirma {
+    background-color: #00a040;
+    border-radius: 20px;
+    color: white;
+    padding: 3px 15px;
+    margin-top: 15px;
+    outline: none;
+    border: none;
+}
+
+.operacoes .titulo {
+    background-color: #00a3ff;
+    justify-content: center !important;
+}
+
+.operacao svg {
+    position: absolute;
+    margin-left: -40px;
+    margin-top: -2px !important;
+}
+
+.logo {
+    text-align: center;
+    padding: 20px;
 }
