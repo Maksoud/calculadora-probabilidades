@@ -9,11 +9,26 @@ exports.post = (req, res, next) => {
     let dados = {
         numeros:    req.body.numeros,
         banca:      req.body.banca,
-        valorDez:   req.body.valorDez,
-        rodadaDez:  req.body.rodadaDez,
-        modalidade: req.body.modalidade,
-        vitorias:   req.body.vitorias,
-        derrotas:   req.body.derrotas
+        vitDuz:     req.body.vitDuz,
+        derDuz:     req.body.derDuz,
+        valorDuz:   req.body.valorDuz,
+        rodadaDuz:  req.body.rodadaDuz,
+        vitCol:     req.body.vitCol,
+        derCol:     req.body.derCol,
+        valorCol:   req.body.valorCol,
+        rodadaCol:  req.body.rodadaCol,
+        vitMet:     req.body.vitMet,
+        derMet:     req.body.derMet,
+        valorMet:   req.body.valorMet,
+        rodadaMet:  req.body.rodadaMet,
+        vitPIs:     req.body.vitPIs,
+        derPIs:     req.body.derPIs,
+        valorPIs:   req.body.valorPIs,
+        rodadaPIs:  req.body.rodadaPIs,
+        vitVPs:     req.body.vitVPs,
+        derVPs:     req.body.derVPs,
+        valorVPs:   req.body.valorVPs,
+        rodadaVPs:  req.body.rodadaVPs,
     };
 
     res.status(201).send(roleta.jogar(dados));
@@ -59,12 +74,12 @@ exports.post = (req, res, next) => {
             17,
             21
         ],
-        "valorDez": [
+        "valorDuz": [
             0,
             0,
             0
         ],
-        "rodadaDez": [
+        "rodadaDuz": [
             0,
             0,
             0
