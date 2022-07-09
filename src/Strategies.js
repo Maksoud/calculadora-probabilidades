@@ -90,8 +90,8 @@ exports.duzias = (dados) => {
                 
                 // último número sorteado é da dúzia 1
                 dados.apostaDuz = null;
+                dados.banca    += (ventr[dados.rodadaDuz] * 3) - dados.valorDuz;
                 dados.rodadaDuz = -1;
-                dados.banca    += dados.valorDuz * 3;
                 dados.valorDuz  = 0;
                 dados.vitDuz++;
     
