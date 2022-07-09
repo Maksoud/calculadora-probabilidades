@@ -48,9 +48,9 @@ exports.jogar = (dados) => {
         /************/
 
         // Elimina números antigos
-        while (dados.numeros.length > 200) {
+        while (dados.numeros.length > 500) {
             dados.numeros.shift();
-        }// while (dados.numeros.length > 200)
+        }// while (dados.numeros.length > 500)
 
         /************/
 

@@ -279,12 +279,12 @@
     </div>
     <script>
 
-        let numero_sorteado = document.querySelector('.numero_sorteado');
-        let box_numeros = document.querySelector('.box-ultimos ul div');
-        let numeros = [];
+        let numero_sorteado   = document.querySelector('.numero_sorteado');
+        let box_numeros       = document.querySelector('.box-ultimos ul div');
+        let numeros           = [];
         let numerosInvertidos = [];
-        let filhos = document.querySelectorAll('.box-ultimos ul div li');
-        const form = document.getElementById('form');
+        let filhos            = document.querySelectorAll('.box-ultimos ul div li');
+        const form            = document.getElementById('form');
         contador = 1;
  
         form.addEventListener('submit', function(e) {
@@ -317,9 +317,7 @@
 
             /************/
 
-            let testes = true;
-
-            if (numeros.length >= 12 || testes) {
+            if (numeros.length >= 12 || true) {
 
                 // Create new FormData object:
                 const formData = new FormData(form);
@@ -330,13 +328,13 @@
                     formData.append('numeros[]', numeros[i]);
                 }
                 formData.append("banca", 1023)
-                console.log("formData get banca: ", formData.get('banca'));
+                formData.delete("numero_sorteado")
 
-                console.log("formData get numero_sorteado: ", formData.get('numero_sorteado'));
+                // console.log("formData get banca: ", formData.get('banca'));
+                // console.log("formData get numero_sorteado: ", formData.get('numero_sorteado'));
                 
                 // Convert formData object to URL-encoded string:
                 const payload = new URLSearchParams(formData);
-
                 // console.log("payload: ", payload);
 
                 // Create payload as new FormData object:
@@ -346,34 +344,50 @@
                     method: 'POST',
                     body: payload,
                 })
-
                 .then(res => res.text())
                 .then(data => {
-                    let resposta = JSON.parse(data);
-                    // console.log("Resposta do servidor", resposta)
-                    console.log("numeros", resposta.numeros)
-                    // console.log("banca", resposta.banca)
-                    // console.log("vitDuz", resposta.vitDuz)
-                    // console.log("derDuz", resposta.derDuz)
-                    // console.log("valorDuz", resposta.valorDuz)
-                    // console.log("rodadaDuz", resposta.rodadaDuz)
-                    // console.log("vitCol", resposta.vitCol)
-                    // console.log("derCol", resposta.derCol)
-                    // console.log("valorCol", resposta.valorCol)
-                    // console.log("rodadaCol", resposta.rodadaCol)
-                    // console.log("vitMet", resposta.vitMet)
-                    // console.log("derMet", resposta.derMet)
-                    // console.log("valorMet", resposta.valorMet)
-                    // console.log("rodadaMet", resposta.rodadaMet)
-                    // console.log("vitPIs", resposta.vitPIs)
-                    // console.log("derPIs", resposta.derPIs)
-                    // console.log("valorPIs", resposta.valorPIs)
-                    // console.log("rodadaPIs", resposta.rodadaPIs)
-                    // console.log("vitVPs", resposta.vitVPs)
-                    // console.log("derVPs", resposta.derVPs)
-                    // console.log("valorVPs", resposta.valorVPs)
-                    // console.log("rodadaVPs", resposta.rodadaVPs)
-                    console.log("Percentuais das dúzias", resposta.duzias.percDuz);
+
+                    try {
+
+                        let resposta = JSON.parse(data);
+                        // console.log("Resposta do servidor", resposta)
+                        console.log("numeros", resposta.numeros)
+
+                        console.log("banca", resposta.banca)
+
+                        console.log("vitDuz", resposta.vitDuz)
+                        console.log("derDuz", resposta.derDuz)
+                        console.log("valorDuz", resposta.valorDuz)
+                        console.log("rodadaDuz", resposta.rodadaDuz)
+
+                        // console.log("vitCol", resposta.vitCol)
+                        // console.log("derCol", resposta.derCol)
+                        // console.log("valorCol", resposta.valorCol)
+                        // console.log("rodadaCol", resposta.rodadaCol)
+
+                        // console.log("vitMet", resposta.vitMet)
+                        // console.log("derMet", resposta.derMet)
+                        // console.log("valorMet", resposta.valorMet)
+                        // console.log("rodadaMet", resposta.rodadaMet)
+
+                        // console.log("vitPIs", resposta.vitPIs)
+                        // console.log("derPIs", resposta.derPIs)
+                        // console.log("valorPIs", resposta.valorPIs)
+                        // console.log("rodadaPIs", resposta.rodadaPIs)
+
+                        // console.log("vitVPs", resposta.vitVPs)
+                        // console.log("derVPs", resposta.derVPs)
+                        // console.log("valorVPs", resposta.valorVPs)
+                        // console.log("rodadaVPs", resposta.rodadaVPs)
+
+                        console.log("Percentuais das dúzias", resposta.duzias.percDuz);
+
+                    } catch (e) {
+
+                        console.log(data, e); // Informe pelo menos 12 números...
+
+                    }
+                    
                 });
                 
             }// if (numeros.length > 12)
