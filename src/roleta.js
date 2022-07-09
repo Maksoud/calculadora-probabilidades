@@ -61,7 +61,7 @@ exports.jogar = (dados) => {
         /************/
 
         dados.duzias        = Strategies.duzias(dados);
-        // dados.colunas       = Strategies.colunas(dados);
+        dados.colunas       = Strategies.colunas(dados);
         // dados.metades       = Strategies.metades(dados);
         // dados.paresImpares  = Strategies.paresImpares(dados);
         // dados.vermelhoPreto = Strategies.vermelhoPreto(dados);
