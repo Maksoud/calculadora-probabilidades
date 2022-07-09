@@ -12,6 +12,7 @@ exports.jogar = (dados) => {
 
         dados.numeros   = dados.numeros.map(Number);
         dados.banca     = Number(dados.banca);
+        dados.ventr     = Number(dados.ventr);
 
         /************/
 

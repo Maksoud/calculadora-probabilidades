@@ -124,6 +124,7 @@ exports.duzias = (dados) => {
                         dados.apostaDuz  = i;
                         dados.valorDuz  += ventr[dados.rodadaDuz];
                         dados.banca     -= ventr[dados.rodadaDuz];
+                        dados.ventr      = ventr[dados.rodadaDuz];
                         
                         Log.warning("Valor acumulado na dúzia: " + dados.valorDuz)
 
@@ -135,6 +136,7 @@ exports.duzias = (dados) => {
                         
                         dados.valorDuz  += ventr[dados.rodadaDuz];
                         dados.banca     -= ventr[dados.rodadaDuz];
+                        dados.ventr      = ventr[dados.rodadaDuz];
                         
                         Log.warning("Valor acumulado na dúzia " + dados.valorDuz)
         
@@ -170,6 +172,7 @@ exports.duzias = (dados) => {
             dados.rodadaDuz += 1;
             dados.valorDuz   = ventr[0];
             dados.banca     -= ventr[0];
+            dados.ventr      = ventr[0];
 
             Log.warning("Valor da entrada " + dados.valorDuz)
 
@@ -182,6 +185,7 @@ exports.duzias = (dados) => {
             dados.rodadaDuz += 1;
             dados.valorDuz   = ventr[0];
             dados.banca     -= ventr[0];
+            dados.ventr      = ventr[0];
 
             Log.warning("Valor da entrada " + dados.valorDuz)
 
@@ -194,6 +198,7 @@ exports.duzias = (dados) => {
             dados.rodadaDuz += 1;
             dados.valorDuz   = ventr[0];
             dados.banca     -= ventr[0];
+            dados.ventr      = ventr[0];
 
             Log.warning("Valor da entrada " + dados.valorDuz)
 

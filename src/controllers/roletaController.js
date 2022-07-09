@@ -74,6 +74,7 @@ exports.post = (req, res, next) => {
             userID:     req.body.userID,
             numeros:    req.body.numeros,
             banca:      req.body.banca,
+            ventr:      user[userID].ventr,
 
             vitDuz:     user[userID].vitDuz,
             derDuz:     user[userID].derDuz,
@@ -108,6 +109,8 @@ exports.post = (req, res, next) => {
 
         // Jogar
         let rodada = roleta.jogar(dados)
+
+        user[userID].ventr      = rodada.ventr
 
         user[userID].vitDuz     = rodada.vitDuz
         user[userID].derDuz     = rodada.derDuz
