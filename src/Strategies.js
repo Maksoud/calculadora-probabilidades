@@ -29,7 +29,7 @@ exports.duzias = (dados) => {
         percDuz: [],
     };
 
-    // console.log("dados.numeros", dados.numeros);
+    // Log.info("dados.numeros", dados.numeros);
 
     /************/
 
@@ -70,72 +70,144 @@ exports.duzias = (dados) => {
 
     /************/
 
-    // Verifica as 3 dúzias
-    for (let i = 0; i <= 2; i++) {
+    // Verifica se a dúzia iniciou a rodada
+    if (dados.rodadaDuz > 0) {
+        
+        // Verifica as 3 dúzias
+        for (let i = 0; i <= 2; i++) {
 
-        // Verifica se a dúzia iniciou a rodada
-        if (dados.rodadaDuz[i] > 0) {
+            // Log.info("dados", dados)
 
-            // último número sorteado
-            if (duz[i].includes(dados.numeros[11])) {
+            // último número sorteado é da dúzia apostada
+            if (duz[i].includes(dados.numeros[dados.numeros.length-1]) && dados.apostaDuz == i) {
+
+                // console.log("Último número sorteado", dados.numeros[dados.numeros.length-1])
+                Log.success("Dúzia sorteada: " + (i+1))
+                Log.info("Valor acumulado na dúzia: " + dados.valorDuz)
+                Log.info("Valor da entrada anterior: " + ventr[dados.rodadaDuz-1])
+                Log.success("Ganhou: " + ((ventr[dados.rodadaDuz-1] * 3) - dados.valorDuz))
+                Log.info("Novo saldo da banca " + dados.banca)
                 
                 // último número sorteado é da dúzia 1
-                dados.rodadaDuz[i] = 0;
-                dados.banca       += valorDuz[i] * 3;
-                dados.valorDuz[i]  = 0;
+                dados.apostaDuz = null;
+                dados.rodadaDuz = -1;
+                dados.banca    += dados.valorDuz * 3;
+                dados.valorDuz  = 0;
                 dados.vitDuz++;
     
-            } else if (rodadaDuz[i] < 9) {
-    
-                // incrementa rodada até a 9a entrada
-                dados.rodadaDuz[i] += 1;
-                dados.valorDuz[i]  += ventr[rodadaDuz[i]];
-                dados.banca        -= ventr[rodadaDuz[i]];
-                
-            } else {
+            } else if (dados.rodadaDuz >= 9) {
+
+                Log.warning("perdeu! " + dados.valorDuz)
+                Log.info("Novo saldo da banca " + dados.banca)
     
                 // perdeu
-                dados.rodadaDuz[i]  = 0;
-                dados.banca        -= valorDuz[i];
-                dados.valorDuz[i]   = 0;
+                dados.apostaDuz = null;
+                dados.rodadaDuz = -1;
+                dados.banca    -= dados.valorDuz;
+                dados.valorDuz  = 0;
                 dados.derDuz++;
                 
-            }// if (duz[i].includes(dados.numeros[11]))
-    
-        }// if (dados.rodadaDuz[i] > 0)
+            } else if (dados.rodadaDuz < 9 && dados.rodadaDuz > 0) {
 
-    }// for (let i = 0; i <= 2; i++)
+                // Log.info("rodada menor que 9 -> " + dados.rodadaDuz);
+    
+                // O último número está na dúzia
+                if (duz[i].includes(dados.numeros[dados.numeros.length-1])) {
+
+                    // A dúzia sorteada é tem a menor participação
+                    if (res.percDuz[i] < res.percDuz[i-1] && res.percDuz[i] < res.percDuz[i+1]) {
+    
+                        Log.info("Mudar jogo para dúzia: " + (i+1))
+                        Log.info("Rodada: " + dados.rodadaDuz)
+                        Log.warning("Valor da entrada: " + ventr[dados.rodadaDuz])
+
+                        dados.apostaDuz  = i;
+                        dados.valorDuz  += ventr[dados.rodadaDuz];
+                        dados.banca     -= ventr[dados.rodadaDuz];
+                        
+                        Log.warning("Valor acumulado na dúzia: " + dados.valorDuz)
+
+                    } else {
+    
+                        Log.info("Continuar na dúzia: " + (dados.apostaDuz+1))
+                        Log.info("Rodada: " + dados.rodadaDuz)
+                        Log.warning("Valor da entrada: " + ventr[dados.rodadaDuz])
+                        
+                        dados.valorDuz  += ventr[dados.rodadaDuz];
+                        dados.banca     -= ventr[dados.rodadaDuz];
+                        
+                        Log.warning("Valor acumulado na dúzia " + dados.valorDuz)
+        
+                    }// else if (res.percDuz[i] < res.percDuz[i-1] && res.percDuz[i] < res.percDuz[i+1])
+    
+                }// if (duz[i].includes(dados.numeros[dados.numeros.length-1]))
+                
+            }// else if (dados.rodadaDuz < 9 && dados.rodadaDuz > 0)
+    
+        }// for (let i = 0; i <= 2; i++)
+
+        /************/
+
+        // incrementa rodada até a 9a entrada
+        dados.rodadaDuz += 1;
+            
+    }// if (dados.rodadaDuz > 0)
 
     /************/
 
     // Começo do jogo
-    if (dados.rodadaDuz[0] == 0 && dados.rodadaDuz[1] == 0 && dados.rodadaDuz[2] == 0) {
+    if (dados.rodadaDuz == 0) {
+
+        // Log.info("Jogo começou")
 
         // Começar com a melhor dúzia
-        if (res.percDuz[0] < 10) {
+        if (res.percDuz[0] < res.percDuz[1] && res.percDuz[0] < res.percDuz[2]) {
+
+            Log.info("Começando na dúzia 1...")
 
             // dúzia 1 possui maior probabilidade
-            dados.rodadaDuz[0] += 1;
-            dados.valorDuz[0]   = ventr[0];
-            dados.banca        -= ventr[0];
+            dados.apostaDuz  = 0;
+            dados.rodadaDuz += 1;
+            dados.valorDuz   = ventr[0];
+            dados.banca     -= ventr[0];
 
-        } else if (res.percDuz[1] < 10) {
+            Log.warning("Valor da entrada " + dados.valorDuz)
+
+        } else if (res.percDuz[1] < res.percDuz[0] && res.percDuz[1] < res.percDuz[2]) {
+
+            Log.info("Começando na dúzia 2...")
 
             // dúzia 2 possui maior probabilidade
-            dados.rodadaDuz[1] += 1;
-            dados.valorDuz[1]   = ventr[0];
-            dados.banca        -= ventr[0];
+            dados.apostaDuz  = 1;
+            dados.rodadaDuz += 1;
+            dados.valorDuz   = ventr[0];
+            dados.banca     -= ventr[0];
 
-        } else if (res.percDuz[2] < 10) {
+            Log.warning("Valor da entrada " + dados.valorDuz)
+
+        } else if (res.percDuz[2] < res.percDuz[1] && res.percDuz[2] < res.percDuz[0]) {
+
+            Log.info("Começando na dúzia 3...")
 
             // dúzia 3 possui maior probabilidade
-            dados.rodadaDuz[2] += 1;
-            dados.valorDuz[2]   = ventr[0];
-            dados.banca        -= ventr[0];
+            dados.apostaDuz  = 2;
+            dados.rodadaDuz += 1;
+            dados.valorDuz   = ventr[0];
+            dados.banca     -= ventr[0];
 
-        }// else if (res.percDuz[2] < 10)
+            Log.warning("Valor da entrada " + dados.valorDuz)
 
-    }// if (dados.rodadaDuz[0] == 0 && dados.rodadaDuz[1] == 0 && dados.rodadaDuz[2] == 0)
+        } else {
+
+            Log.warning("Aguardando novo sorteio para desempate de probabilidade")
+
+        }// else if (res.percDuz[2] < 25)
+        
+    }// if (dados.rodadaDuz == 0)
+
+    Log.info("Percentual de participação da dúzia 1: " + res.percDuz[0] + "%");
+    Log.info("Percentual de participação da dúzia 2: " + res.percDuz[1] + "%");
+    Log.info("Percentual de participação da dúzia 3: " + res.percDuz[2] + "%");
 
     /************/
 

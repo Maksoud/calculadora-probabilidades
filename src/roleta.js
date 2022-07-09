@@ -7,7 +7,7 @@ exports.jogar = (dados) => {
 
     // Log.info("Dados", dados);
 
-    // Aguarda os 9 útimos números sorteados para iniciar a análise probabilística
+    // Aguarda os 12 útimos números sorteados para iniciar a análise probabilística
     if (dados.numeros.length >= 12) {
 
         dados.numeros   = dados.numeros.map(Number);
@@ -18,32 +18,37 @@ exports.jogar = (dados) => {
         // Dúzias
         dados.vitDuz    = Number(dados.vitDuz);
         dados.derDuz    = Number(dados.derDuz);
-        dados.valorDuz  = dados.valorDuz.map(Number);
-        dados.rodadaDuz = dados.rodadaDuz.map(Number);
+        dados.valorDuz  = Number(dados.valorDuz);
+        dados.rodadaDuz = Number(dados.rodadaDuz);
+        dados.apostaDuz = Number(dados.apostaDuz);
 
         // Colunas
         dados.vitCol    = Number(dados.vitCol);
         dados.derCol    = Number(dados.derCol);
-        dados.valorCol  = dados.valorCol.map(Number);
-        dados.rodadaCol = dados.rodadaCol.map(Number);
+        dados.valorCol  = Number(dados.valorCol);
+        dados.rodadaCol = Number(dados.rodadaCol);
+        dados.apostaCol = Number(dados.apostaCol);
 
         // Metades
         dados.vitMet    = Number(dados.vitMet);
         dados.derMet    = Number(dados.derMet);
-        dados.valorMet  = dados.valorMet.map(Number);
-        dados.rodadaMet = dados.rodadaMet.map(Number);
+        dados.valorMet  = Number(dados.valorMet);
+        dados.rodadaMet = Number(dados.rodadaMet);
+        dados.apostaMet = Number(dados.apostaMet);
 
         // Pares e Ímpares
         dados.vitPIs    = Number(dados.vitPIs);
         dados.derPIs    = Number(dados.derPIs);
-        dados.valorPIs  = dados.valorPIs.map(Number);
-        dados.rodadaPIs = dados.rodadaPIs.map(Number);
+        dados.valorPIs  = Number(dados.valorPIs);
+        dados.rodadaPIs = Number(dados.rodadaPIs);
+        dados.apostaPIs = Number(dados.apostaPIs);
 
         // Vermelhos e Pretos
         dados.vitVPs    = Number(dados.vitVPs);
         dados.derVPs    = Number(dados.derVPs);
-        dados.valorVPs  = dados.valorVPs.map(Number);
-        dados.rodadaVPs = dados.rodadaVPs.map(Number); 
+        dados.valorVPs  = Number(dados.valorVPs);
+        dados.rodadaVPs = Number(dados.rodadaVPs);
+        dados.apostaVPs = Number(dados.apostaVPs);
 
         /************/
 

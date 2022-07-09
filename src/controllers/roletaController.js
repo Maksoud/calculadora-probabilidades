@@ -36,28 +36,30 @@ exports.post = (req, res, next) => {
     userID = req.body.userID;
 
     if (typeof user[userID] == "undefined") {
+
+        console.log("novo usuário")
         
         user[userID] = {
             vitDuz:    0,
             derDuz:    0,
             valorDuz:  [0,0,0],
-            rodadaDuz: [0,0,0],
+            rodadaDuz: 0,
             vitCol:    0,
             derCol:    0,
             valorCol:  [0,0,0],
-            rodadaCol: [0,0,0],
+            rodadaCol: 0,
             vitMet:    0,
             derMet:    0,
             valorMet:  [0,0],
-            rodadaMet: [0,0],
+            rodadaMet: 0,
             vitPIs:    0,
             derPIs:    0,
             valorPIs:  [0,0],
-            rodadaPIs: [0,0],
+            rodadaPIs: 0,
             vitVPs:    0,
             derVPs:    0,
             valorVPs:  [0,0],
-            rodadaVPs: [0,0],
+            rodadaVPs: 0,
         }
 
     }// if (typeof user[userID] == "undefined")
@@ -66,33 +68,80 @@ exports.post = (req, res, next) => {
 
     if (!error) {
 
+        // console.log("user[userID]", user[userID])
+
         let dados = {
             userID:     req.body.userID,
             numeros:    req.body.numeros,
             banca:      req.body.banca,
+
             vitDuz:     user[userID].vitDuz,
             derDuz:     user[userID].derDuz,
             valorDuz:   user[userID].valorDuz,
             rodadaDuz:  user[userID].rodadaDuz,
+            apostaDuz:  user[userID].apostaDuz,
+
             vitCol:     user[userID].vitCol,
             derCol:     user[userID].derCol,
             valorCol:   user[userID].valorCol,
             rodadaCol:  user[userID].rodadaCol,
+            apostaCol:  user[userID].apostaCol,
+
             vitMet:     user[userID].vitMet,
             derMet:     user[userID].derMet,
             valorMet:   user[userID].valorMet,
             rodadaMet:  user[userID].rodadaMet,
+            apostaMet:  user[userID].apostaMet,
+
             vitPIs:     user[userID].vitPIs,
             derPIs:     user[userID].derPIs,
             valorPIs:   user[userID].valorPIs,
             rodadaPIs:  user[userID].rodadaPIs,
+            apostaPIs:  user[userID].apostaPIs,
+
             vitVPs:     user[userID].vitVPs,
             derVPs:     user[userID].derVPs,
             valorVPs:   user[userID].valorVPs,
             rodadaVPs:  user[userID].rodadaVPs,
+            apostaVPs:  user[userID].apostaVPs,
         };
 
-        res.status(201).send(roleta.jogar(dados));
+        // Jogar
+        let rodada = roleta.jogar(dados)
+
+        user[userID].vitDuz     = rodada.vitDuz
+        user[userID].derDuz     = rodada.derDuz
+        user[userID].valorDuz   = rodada.valorDuz
+        user[userID].rodadaDuz  = rodada.rodadaDuz
+        user[userID].apostaDuz  = rodada.apostaDuz
+
+        user[userID].vitCol     = rodada.vitCol
+        user[userID].derCol     = rodada.derCol
+        user[userID].valorCol   = rodada.valorCol
+        user[userID].rodadaCol  = rodada.rodadaCol
+        user[userID].apostaCol  = rodada.apostaCol
+
+        user[userID].vitMet     = rodada.vitMet
+        user[userID].derMet     = rodada.derMet
+        user[userID].valorMet   = rodada.valorMet
+        user[userID].rodadaMet  = rodada.rodadaMet
+        user[userID].apostaMet  = rodada.apostaMet
+
+        user[userID].vitPIs     = rodada.vitPIs
+        user[userID].derPIs     = rodada.derPIs
+        user[userID].valorPIs   = rodada.valorPIs
+        user[userID].rodadaPIs  = rodada.rodadaPIs
+        user[userID].apostaPIs  = rodada.apostaPIs
+
+        user[userID].vitVPs     = rodada.vitVPs
+        user[userID].derVPs     = rodada.derVPs
+        user[userID].valorVPs   = rodada.valorVPs
+        user[userID].rodadaVPs  = rodada.rodadaVPs
+        user[userID].apostaVPs  = rodada.apostaVPs
+
+        // console.log("rodada", rodada)
+
+        res.status(201).send(rodada)
 
     }// if (!error)
 

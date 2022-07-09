@@ -327,6 +327,7 @@
                 for (var i = 0; i < numeros.length; i++) {
                     formData.append('numeros[]', numeros[i]);
                 }
+                formData.append("userID", 1)
                 formData.append("banca", 1023)
                 formData.delete("numero_sorteado")
 
@@ -359,26 +360,31 @@
                         console.log("derDuz", resposta.derDuz)
                         console.log("valorDuz", resposta.valorDuz)
                         console.log("rodadaDuz", resposta.rodadaDuz)
+                        console.log("apostaDuz", resposta.apostaDuz)
 
                         // console.log("vitCol", resposta.vitCol)
                         // console.log("derCol", resposta.derCol)
                         // console.log("valorCol", resposta.valorCol)
                         // console.log("rodadaCol", resposta.rodadaCol)
+                        // console.log("apostaCol", resposta.apostaCol)
 
                         // console.log("vitMet", resposta.vitMet)
                         // console.log("derMet", resposta.derMet)
                         // console.log("valorMet", resposta.valorMet)
                         // console.log("rodadaMet", resposta.rodadaMet)
+                        // console.log("apostaMet", resposta.apostaMet)
 
                         // console.log("vitPIs", resposta.vitPIs)
                         // console.log("derPIs", resposta.derPIs)
                         // console.log("valorPIs", resposta.valorPIs)
                         // console.log("rodadaPIs", resposta.rodadaPIs)
+                        // console.log("apostaPIs", resposta.apostaPIs)
 
                         // console.log("vitVPs", resposta.vitVPs)
                         // console.log("derVPs", resposta.derVPs)
                         // console.log("valorVPs", resposta.valorVPs)
                         // console.log("rodadaVPs", resposta.rodadaVPs)
+                        // console.log("apostaVPs", resposta.apostaVPs)
 
                         console.log("Percentuais das dúzias", resposta.duzias.percDuz);
 
