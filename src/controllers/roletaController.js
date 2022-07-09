@@ -73,7 +73,6 @@ exports.post = (req, res, next) => {
         let dados = {
             userID:     req.body.userID,
             numeros:    req.body.numeros,
-            banca:      req.body.banca,
             ventr:      user[userID].ventr,
 
             vitDuz:     user[userID].vitDuz,
@@ -107,10 +106,13 @@ exports.post = (req, res, next) => {
             apostaVPs:  user[userID].apostaVPs,
         };
 
+        dados.banca = user[userID].banca ? user[userID].banca : req.body.banca;
+
         // Jogar
         let rodada = roleta.jogar(dados)
 
         user[userID].ventr      = rodada.ventr
+        user[userID].banca      = rodada.banca
 
         user[userID].vitDuz     = rodada.vitDuz
         user[userID].derDuz     = rodada.derDuz

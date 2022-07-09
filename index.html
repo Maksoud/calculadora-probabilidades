@@ -395,7 +395,7 @@
                         if (resposta.apostaDuz == 0) {
                         
                             acumuladoD1.innerHTML = "R$ " + Decimal(resposta.valorDuz,2)
-                            entradasD1.innerHTML  = (resposta.rodadaDuz+1) + "ª entrada"
+                            entradasD1.innerHTML  = (resposta.rodadaDuz) + "ª entrada"
 
                             acumuladoD2.innerHTML = "0,00"
                             entradasD2.innerHTML  = "Sem Entradas"
@@ -405,7 +405,7 @@
                         } else if (resposta.apostaDuz == 1) {
                         
                             acumuladoD2.innerHTML = "R$ " + Decimal(resposta.valorDuz,2)
-                            entradasD2.innerHTML  = (resposta.rodadaDuz+1) + "ª entrada"
+                            entradasD2.innerHTML  = (resposta.rodadaDuz) + "ª entrada"
 
                             acumuladoD1.innerHTML = "0,00"
                             entradasD1.innerHTML  = "Sem Entradas"
@@ -415,7 +415,7 @@
                         } else if (resposta.apostaDuz == 2) {
                         
                             acumuladoD3.innerHTML = "R$ " + Decimal(resposta.valorDuz,2)
-                            entradasD3.innerHTML  = (resposta.rodadaDuz+1) + "ª entrada"
+                            entradasD3.innerHTML  = (resposta.rodadaDuz) + "ª entrada"
 
                             acumuladoD1.innerHTML = "0,00"
                             entradasD1.innerHTML  = "Sem Entradas"
