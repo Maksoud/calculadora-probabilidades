@@ -1,5 +1,18 @@
+<?php
+    ob_start();
+    session_start();
+    include("config/conexao/conexao.php");
+    function gerarSSID($size){
+        $basic = 'abcdef0123456789';
+        $return= "";
+        for($count= 0; $size > $count; $count++){
+            $return.= $basic[rand(0, strlen($basic) - 1)];
+        }
+        return $return;
+    }
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +22,73 @@
 </head>
 <body>
     <div class="container">
+    <?php
+        if(isset($_GET['acao'])){
+            if(!isset($_POST['logar'])){
+            
+                $acao = $_GET['acao'];
+                if($acao=='multipla'){
+                    echo '<div class="balao inatividade">
+                    <strong>Seu login foi desabilitado, pois você tentou usar múltiplos logins. Entre em contato com o suporte.</strong>
+                </div>';	
+                }
+            }
+        }
+        if(isset($_POST['logar'])){
+            // RECUPERAR DADOS FORM
+            $email = trim(strip_tags($_POST['email']));
+            $senha = trim(strip_tags(md5($_POST['senha'])));
+            $SSID = gerarSSID(32);
+            // SELECIONAR BANCO DE DADOS
+            $date = new DateTime();
+            try{
+                $result = $conexao->prepare("SELECT * from clientes WHERE BINARY email=:email AND senha=:senha");
+                $result->bindParam(':email', $email, PDO::PARAM_STR);
+                $result->bindParam(':senha', $senha, PDO::PARAM_STR);
+                $result->execute();
+                $resultado = $result->fetchAll();
+                $contar = $result->rowCount();
+                if($contar == 0){
+                    echo '<div class="balao erro"><strong>Dados inválidos. </strong> Entre em contato com o suporte.</div>';
+                }elseif($resultado !== []){
+                    $result = $conexao->prepare("SELECT * from clientes WHERE BINARY email=:email AND senha=:senha AND expiracao > ".$date->getTimestamp()."");
+                    $result->bindParam(':email', $email, PDO::PARAM_STR);
+                    $result->bindParam(':senha', $senha, PDO::PARAM_STR);
+                    $result->execute();
+                    $resultado = $result->fetchAll();
+                    $contar = $result->rowCount();
+                    if($contar == 0){
+                        echo '<div class="balao erro"><strong>Sua assinatura expirou, </strong> entre em contato com o suporte.</div>';
+                    } else {
+                        $result = $conexao->prepare("SELECT * from clientes WHERE BINARY email=:email AND senha=:senha AND expiracao > ".$date->getTimestamp()." AND status_pagamento = 1;UPDATE clientes SET ssid = '".$SSID."' WHERE email=:email AND senha=:senha");
+                        $result->bindParam(':email', $email, PDO::PARAM_STR);
+                        $result->bindParam(':senha', $senha, PDO::PARAM_STR);
+                        $result->execute();
+                        $resultado = $result->fetchAll();
+                        $contar = $result->rowCount();
+                        if($contar == 0){
+                            echo '<div class="balao erro"><strong>Estamos com dificuldade para validar seu acesso. </strong>Entre em contato com o suporte.</div>';
+                        }
+                    }
+                }
+                $contar = $result->rowCount();
+                $email = $_POST['email'];
+                $senha = md5($_POST['senha']);
+                if($contar>0){
+                    $_SESSION['aRoulette_mail'] = $email;
+                    $_SESSION['aRoulette_pass'] = $senha;
+                    
+                    echo '<div class="balao success">
+                        <strong>Logado com Sucesso!</strong>
+                    </div>';
+                    $_SESSION['SSID'] = $SSID;
+                    header("Refresh: 0, index");
+                }
+            }catch(PDOException $e){
+                echo $e;
+            }
+        }// se clicar no botão entrar no sistema
+        ?>
         <svg width="250" height="65" viewBox="0 0 250 65" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <rect width="250" height="65" fill="url(#pattern0)"/>
             <defs>
@@ -21,8 +101,8 @@
         <h2>Login</h2>
         <form action="" method="POST">
             <input type="text" placeholder="E-mail ou nome de usuário" name="email">
-            <input type="password" placeholder="Senha" name="password">
-            <button type="submit">Entrar</button>
+            <input type="password" placeholder="Senha" name="senha">
+            <button type="submit" name="logar">Entrar</button>
         </form>
         <p>Ainda não tem acesso?</p>
         <p class="comprar">Compre agora</p>

@@ -65,3 +65,11 @@ button:hover {
     font-weight: bold;
     margin-top: -4px;
 }
+.balao {
+    position: absolute;
+    top: 40px;
+    background: #cfa21b;
+    padding: 13px;
+    border-radius: 20px;
+    font-size: 14px;
+}

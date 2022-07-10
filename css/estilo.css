@@ -168,7 +168,7 @@ input::placeholder {
     width: 100%;
     margin-left: 0px;
     align-items: center !important;
-    justify-content: space-between !important;
+    /* justify-content: space-between !important; */
     margin-bottom: 6px;
 }
 
@@ -337,6 +337,9 @@ input::placeholder {
 .logo {
     text-align: center;
     padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Hide arrows type number */
@@ -349,4 +352,17 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.usuario {
+    display: inline-flex;
+    flex-direction: column;
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.assinatura {
+    font-weight: bold;
 }
