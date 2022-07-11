@@ -87,6 +87,8 @@ exports.duzias = (dados) => {
                 let tempLog = []
                 tempLog[Date.now()] = {
                     banca:      dados.banca,
+                    totalNum:   dados.numeros.length,
+                    ultNum:     dados.numeros[dados.numeros.length-1],
                     rodadaDuz:  dados.rodadaDuz,
                     valorDuz:   dados.valorDuz,
                     apostaDuz:  dados.apostaDuz,
@@ -114,6 +116,8 @@ exports.duzias = (dados) => {
                 let tempLog = []
                 tempLog[Date.now()] = {
                     banca:      dados.banca,
+                    totalNum:   dados.numeros.length,
+                    ultNum:     dados.numeros[dados.numeros.length-1],
                     rodadaDuz:  dados.rodadaDuz,
                     valorDuz:   dados.valorDuz,
                     apostaDuz:  dados.apostaDuz,
@@ -145,6 +149,8 @@ exports.duzias = (dados) => {
                         let tempLog = []
                         tempLog[Date.now()] = {
                             banca:      dados.banca,
+                            totalNum:   dados.numeros.length,
+                            ultNum:     dados.numeros[dados.numeros.length-1],
                             rodadaDuz:  dados.rodadaDuz,
                             valorDuz:   dados.valorDuz,
                             apostaDuz:  dados.apostaDuz,
@@ -168,6 +174,8 @@ exports.duzias = (dados) => {
                         let tempLog = []
                         tempLog[Date.now()] = {
                             banca:      dados.banca,
+                            totalNum:   dados.numeros.length,
+                            ultNum:     dados.numeros[dados.numeros.length-1],
                             rodadaDuz:  dados.rodadaDuz,
                             valorDuz:   dados.valorDuz,
                             apostaDuz:  dados.apostaDuz,
@@ -266,6 +274,8 @@ exports.duzias = (dados) => {
             let tempLog = []
             tempLog[Date.now()] = {
                 banca:      dados.banca,
+                totalNum:   dados.numeros.length,
+                ultNum:     dados.numeros[dados.numeros.length-1],
                 rodadaDuz:  dados.rodadaDuz,
                 valorDuz:   dados.valorDuz,
                 apostaDuz:  dados.apostaDuz,

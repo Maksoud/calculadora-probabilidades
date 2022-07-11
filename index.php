@@ -347,6 +347,13 @@
                             valorD1.innerHTML = "R$ 0,00"
                             valorD2.innerHTML = "R$ 0,00"
                             valorD3.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                        } else {
+                            sugestoes[0].classList.remove('selecionado')
+                            sugestoes[1].classList.remove('selecionado')
+                            sugestoes[2].classList.remove('selecionado')
+                            valorD1.innerHTML = "R$ 0,00"
+                            valorD2.innerHTML = "R$ 0,00"
+                            valorD3.innerHTML = "R$ 0,00"
                         }// else if (resposta.apostaDuz == 2)
 
                         // percD1.innerHTML = resposta.duzias.percDuz[0] ? resposta.duzias.percDuz[0] + "%" : "0%"
