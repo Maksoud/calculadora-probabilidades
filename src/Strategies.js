@@ -75,139 +75,152 @@ exports.duzias = (dados) => {
 
     // Verifica se a dúzia iniciou a rodada
     if (dados.rodadaDuz > 0) {
-        
-        // Verifica as 3 dúzias
-        for (let i = 0; i <= 2; i++) {
 
-            // Log.info("dados", dados)
+        // Ignora os zeros
+        if (dados.numeros[dados.numeros.length-1] == 0) {
 
-            // último número sorteado é da dúzia apostada
-            if (duz[i].includes(dados.numeros[dados.numeros.length-1]) && dados.apostaDuz == i) {
+            Log.warning("Não contabilize o 0...")
 
-                let tempLog = []
-                tempLog[Date.now()] = {
-                    banca:      dados.banca,
-                    totalNum:   dados.numeros.length,
-                    ultNum:     dados.numeros[dados.numeros.length-1],
-                    rodadaDuz:  dados.rodadaDuz,
-                    valorDuz:   dados.valorDuz,
-                    apostaDuz:  dados.apostaDuz,
-                    percDuz:    res.percDuz,
-                    acao:       "vitoria"
-                }
-                logRd.push(tempLog)
+            dados.apostaDuz  = null;
+            dados.ventr      = 0;
+            dados.rodadaDuz -= 1;
 
-                Log.success("Dúzia sorteada: " + (i+1))
-                Log.info("Valor acumulado na dúzia: " + dados.valorDuz)
-                Log.info("Valor da entrada anterior: " + ventr[dados.rodadaDuz-1])
-                Log.success("Ganhou: " + ((ventr[dados.rodadaDuz-1] * 3) - dados.valorDuz))
-                
-                // último número sorteado é da dúzia 1
-                dados.apostaDuz = null;
-                dados.banca    += (ventr[dados.rodadaDuz-1] * 3); // Acrescenta o lucro
-                dados.rodadaDuz = -1;
-                dados.valorDuz  = 0;
-                dados.vitDuz++;
+        } else {
 
-                Log.info("Novo saldo da banca " + dados.banca)
-    
-            } else if (dados.rodadaDuz >= maxRd) {
+            // Verifica as 3 dúzias
+            for (let i = 0; i <= 2; i++) {
 
-                let tempLog = []
-                tempLog[Date.now()] = {
-                    banca:      dados.banca,
-                    totalNum:   dados.numeros.length,
-                    ultNum:     dados.numeros[dados.numeros.length-1],
-                    rodadaDuz:  dados.rodadaDuz,
-                    valorDuz:   dados.valorDuz,
-                    apostaDuz:  dados.apostaDuz,
-                    percDuz:    res.percDuz,
-                    acao:       "derrota"
-                }
-                logRd.push(tempLog)
+                // Log.info("dados", dados)
 
-                Log.warning("perdeu! " + dados.valorDuz)
-                Log.info("Novo saldo da banca " + dados.banca)
-    
-                // perdeu
-                dados.apostaDuz = null;
-                dados.rodadaDuz = -1;
-                // dados.banca    -= dados.valorDuz;
-                dados.valorDuz  = 0;
-                dados.derDuz++;
-                
-            } else if (dados.rodadaDuz < maxRd && dados.rodadaDuz > 0) {
+                // último número sorteado é da dúzia apostada
+                if (duz[i].includes(dados.numeros[dados.numeros.length-1]) && dados.apostaDuz == i) {
 
-                // Log.info("rodada menor que o máximo -> " + dados.rodadaDuz);
-    
-                // O último número está na dúzia
-                if (duz[i].includes(dados.numeros[dados.numeros.length-1])) {
+                    let tempLog = []
+                    tempLog[Date.now()] = {
+                        banca:      dados.banca,
+                        totalNum:   dados.numeros.length,
+                        ultNum:     dados.numeros[dados.numeros.length-1],
+                        rodadaDuz:  dados.rodadaDuz,
+                        valorDuz:   dados.valorDuz,
+                        apostaDuz:  dados.apostaDuz,
+                        percDuz:    res.percDuz,
+                        acao:       "vitoria"
+                    }
+                    logRd.push(tempLog)
 
-                    // A dúzia sorteada é tem a menor participação
-                    if (res.percDuz[i] < res.percDuz[i-1] && res.percDuz[i] < res.percDuz[i+1]) {
-
-                        let tempLog = []
-                        tempLog[Date.now()] = {
-                            banca:      dados.banca,
-                            totalNum:   dados.numeros.length,
-                            ultNum:     dados.numeros[dados.numeros.length-1],
-                            rodadaDuz:  dados.rodadaDuz,
-                            valorDuz:   dados.valorDuz,
-                            apostaDuz:  dados.apostaDuz,
-                            percDuz:    res.percDuz,
-                            acao:       "mudança de dúzia"
-                        }
-                        logRd.push(tempLog)
-    
-                        Log.info("Mudar jogo para dúzia: " + (i+1))
-                        Log.warning("Valor da entrada: " + ventr[dados.rodadaDuz])
-
-                        dados.apostaDuz  = i;
-                        dados.valorDuz  += ventr[dados.rodadaDuz];
-                        dados.banca     -= ventr[dados.rodadaDuz];
-                        dados.ventr      = ventr[dados.rodadaDuz];
-                        
-                        Log.warning("Valor acumulado na dúzia: " + dados.valorDuz)
-
-                    } if (res.percDuz[i] == res.percDuz[i-1] || res.percDuz[i] == res.percDuz[i+1]) {
-
-                        let tempLog = []
-                        tempLog[Date.now()] = {
-                            banca:      dados.banca,
-                            totalNum:   dados.numeros.length,
-                            ultNum:     dados.numeros[dados.numeros.length-1],
-                            rodadaDuz:  dados.rodadaDuz,
-                            valorDuz:   dados.valorDuz,
-                            apostaDuz:  dados.apostaDuz,
-                            percDuz:    res.percDuz,
-                            acao:       "empate dúzias"
-                        }
-                        logRd.push(tempLog)
-
-                        Log.warning("Aguarde o próximo sorteio...")
-
-                        dados.apostaDuz  = null;
-                        dados.valorDuz   = 0;
-                        dados.ventr      = 0;
+                    Log.success("Dúzia sorteada: " + (i+1))
+                    Log.info("Valor acumulado na dúzia: " + dados.valorDuz)
+                    Log.info("Valor da entrada anterior: " + ventr[dados.rodadaDuz-1])
+                    Log.success("Ganhou: " + ((ventr[dados.rodadaDuz-1] * 3) - dados.valorDuz))
                     
-                    } else {
-    
-                        Log.info("Continuar na dúzia: " + (dados.apostaDuz+1))
-                        Log.warning("Valor da entrada: " + ventr[dados.rodadaDuz])
-                        
-                        dados.valorDuz  += ventr[dados.rodadaDuz];
-                        dados.banca     -= ventr[dados.rodadaDuz];
-                        dados.ventr      = ventr[dados.rodadaDuz];
-                        
-                        Log.warning("Valor acumulado na dúzia " + dados.valorDuz)
+                    // último número sorteado é da dúzia 1
+                    dados.apostaDuz = null;
+                    dados.banca    += (ventr[dados.rodadaDuz-1] * 3); // Acrescenta o lucro
+                    dados.rodadaDuz = -1;
+                    dados.valorDuz  = 0;
+                    dados.vitDuz++;
+
+                    Log.info("Novo saldo da banca " + dados.banca)
         
-                    }// else if (res.percDuz[i] < res.percDuz[i-1] && res.percDuz[i] < res.percDuz[i+1])
-    
-                }// if (duz[i].includes(dados.numeros[dados.numeros.length-1]))
-                
-            }// else if (dados.rodadaDuz < maxRd && dados.rodadaDuz > 0)
-    
-        }// for (let i = 0; i <= 2; i++)
+                } else if (dados.rodadaDuz >= maxRd) {
+
+                    let tempLog = []
+                    tempLog[Date.now()] = {
+                        banca:      dados.banca,
+                        totalNum:   dados.numeros.length,
+                        ultNum:     dados.numeros[dados.numeros.length-1],
+                        rodadaDuz:  dados.rodadaDuz,
+                        valorDuz:   dados.valorDuz,
+                        apostaDuz:  dados.apostaDuz,
+                        percDuz:    res.percDuz,
+                        acao:       "derrota"
+                    }
+                    logRd.push(tempLog)
+
+                    Log.warning("perdeu! " + dados.valorDuz)
+                    Log.info("Novo saldo da banca " + dados.banca)
+        
+                    // perdeu
+                    dados.apostaDuz = null;
+                    dados.rodadaDuz = -1;
+                    // dados.banca    -= dados.valorDuz;
+                    dados.valorDuz  = 0;
+                    dados.derDuz++;
+                    
+                } else if (dados.rodadaDuz < maxRd && dados.rodadaDuz > 0) {
+
+                    // Log.info("rodada menor que o máximo -> " + dados.rodadaDuz);
+        
+                    // O último número está na dúzia
+                    if (duz[i].includes(dados.numeros[dados.numeros.length-1])) {
+
+                        // A dúzia sorteada tem a menor participação
+                        if (res.percDuz[i] < res.percDuz[i-1] && res.percDuz[i] < res.percDuz[i+1]) {
+
+                            let tempLog = []
+                            tempLog[Date.now()] = {
+                                banca:      dados.banca,
+                                totalNum:   dados.numeros.length,
+                                ultNum:     dados.numeros[dados.numeros.length-1],
+                                rodadaDuz:  dados.rodadaDuz,
+                                valorDuz:   dados.valorDuz,
+                                apostaDuz:  dados.apostaDuz,
+                                percDuz:    res.percDuz,
+                                acao:       "mudança de dúzia"
+                            }
+                            logRd.push(tempLog)
+        
+                            Log.info("Mudar jogo para dúzia: " + (i+1))
+                            Log.warning("Valor da entrada: " + ventr[dados.rodadaDuz])
+
+                            dados.apostaDuz  = i;
+                            dados.valorDuz  += ventr[dados.rodadaDuz];
+                            dados.banca     -= ventr[dados.rodadaDuz];
+                            dados.ventr      = ventr[dados.rodadaDuz];
+                            
+                            Log.warning("Valor acumulado na dúzia: " + dados.valorDuz)
+
+                        } else if (res.percDuz[i] == res.percDuz[i-1] || res.percDuz[i] == res.percDuz[i+1]) {
+
+                            let tempLog = []
+                            tempLog[Date.now()] = {
+                                banca:      dados.banca,
+                                totalNum:   dados.numeros.length,
+                                ultNum:     dados.numeros[dados.numeros.length-1],
+                                rodadaDuz:  dados.rodadaDuz,
+                                valorDuz:   dados.valorDuz,
+                                apostaDuz:  dados.apostaDuz,
+                                percDuz:    res.percDuz,
+                                acao:       "empate dúzias"
+                            }
+                            logRd.push(tempLog)
+
+                            Log.warning("Aguarde o próximo sorteio...")
+
+                            dados.apostaDuz  = null;
+                            dados.ventr      = 0;
+                            dados.rodadaDuz -= 1;
+                        
+                        } else {
+        
+                            Log.info("Continuar na dúzia: " + (dados.apostaDuz+1))
+                            Log.warning("Valor da entrada: " + ventr[dados.rodadaDuz])
+                            
+                            dados.valorDuz  += ventr[dados.rodadaDuz];
+                            dados.banca     -= ventr[dados.rodadaDuz];
+                            dados.ventr      = ventr[dados.rodadaDuz];
+                            
+                            Log.warning("Valor acumulado na dúzia " + dados.valorDuz)
+            
+                        }// else if (res.percDuz[i] < res.percDuz[i-1] && res.percDuz[i] < res.percDuz[i+1])
+        
+                    }// if (duz[i].includes(dados.numeros[dados.numeros.length-1]))
+                    
+                }// else if (dados.rodadaDuz < maxRd && dados.rodadaDuz > 0)
+        
+            }// for (let i = 0; i <= 2; i++)
+
+        }// else if (dados.numeros[dados.numeros.length-1] == 0)
 
         /************/
 

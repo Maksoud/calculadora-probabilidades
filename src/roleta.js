@@ -7,8 +7,14 @@ exports.jogar = (dados) => {
 
     // Log.info("Dados", dados);
 
+    // Conta zeros
+    let zeros = 0;
+    dados.numeros.forEach(num => {
+        num == 0 ? zeros++ : "";
+    });
+
     // Aguarda os 12 útimos números sorteados para iniciar a análise probabilística
-    if (dados.numeros.length >= 12) {
+    if ((dados.numeros.length - zeros) > 12) {
 
         dados.numeros   = dados.numeros.map(Number);
         dados.banca     = Number(dados.banca);
@@ -78,9 +84,9 @@ exports.jogar = (dados) => {
 
     } else {
 
-        Log.warning("Informe pelo menos 12 números...", dados.numeros);
-        return "Informe pelo menos 12 números...";
+        Log.warning("Informe pelo menos 12 números além do zero...", dados.numeros);
+        return "Informe pelo menos 12 números além do zero...";
 
-    }// if (dados.numeros.length >= 12)
+    }// else if ((dados.numeros.length - zeros) > 12)
 
 };// function jogar(numeros)

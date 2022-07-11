@@ -397,6 +397,17 @@
                             acumuladoD2.innerHTML = "0,00"
                             entradasD2.innerHTML  = "Sem Entradas"
                         
+                        } else {
+
+                            if (resposta.rodadaDuz == 0) {
+                                acumuladoD1.innerHTML = "0,00"
+                                entradasD1.innerHTML  = "Sem Entradas"
+                                acumuladoD2.innerHTML = "0,00"
+                                entradasD2.innerHTML  = "Sem Entradas"
+                                acumuladoD3.innerHTML = "0,00"
+                                entradasD3.innerHTML  = "Sem Entradas"
+                            }// if (resposta.rodadaDuz == 0)
+
                         }// else if (resposta.apostaDuz == 2)
 
                         // console.log("vitCol", resposta.vitCol)
