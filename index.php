@@ -38,7 +38,7 @@
             <div class="inputs">
                 <div class="ultimo-sorteado">
                     <p>Último número sorteado</p>
-                    <input type="number" class="numero_sorteado" id="numeroSorteado" placeholder="Próximo" value="36" min="0" max="36">
+                    <input type="number" class="numero_sorteado" id="numeroSorteado" placeholder="Próximo" value="36" min="0" max="36" required>
                     <button id="enviar" type="submit">
                         <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00895 0.20156C1.88414 0.139133 1.74431 0.112989 1.60537 0.126102C1.46643 0.139214 1.33396 0.191057 1.22302 0.275733C1.11209 0.360408 1.02715 0.474518 0.977861 0.605081C0.928572 0.735644 0.916915 0.877419 0.944216 1.01428L3.03641 8.24674C3.07542 8.38152 3.15167 8.50256 3.2564 8.59594C3.36112 8.68932 3.49007 8.75126 3.62843 8.77463L12.1135 10.1958C12.5132 10.2748 12.5132 10.8474 12.1135 10.9265L3.62843 12.3476C3.49007 12.371 3.36112 12.4329 3.2564 12.5263C3.15167 12.6197 3.07542 12.7407 3.03641 12.8755L0.944216 20.108C0.916915 20.2448 0.928572 20.3866 0.977861 20.5172C1.02715 20.6477 1.11209 20.7618 1.22302 20.8465C1.33396 20.9312 1.46643 20.983 1.60537 20.9961C1.74431 21.0093 1.88414 20.9831 2.00895 20.9207L21.3949 11.2277C21.5186 11.1657 21.6226 11.0705 21.6953 10.9528C21.768 10.8351 21.8064 10.6995 21.8064 10.5611C21.8064 10.4228 21.768 10.2872 21.6953 10.1694C21.6226 10.0517 21.5186 9.95653 21.3949 9.89454L2.00895 0.20156Z" fill="white"/></svg>
                     </button>
@@ -80,7 +80,7 @@
                     </div>
                     <p id="valorD1">R$ 0,00</p>
                     <div class="entradas">
-                        <p>Até 9 entradas</p>
+                        <p>Até 4 entradas</p>
                     </div>
                 </div>
                 <div>
@@ -90,7 +90,7 @@
                     </div>
                     <p id="valorD2">R$ 0,00</p>
                     <div class="entradas">
-                        <p>Até 9 entradas</p>
+                        <p>Até 4 entradas</p>
                     </div>
                 </div>
                 <div>
@@ -100,7 +100,7 @@
                     </div>
                     <p id="valorD3">R$ 0,00</p>
                     <div class="entradas">
-                        <p>Até 9 entradas</p>
+                        <p>Até 4 entradas</p>
                     </div>
                 </div>
             </div>
@@ -266,18 +266,14 @@
             numerosInvertidos.reverse();
             // console.log("invertidos", numerosInvertidos)
 
-            novo_box = ''
-
             /************/
 
             for (i = 0; i <= 11; i++) {
-                novo_box += numerosInvertidos[i] ? '<li>' + numerosInvertidos[i] + '</li>' : '<li>?</li>';
-                novo_box += '<strong>' + (i+1) + '</strong>';
+                box_numeros.innerHTML += numerosInvertidos[i] ? '<li>' + numerosInvertidos[i] + '</li>' : '<li>?</li>';
+                box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>';
                 // console.log(numerosInvertidos)
             }// for (i = 0; i <= 11; i++)
-            console.log(novo_box)
-
-            box_numeros.innerHTML = novo_box
+            // console.log("box_numeros", box_numeros)
 
             /************/
 
@@ -315,7 +311,7 @@
                     try {
 
                         let resposta = JSON.parse(data);
-                        console.log("Resposta do servidor", resposta)
+                        // console.log("Resposta do servidor", resposta)
                         // console.log("numeros", resposta.numeros)
 
                         // console.log("banca", resposta.banca)

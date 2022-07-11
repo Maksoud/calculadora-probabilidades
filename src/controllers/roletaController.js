@@ -1,5 +1,5 @@
 const roleta = require('../roleta');
-const user = {};
+const User = {};
 
 /************/
 
@@ -35,114 +35,129 @@ exports.post = (req, res, next) => {
     
     userID = req.body.userID;
 
-    if (typeof user[userID] == "undefined") {
-
-        console.log("novo usuário")
+    if (typeof User[userID] == "undefined") {
         
-        user[userID] = {
+        User[userID] = {
+            ventr:     0,
+
             vitDuz:    0,
             derDuz:    0,
-            valorDuz:  [0,0,0],
+            valorDuz:  0,
             rodadaDuz: 0,
+            apostaDuz: 0,
+
             vitCol:    0,
             derCol:    0,
-            valorCol:  [0,0,0],
+            valorCol:  0,
             rodadaCol: 0,
+            apostaCol: 0,
+
             vitMet:    0,
             derMet:    0,
-            valorMet:  [0,0],
+            valorMet:  0,
             rodadaMet: 0,
+            apostaMet: 0,
+
             vitPIs:    0,
             derPIs:    0,
-            valorPIs:  [0,0],
+            valorPIs:  0,
             rodadaPIs: 0,
+            apostaPIs: 0,
+
             vitVPs:    0,
             derVPs:    0,
-            valorVPs:  [0,0],
+            valorVPs:  0,
             rodadaVPs: 0,
+            apostaVPs: 0,
         }
 
-    }// if (typeof user[userID] == "undefined")
+        // console.log("novo usuário", User)
+
+    }// if (typeof User[userID] == "undefined")
 
     error ? res.send(error): "no error";
 
     if (!error) {
 
-        // console.log("user[userID]", user[userID])
+        // console.log("User[userID]", User[userID])
 
         let dados = {
             userID:     req.body.userID,
             numeros:    req.body.numeros,
-            ventr:      user[userID].ventr,
+            ventr:      User[userID].ventr,
 
-            vitDuz:     user[userID].vitDuz,
-            derDuz:     user[userID].derDuz,
-            valorDuz:   user[userID].valorDuz,
-            rodadaDuz:  user[userID].rodadaDuz,
-            apostaDuz:  user[userID].apostaDuz,
+            vitDuz:     User[userID].vitDuz,
+            derDuz:     User[userID].derDuz,
+            valorDuz:   User[userID].valorDuz,
+            rodadaDuz:  User[userID].rodadaDuz,
+            apostaDuz:  User[userID].apostaDuz,
 
-            vitCol:     user[userID].vitCol,
-            derCol:     user[userID].derCol,
-            valorCol:   user[userID].valorCol,
-            rodadaCol:  user[userID].rodadaCol,
-            apostaCol:  user[userID].apostaCol,
+            vitCol:     User[userID].vitCol,
+            derCol:     User[userID].derCol,
+            valorCol:   User[userID].valorCol,
+            rodadaCol:  User[userID].rodadaCol,
+            apostaCol:  User[userID].apostaCol,
 
-            vitMet:     user[userID].vitMet,
-            derMet:     user[userID].derMet,
-            valorMet:   user[userID].valorMet,
-            rodadaMet:  user[userID].rodadaMet,
-            apostaMet:  user[userID].apostaMet,
+            vitMet:     User[userID].vitMet,
+            derMet:     User[userID].derMet,
+            valorMet:   User[userID].valorMet,
+            rodadaMet:  User[userID].rodadaMet,
+            apostaMet:  User[userID].apostaMet,
 
-            vitPIs:     user[userID].vitPIs,
-            derPIs:     user[userID].derPIs,
-            valorPIs:   user[userID].valorPIs,
-            rodadaPIs:  user[userID].rodadaPIs,
-            apostaPIs:  user[userID].apostaPIs,
+            vitPIs:     User[userID].vitPIs,
+            derPIs:     User[userID].derPIs,
+            valorPIs:   User[userID].valorPIs,
+            rodadaPIs:  User[userID].rodadaPIs,
+            apostaPIs:  User[userID].apostaPIs,
 
-            vitVPs:     user[userID].vitVPs,
-            derVPs:     user[userID].derVPs,
-            valorVPs:   user[userID].valorVPs,
-            rodadaVPs:  user[userID].rodadaVPs,
-            apostaVPs:  user[userID].apostaVPs,
+            vitVPs:     User[userID].vitVPs,
+            derVPs:     User[userID].derVPs,
+            valorVPs:   User[userID].valorVPs,
+            rodadaVPs:  User[userID].rodadaVPs,
+            apostaVPs:  User[userID].apostaVPs,
         };
 
-        dados.banca = user[userID].banca ? user[userID].banca : req.body.banca;
+        dados.banca = User[userID].banca ? User[userID].banca : req.body.banca;
 
         // Jogar
         let rodada = roleta.jogar(dados)
 
-        user[userID].ventr      = rodada.ventr
-        user[userID].banca      = rodada.banca
+        if (typeof rodada == "object") {
 
-        user[userID].vitDuz     = rodada.vitDuz
-        user[userID].derDuz     = rodada.derDuz
-        user[userID].valorDuz   = rodada.valorDuz
-        user[userID].rodadaDuz  = rodada.rodadaDuz
-        user[userID].apostaDuz  = rodada.apostaDuz
+            User[userID].ventr      = rodada.ventr
+            User[userID].banca      = rodada.banca
 
-        user[userID].vitCol     = rodada.vitCol
-        user[userID].derCol     = rodada.derCol
-        user[userID].valorCol   = rodada.valorCol
-        user[userID].rodadaCol  = rodada.rodadaCol
-        user[userID].apostaCol  = rodada.apostaCol
+            User[userID].vitDuz     = rodada.vitDuz
+            User[userID].derDuz     = rodada.derDuz
+            User[userID].valorDuz   = rodada.valorDuz
+            User[userID].rodadaDuz  = rodada.rodadaDuz
+            User[userID].apostaDuz  = rodada.apostaDuz
 
-        user[userID].vitMet     = rodada.vitMet
-        user[userID].derMet     = rodada.derMet
-        user[userID].valorMet   = rodada.valorMet
-        user[userID].rodadaMet  = rodada.rodadaMet
-        user[userID].apostaMet  = rodada.apostaMet
+            User[userID].vitCol     = rodada.vitCol
+            User[userID].derCol     = rodada.derCol
+            User[userID].valorCol   = rodada.valorCol
+            User[userID].rodadaCol  = rodada.rodadaCol
+            User[userID].apostaCol  = rodada.apostaCol
 
-        user[userID].vitPIs     = rodada.vitPIs
-        user[userID].derPIs     = rodada.derPIs
-        user[userID].valorPIs   = rodada.valorPIs
-        user[userID].rodadaPIs  = rodada.rodadaPIs
-        user[userID].apostaPIs  = rodada.apostaPIs
+            User[userID].vitMet     = rodada.vitMet
+            User[userID].derMet     = rodada.derMet
+            User[userID].valorMet   = rodada.valorMet
+            User[userID].rodadaMet  = rodada.rodadaMet
+            User[userID].apostaMet  = rodada.apostaMet
 
-        user[userID].vitVPs     = rodada.vitVPs
-        user[userID].derVPs     = rodada.derVPs
-        user[userID].valorVPs   = rodada.valorVPs
-        user[userID].rodadaVPs  = rodada.rodadaVPs
-        user[userID].apostaVPs  = rodada.apostaVPs
+            User[userID].vitPIs     = rodada.vitPIs
+            User[userID].derPIs     = rodada.derPIs
+            User[userID].valorPIs   = rodada.valorPIs
+            User[userID].rodadaPIs  = rodada.rodadaPIs
+            User[userID].apostaPIs  = rodada.apostaPIs
+
+            User[userID].vitVPs     = rodada.vitVPs
+            User[userID].derVPs     = rodada.derVPs
+            User[userID].valorVPs   = rodada.valorVPs
+            User[userID].rodadaVPs  = rodada.rodadaVPs
+            User[userID].apostaVPs  = rodada.apostaVPs
+
+        }// if (typeof rodada == object)
 
         // console.log("rodada", rodada)
 
