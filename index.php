@@ -80,7 +80,7 @@
                     </div>
                     <p id="valorD1">R$ 0,00</p>
                     <div class="entradas">
-                        <p>Até 4 entradas</p>
+                        <p>Até 9 entradas</p>
                     </div>
                 </div>
                 <div>
@@ -90,7 +90,7 @@
                     </div>
                     <p id="valorD2">R$ 0,00</p>
                     <div class="entradas">
-                        <p>Até 4 entradas</p>
+                        <p>Até 9 entradas</p>
                     </div>
                 </div>
                 <div>
@@ -100,7 +100,7 @@
                     </div>
                     <p id="valorD3">R$ 0,00</p>
                     <div class="entradas">
-                        <p>Até 4 entradas</p>
+                        <p>Até 9 entradas</p>
                     </div>
                 </div>
             </div>

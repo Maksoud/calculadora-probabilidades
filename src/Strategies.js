@@ -18,8 +18,8 @@ const pares = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36];
 const impar = [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35];
 const verme = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 const preto = [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35];
-const ventr = [1,5,20,75];
-const maxRd = 4;
+const ventr = [1,5,20,75,80,110,150,230,340];
+const maxRd = 9;
 const logRd = [];
 
 /************/
@@ -180,6 +180,7 @@ exports.duzias = (dados) => {
 
                         dados.apostaDuz  = null;
                         dados.rodadaDuz -= 1;
+                        dados.valorDuz   = 0;
                         dados.ventr      = 0;
                     
                     } else {
@@ -203,9 +204,10 @@ exports.duzias = (dados) => {
 
         /************/
 
+        Log.warning("Rodada: " + (dados.rodadaDuz+1))
+
         // incrementa rodada até a 'maxRd' entrada
         dados.rodadaDuz += 1;
-        Log.warning("Rodada: " + (dados.rodadaDuz+1))
             
     }// if (dados.rodadaDuz > 0)
 
@@ -220,6 +222,7 @@ exports.duzias = (dados) => {
         if (res.percDuz[0] < res.percDuz[1] && res.percDuz[0] < res.percDuz[2]) {
 
             Log.warning("Começando na dúzia 1...")
+            Log.warning("Rodada: " + (dados.rodadaDuz+1))
 
             // dúzia 1 possui maior probabilidade
             dados.apostaDuz  = 0;
@@ -228,12 +231,12 @@ exports.duzias = (dados) => {
             dados.banca     -= ventr[0];
             dados.ventr      = ventr[0];
 
-            Log.warning("Rodada: " + (dados.rodadaDuz+1))
             Log.info("Valor da entrada R$" + dados.valorDuz)
 
         } else if (res.percDuz[1] < res.percDuz[0] && res.percDuz[1] < res.percDuz[2]) {
 
             Log.warning("Começando na dúzia 2...")
+            Log.warning("Rodada: " + (dados.rodadaDuz+1))
 
             // dúzia 2 possui maior probabilidade
             dados.apostaDuz  = 1;
@@ -242,12 +245,12 @@ exports.duzias = (dados) => {
             dados.banca     -= ventr[0];
             dados.ventr      = ventr[0];
 
-            Log.warning("Rodada: " + (dados.rodadaDuz+1))
             Log.info("Valor da entrada R$" + dados.valorDuz)
 
         } else if (res.percDuz[2] < res.percDuz[1] && res.percDuz[2] < res.percDuz[0]) {
 
             Log.warning("Começando na dúzia 3...")
+            Log.warning("Rodada: " + (dados.rodadaDuz+1))
 
             // dúzia 3 possui maior probabilidade
             dados.apostaDuz  = 2;
@@ -256,7 +259,6 @@ exports.duzias = (dados) => {
             dados.banca     -= ventr[0];
             dados.ventr      = ventr[0];
 
-            Log.warning("Rodada: " + (dados.rodadaDuz+1))
             Log.info("Valor da entrada R$" + dados.valorDuz)
 
         } else {
@@ -287,6 +289,7 @@ exports.duzias = (dados) => {
     // Log.info("Percentual de participação da dúzia 2: " + res.percDuz[1] + "%");
     // Log.info("Percentual de participação da dúzia 3: " + res.percDuz[2] + "%");
 
+    // Exibe o último histórico de operação
     logRd.length > 0 ? Log.warning("Histórico", logRd[logRd.length-1]) : ""
 
     /************/
