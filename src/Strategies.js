@@ -187,7 +187,6 @@ exports.duzias = (dados) => {
                         Log.warning("Aguarde o próximo sorteio...")
 
                         dados.apostaDuz  = null;
-                        dados.rodadaDuz -= 1;
                         dados.valorDuz   = 0;
                         dados.ventr      = 0;
                     
