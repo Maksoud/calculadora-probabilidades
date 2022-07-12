@@ -372,3 +372,20 @@ input[type=number] {
     float: right;
     margin-top: 15px;
 }
+
+.teste-numero textarea, .teste-numero input {
+    border: none;
+    padding: 6px 14px;
+    background-color: #111;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px #000;
+    text-align: center;
+    margin: 30px 0;
+    display: inline-table;
+    overflow: hidden;
+}
+.teste-numero input {
+    float: right;
+    margin-top: 27px;
+}

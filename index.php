@@ -136,8 +136,29 @@
                 </div>
             </div>
         </form>
+        <div class="teste-numero">
+            <textarea rows="1" cols="33" class="codigo" placeholder="Cole o código aqui"></textarea>
+            <input type="submit" class="enviar">
+            <div class="listarNumeros" style="display:none;"></div>
+        </div>
     </div>
     <script>
+        
+        ////// ANALISAR NÚMEROS
+        numeross = ''
+        numerosConvertidos = []
+        input = document.querySelector('.codigo')
+        listarNumeros = document.querySelector('.listarNumeros')
+        document.querySelector('.enviar').addEventListener("click", function(){
+            if(input.value != undefined){
+                listarNumeros.innerHTML = input.value
+                numeross = listarNumeros.querySelectorAll('.roulette-history-item__value-textsiwxWvFlm3ohr_UMS23f')
+                for(i = 0; i < numeross.length; i++){
+                    numerosConvertidos.push(numeross[i].innerText)
+                }
+                input.value = ''
+            }
+        })
 
         reload = document.querySelector('.reload')
         inputSorteado = document.querySelector('#numeroSorteado')
@@ -201,7 +222,13 @@
 
             /************/
             
-            numeros.push(numeroSorteado.value)
+            if (numerosConvertidos.length > 0) {
+                numeros = [...numerosConvertidos]
+                numerosConvertidos = []
+            } else {
+                numeros.push(numeroSorteado.value)
+            }// else if (numerosConvertidos.length > 0)
+
             // console.log("numeros", numeros)
 
             /************/

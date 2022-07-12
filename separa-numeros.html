@@ -1,0 +1,32 @@
+<input type="text" class="codigo" placeholder="Cole o código aqui">
+<input type="submit" class="enviar">
+<div class="div-completa">
+</div>
+<div class="numeross"></div>
+<script>
+    
+    input = document.querySelector('.codigo')
+    document.querySelector('.enviar').addEventListener("click", function(){
+        if(input.value != undefined){
+            console.log(input.value)
+        }
+    })
+    numeros = document.querySelectorAll('.roulette-history-item__value-textsiwxWvFlm3ohr_UMS23f')
+    numeross = document.querySelector(".numeross")
+    document.querySelector('.div-completa').style.display = "none"
+    numerosConvertidos = []
+    for(i = 0; i < numeros.length; i++){
+        numerosConvertidos.push(numeros[i].innerText)
+    }
+    numeross.innerHTML = numerosConvertidos
+</script>
+<style>
+    input {
+        border: none;
+        padding: 10px 20px;
+        background-color: #111;
+        color: white;
+        border-radius: 20px;
+        box-shadow: 0px 0px 5px #000;
+    }
+</style>
