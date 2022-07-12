@@ -366,3 +366,9 @@ input[type=number] {
 .assinatura {
     font-weight: bold;
 }
+
+.reload {
+    font-size: 18px;
+    float: right;
+    margin-top: 15px;
+}

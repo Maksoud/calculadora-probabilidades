@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <h2 class="ultimos-numeros">Últimos números</h2>
+            <h2 class="ultimos-numeros">Últimos números <i class="fas fa-redo reload"></i></h2>
             <div class="box-ultimos">
                 <ul>
                     <li>?</li><strong>1</strong>
@@ -135,70 +135,10 @@
                     </div>
                 </div>
             </div>
-            <!-- <input type="submit" value="teste"> -->
-            <!-- 
-                {
-                    "numeros": [25,27,2,13,12,9,5,1,22,5,17,21],
-                    "banca": 1023,
-
-                    "vitDuz": 0,
-                    "derDuz": 0,
-                    "valorDuz": [0,0,0],
-                    "rodadaDuz": [0,0,0],
-
-                    "vitCol": 0,
-                    "derCol": 0,
-                    "valorCol": [0,0,0],
-                    "rodadaCol": [0,0,0],
-
-                    "vitMet": 0,
-                    "derMet": 0,
-                    "valorMet": [0,0],
-                    "rodadaMet": [0,0],
-
-                    "vitPIs": 0,
-                    "derPIs": 0,
-                    "valorPIs": [0,0],
-                    "rodadaPIs": [0,0],
-                    
-                    "vitVPs": 0,
-                    "derVPs": 0,
-                    "valorVPs": [0,0],
-                    "rodadaVPs": [0,0],
-
-                    //////// RESPOSTA DO SERVIDOR //////////
-                    "duzias": {
-                        "duzias": [
-                            [
-                                2,
-                                12,
-                                9,
-                                5,
-                                1,
-                                5
-                            ],
-                            [
-                                13,
-                                22,
-                                17,
-                                21
-                            ],
-                            [
-                                25,
-                                27
-                            ]
-                        ],
-                        "percDuz": [
-                            50,
-                            33,
-                            16
-                        ]
-                    }
-                }
-            -->
         </form>
     </div>
     <script>
+        reload = document.querySelector('.reload')
         inputSorteado = document.querySelector('#numeroSorteado')
         setInterval(() => {
             if(inputSorteado.value > 36 || inputSorteado.value < 0){
@@ -214,6 +154,16 @@
                     inputSorteado.value = ''
                 }, 100)
             }
+        })
+        reload.addEventListener("click", function(){
+            
+            formData.append("userID", <?= $id ?>)
+            const payload = new URLSearchParams(formData)
+
+            fetch('http://localhost:3001/reset', {
+                method: 'POST',
+                body: payload,
+            })
         })
 
         let saldoBanca        = document.getElementById('saldoBanca');
@@ -287,7 +237,7 @@
                 for (var i = 0; i < numeros.length; i++) {
                     formData.append('numeros[]', numeros[i]);
                 }
-                formData.append("userID", 1)
+                formData.append("userID", <?= $id ?>)
                 formData.append("banca", 1023)
                 formData.delete("numeroSorteado")
 
