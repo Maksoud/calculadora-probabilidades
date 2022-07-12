@@ -80,7 +80,7 @@
                     </div>
                     <p id="valorD1">R$ 0,00</p>
                     <div class="entradas">
-                        <p>Até 9 entradas</p>
+                        <p id="entradasD1">-</p>
                     </div>
                 </div>
                 <div>
@@ -90,7 +90,7 @@
                     </div>
                     <p id="valorD2">R$ 0,00</p>
                     <div class="entradas">
-                        <p>Até 9 entradas</p>
+                        <p id="entradasD2">-</p>
                     </div>
                 </div>
                 <div>
@@ -100,7 +100,7 @@
                     </div>
                     <p id="valorD3">R$ 0,00</p>
                     <div class="entradas">
-                        <p>Até 9 entradas</p>
+                        <p id="entradasD3">-</p>
                     </div>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                     </div>
                     <p id="acumuladoD1">R$ 0,00</p>
                     <div class="entradas">
-                        <p id="entradasD1">-</p>
+                        <p>Até 9 entradas</p>
                     </div>
                 </div>
                 <div>
@@ -122,7 +122,7 @@
                     </div>
                     <p id="acumuladoD2">R$ 0,00</p>
                     <div class="entradas">
-                        <p id="entradasD2">-</p>
+                        <p>Até 9 entradas</p>
                     </div>
                 </div>
                 <div>
@@ -131,7 +131,7 @@
                     </div>
                     <p id="acumuladoD3">R$ 0,00</p>
                     <div class="entradas">
-                        <p id="entradasD3">-</p>
+                        <p>Até 9 entradas</p>
                     </div>
                 </div>
             </div>
