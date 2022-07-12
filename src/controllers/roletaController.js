@@ -165,7 +165,49 @@ exports.post = (req, res, next) => {
 
     }// if (!error)
 
-};
+}
+
+exports.reset = (req, res, next) => {
+
+    userID = req.body.userID;
+
+    User[userID] = {
+        numeros:   [],
+
+        ventr:     0,
+
+        vitDuz:    0,
+        derDuz:    0,
+        valorDuz:  0,
+        rodadaDuz: 0,
+        apostaDuz: 0,
+
+        vitCol:    0,
+        derCol:    0,
+        valorCol:  0,
+        rodadaCol: 0,
+        apostaCol: 0,
+
+        vitMet:    0,
+        derMet:    0,
+        valorMet:  0,
+        rodadaMet: 0,
+        apostaMet: 0,
+
+        vitPIs:    0,
+        derPIs:    0,
+        valorPIs:  0,
+        rodadaPIs: 0,
+        apostaPIs: 0,
+
+        vitVPs:    0,
+        derVPs:    0,
+        valorVPs:  0,
+        rodadaVPs: 0,
+        apostaVPs: 0,
+    }
+
+}
 
 // exports.get = (req, res, next) => {
 //     console.log("req.params: ", req.params);

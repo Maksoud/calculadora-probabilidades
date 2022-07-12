@@ -17,8 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Rotas
 const index     = require('./routes/index');
 const calcRoute = require('./routes/calcRoute');
+const resetRoute = require('./routes/resetRoute');
 
 app.use('/', index);
 app.use('/calc', calcRoute);
+app.use('/reset', resetRoute);
 
 module.exports = app;

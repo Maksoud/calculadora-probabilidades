@@ -138,32 +138,26 @@
         </form>
     </div>
     <script>
+
         reload = document.querySelector('.reload')
         inputSorteado = document.querySelector('#numeroSorteado')
+
         setInterval(() => {
             if(inputSorteado.value > 36 || inputSorteado.value < 0){
                 inputSorteado.value = ''
             }
         }, 100)
-        inputSorteado.addEventListener("click", function(){
+
+        inputSorteado.addEventListener("click", () => {
             inputSorteado.value = ''
         })
-        inputSorteado.addEventListener("keypress", function(){
+
+        inputSorteado.addEventListener("keypress", () => {
             if (event.key === "Enter") {
                 setTimeout(() => {
                     inputSorteado.value = ''
                 }, 100)
             }
-        })
-        reload.addEventListener("click", function(){
-            
-            formData.append("userID", <?= $id ?>)
-            const payload = new URLSearchParams(formData)
-
-            fetch('http://localhost:3001/reset', {
-                method: 'POST',
-                body: payload,
-            })
         })
 
         let saldoBanca        = document.getElementById('saldoBanca');
@@ -203,24 +197,24 @@
 
             /************/
 
-            box_numeros.innerHTML = '';
+            box_numeros.innerHTML = ''
 
             /************/
             
-            numeros.push(numeroSorteado.value);
-            // console.log("numeros", numeros);
+            numeros.push(numeroSorteado.value)
+            // console.log("numeros", numeros)
 
             /************/
 
-            numerosInvertidos = [...numeros];
-            numerosInvertidos.reverse();
+            numerosInvertidos = [...numeros]
+            numerosInvertidos.reverse()
             // console.log("invertidos", numerosInvertidos)
 
             /************/
 
             for (i = 0; i <= 11; i++) {
-                box_numeros.innerHTML += numerosInvertidos[i] ? '<li>' + numerosInvertidos[i] + '</li>' : '<li>?</li>';
-                box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>';
+                box_numeros.innerHTML += numerosInvertidos[i] ? '<li>' + numerosInvertidos[i] + '</li>' : '<li>?</li>'
+                box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>'
                 // console.log(numerosInvertidos)
             }// for (i = 0; i <= 11; i++)
             // console.log("box_numeros", box_numeros)
@@ -235,7 +229,7 @@
                 // formData.append('nome', 'valor')
                 // let numeros = [25,27,2,13,12,9,5,1,22,5,17,21];
                 for (var i = 0; i < numeros.length; i++) {
-                    formData.append('numeros[]', numeros[i]);
+                    formData.append('numeros[]', numeros[i])
                 }
                 formData.append("userID", <?= $id ?>)
                 formData.append("banca", 1023)
@@ -245,7 +239,7 @@
                 // console.log("formData get numeroSorteado: ", formData.get('numeroSorteado'));
                 
                 // Convert formData object to URL-encoded string:
-                const payload = new URLSearchParams(formData);
+                const payload = new URLSearchParams(formData)
                 // console.log("payload: ", payload);
 
                 // Create payload as new FormData object:
@@ -397,6 +391,67 @@
             }// if (numeros.length > 12)
 
         })// form.addEventListener
+
+        reload.addEventListener("click", function(e) {
+
+            // Previne comportamento padrão de recarregar página
+            e.preventDefault();
+
+            /************/
+            
+            numeros = []
+
+            /************/
+            
+            const formData = new FormData(form);
+            formData.append("userID", <?= $id ?>)
+            const payload = new URLSearchParams(formData)
+
+            /************/
+
+            fetch('http://localhost:3001/reset', {
+                method: 'POST',
+                body: payload,
+            })
+            .then(res => res.text())
+            .then(data => {
+
+                try {
+
+                    box_numeros.innerHTML = ''
+
+                    for (i = 0; i <= 11; i++) {
+                        box_numeros.innerHTML += '<li>?</li>'
+                        box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>'
+                    }// for (i = 0; i <= 11; i++)
+
+                    saldoLucro.innerHTML = "R$ 0,00"
+                    contaWin.innerHTML   = "0"
+                    contaLoss.innerHTML  = "0"
+
+                    sugestoes[0].classList.remove('selecionado')
+                    sugestoes[1].classList.remove('selecionado')
+                    sugestoes[2].classList.remove('selecionado')
+
+                    valorD1.innerHTML = "R$ 0,00"
+                    valorD2.innerHTML = "R$ 0,00"
+                    valorD3.innerHTML = "R$ 0,00"
+
+                    acumuladoD1.innerHTML = "0,00"
+                    entradasD1.innerHTML  = "Sem Entradas"
+                    acumuladoD2.innerHTML = "0,00"
+                    entradasD2.innerHTML  = "Sem Entradas"
+                    acumuladoD3.innerHTML = "0,00"
+                    entradasD3.innerHTML  = "Sem Entradas"
+
+                } catch (e) {
+
+                    console.log(data, e) // Informe pelo menos 12 números...
+
+                }
+            })
+
+        })
 
         function Decimal(num, decimal) {
 
