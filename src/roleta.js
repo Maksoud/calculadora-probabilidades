@@ -66,17 +66,17 @@ exports.jogar = (dados) => {
 
         /************/
 
-        // dados.duzias        = Strategies.duzias(dados);
-        // dados.colunas       = Strategies.colunas(dados);
-        // dados.metades       = Strategies.metades(dados);
-        // dados.paresImpares  = Strategies.paresImpares(dados);
-        // dados.vermelhoPreto = Strategies.vermelhoPreto(dados);
+        dados.duzias        = Strategies.duzias(dados);
+        dados.colunas       = Strategies.colunas(dados);
+        dados.metades       = Strategies.metades(dados);
+        dados.paresImpares  = Strategies.paresImpares(dados);
+        dados.vermelhoPreto = Strategies.vermelhoPreto(dados);
 
-        Strategies.duzias(dados);
-        Strategies.colunas(dados);
-        Strategies.metades(dados);
-        Strategies.paresImpares(dados);
-        Strategies.vermelhoPreto(dados);
+        // Strategies.duzias(dados);
+        // Strategies.colunas(dados);
+        // Strategies.metades(dados);
+        // Strategies.paresImpares(dados);
+        // Strategies.vermelhoPreto(dados);
 
         /************/
 

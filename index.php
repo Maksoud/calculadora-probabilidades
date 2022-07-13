@@ -76,7 +76,7 @@
                 <div>
                     <div class="flex titulo space-between nao_selecionado">
                         <h2>D1</h2>
-                        <!-- <p id="percD1">0%</p> -->
+                        <p id="percD1">0%</p>
                     </div>
                     <p id="valorD1">R$ 0,00</p>
                     <div class="entradas">
@@ -86,7 +86,7 @@
                 <div>
                     <div class="flex titulo space-between nao_selecionado">
                         <h2>D2</h2>
-                        <!-- <p id="percD2">0%</p> -->
+                        <p id="percD2">0%</p>
                     </div>
                     <p id="valorD2">R$ 0,00</p>
                     <div class="entradas">
@@ -96,7 +96,7 @@
                 <div>
                     <div class="flex titulo space-between nao_selecionado">
                         <h2>D3</h2>
-                        <!-- <p id="percD3">0%</p> -->
+                        <p id="percD3">0%</p>
                     </div>
                     <p id="valorD3">R$ 0,00</p>
                     <div class="entradas">
@@ -188,11 +188,11 @@
         let contaWin          = document.getElementById('contaWin');
         let contaLoss         = document.getElementById('contaLoss');
 
-        // let percD1            = document.getElementById('percD1');
+        let percD1            = document.getElementById('percD1');
         let valorD1           = document.getElementById('valorD1');
-        // let percD2            = document.getElementById('percD2');
+        let percD2            = document.getElementById('percD2');
         let valorD2           = document.getElementById('valorD2');
-        // let percD3            = document.getElementById('percD3');
+        let percD3            = document.getElementById('percD3');
         let valorD3           = document.getElementById('valorD3');
 
         let acumuladoD1       = document.getElementById('acumuladoD1');
@@ -221,9 +221,10 @@
             box_numeros.innerHTML = ''
 
             /************/
-            
+
             if (numerosConvertidos.length > 0) {
                 numeros = [...numerosConvertidos]
+                numeros.reverse()
                 numerosConvertidos = []
             } else {
                 numeros.push(numeroSorteado.value)
@@ -327,9 +328,9 @@
                             valorD3.innerHTML = "R$ 0,00"
                         }// else if (resposta.apostaDuz == 2)
 
-                        // percD1.innerHTML = resposta.duzias.percDuz[0] ? resposta.duzias.percDuz[0] + "%" : "0%"
-                        // percD2.innerHTML = resposta.duzias.percDuz[1] ? resposta.duzias.percDuz[1] + "%" : "0%"
-                        // percD3.innerHTML = resposta.duzias.percDuz[2] ? resposta.duzias.percDuz[2] + "%" : "0%"
+                        percD1.innerHTML = resposta.duzias.percDuz[0] ? resposta.duzias.percDuz[0] + "%" : "0%"
+                        percD2.innerHTML = resposta.duzias.percDuz[1] ? resposta.duzias.percDuz[1] + "%" : "0%"
+                        percD3.innerHTML = resposta.duzias.percDuz[2] ? resposta.duzias.percDuz[2] + "%" : "0%"
 
                         //.replace(/,/g, '.')
 
