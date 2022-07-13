@@ -376,7 +376,7 @@ input[type=number] {
 
 .teste-numero textarea, .teste-numero input {
     border: none;
-    padding: 6px 14px;
+    padding: 6px 10px;
     background-color: #111;
     color: white;
     border-radius: 20px;
@@ -416,52 +416,52 @@ input[type=number] {
     align-items: center;
     cursor: pointer;
     margin-top: 20px;
-  }
-  .button-container .button {
-    position: relative;
-    border: 3px solid #9b9c9b;
-    height: 25px;
-    width: 50px;
-    margin-right: 5px;
-    border-radius: 40px;
-  }
-  .button-container.on .button {
-    border-color: #0dcaf0;
-  }
-  .button-container .button:before {
-    content: '';
-    position: absolute;
-    height: 21px;
-    width: 20px;
-    background-color: #9b9c9b;
-    border-radius: 38px;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 1px;
-    transition: left .3s linear;
-  }
-  .button-container.on .button:before {
-    background-color: #0dcaf0;
-    left: 24px;
-  }
-  
-  .button-container .text {
-    font-family: 'Lato', sans-serif;
-    font-weight: 900;
-    font-size: 16px;
-    color: #9b9c9b;
-  }
-  .button-container.on .text {
-    color: #0dcaf0;
-  }
-  .button-container:not(.on) .text .on {
-    display: none;
-  }
-  .button-container.on .text .off {
-    display: none;
-  }
+}
+.button-container .button {
+position: relative;
+border: 3px solid #9b9c9b;
+height: 25px;
+width: 50px;
+margin-right: 5px;
+border-radius: 40px;
+}
+.button-container.on .button {
+border-color: #0dcaf0;
+}
+.button-container .button:before {
+content: '';
+position: absolute;
+height: 21px;
+width: 20px;
+background-color: #9b9c9b;
+border-radius: 38px;
+top: 50%;
+transform: translateY(-50%);
+left: 1px;
+transition: left .3s linear;
+}
+.button-container.on .button:before {
+background-color: #0dcaf0;
+left: 24px;
+}
 
-  .onoffswitch {
+.button-container .text {
+font-family: 'Lato', sans-serif;
+font-weight: 900;
+font-size: 16px;
+color: #9b9c9b;
+}
+.button-container.on .text {
+color: #0dcaf0;
+}
+.button-container:not(.on) .text .on {
+display: none;
+}
+.button-container.on .text .off {
+display: none;
+}
+
+/* .onoffswitch {
     position: relative; width: 155px;
     margin-top: 15px;
 }
@@ -505,4 +505,4 @@ input[type=number] {
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
-}
+} */

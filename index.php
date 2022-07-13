@@ -71,8 +71,9 @@
             </div>
             <div class="space-between">
                 <h2 class="ultimos-numeros">Sugestões</h2>
-                <div class="button-container on">
+                <div id="umaDuasDuz-container" class="button-container on">
                     <div class="button"></div>
+                    <input type="hidden" name="umaDuasDuz" value="2">
                     <div class="text">
                         <span class="on">2 Dúzias</span>
                         <span class="off">1 Dúzia</span>
@@ -113,12 +114,13 @@
             </div>
             <div class="space-between">
                 <h2 class="ultimos-numeros">Em operação</h2>
-                <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                    <label class="onoffswitch-label" for="myonoffswitch">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
+                <div id="operacaoTestes-container" class="button-container on">
+                    <div class="button"></div>
+                    <input type="hidden" name="operacaoTestes" value="2">
+                    <div class="text">
+                        <span class="on">Operação</span>
+                        <span class="off">Testes</span>
+                    </div>
                 </div>
             </div>
             <div class="duzias operacoes">
@@ -160,11 +162,26 @@
     </div>
     <script>
 
-        const btnElmCont = document.querySelector('.button-container')
+        const btnElmDuzCont = document.getElementById('umaDuasDuz-container')
+        const btnElmDuz     = document.getElementsByName('umaDuasDuz')[0]
 
-        btnElmCont.addEventListener('click', function () {
-        btnElmCont.classList.toggle('on')
+        btnElmDuzCont.addEventListener('click', function () {
+            btnElmDuzCont.classList.toggle('on')
+            btnElmDuzCont.classList.contains('on') ? btnElmDuz.value = 2 : btnElmDuz.value = 1
         });
+
+        /************/
+
+        const btnElmOpCont = document.getElementById('operacaoTestes-container')
+        const btnElmOp     = document.getElementsByName('operacaoTestes')[0]
+
+        btnElmOpCont.addEventListener('click', function () {
+            btnElmOpCont.classList.toggle('on')
+            btnElmOpCont.classList.contains('on') ? btnElmOp.value = 2 : btnElmOp.value = 1
+        });
+
+        /************/
+
         elemento = document.querySelector('.bancaUsu')
         function formatarMoeda() {
             var elemento = document.querySelector('.bancaUsu')
@@ -219,6 +236,8 @@
             }
         })
 
+        /************/
+
         let saldoBanca        = document.getElementById('saldoBanca');
         let saldoLucro        = document.getElementById('saldoLucro');
         let numeroSorteado    = document.getElementById('numeroSorteado');
@@ -246,6 +265,8 @@
         let filhos            = document.querySelectorAll('.box-ultimos ul li');
         const form            = document.getElementById('form');
         contador = 1;
+
+        /************/
  
         form.addEventListener('submit', function(e) {
 
