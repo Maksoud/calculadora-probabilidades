@@ -382,14 +382,17 @@ input[type=number] {
     border-radius: 20px;
     box-shadow: 0px 0px 5px #000;
     text-align: center;
-    margin: 30px 0;
     margin-bottom: -12px;
     display: inline-table;
     overflow: hidden;
 }
+
+.teste-numero h3 {
+    margin-top: 22px;
+}
 .teste-numero input {
     float: right;
-    margin-top: 27px;
+    margin-top: -5px;
 }
 
 .bancaUsu {
@@ -445,7 +448,7 @@ input[type=number] {
   .button-container .text {
     font-family: 'Lato', sans-serif;
     font-weight: 900;
-    font-size: 23px;
+    font-size: 16px;
     color: #9b9c9b;
   }
   .button-container.on .text {
@@ -457,3 +460,52 @@ input[type=number] {
   .button-container.on .text .off {
     display: none;
   }
+
+  .onoffswitch {
+    position: relative; width: 155px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    margin-top: 15px;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 12px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "Modo operação";
+    padding-left: 10px;
+    background-color: #00b733; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "Modo teste";
+    padding-right: 10px;
+    background-color: #fd0000; color: #FFFFFF;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 46px; margin: 2px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 101px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}

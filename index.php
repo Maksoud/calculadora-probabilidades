@@ -23,8 +23,7 @@
                 <div class="small-box">
                     <h5><i class="fas fa-wallet"></i> Banca Inicial</h5>
                     <div class="space-between">
-                        <h2>R$ <input type="text" name="banca" class="bancaUsu" onkeyup="formatarMoeda();" placeholder="valor"></h2>
-                        <input type="hidden" id="saldoBanca" value="1023">
+                        <h2>R$ <input type="text" id="saldoBanca" name="banca" class="bancaUsu" onkeyup="formatarMoeda();" placeholder="valor" required></h2>
                     </div>
                 </div>
                 <div class="small-box">
@@ -75,8 +74,8 @@
                 <div class="button-container on">
                     <div class="button"></div>
                     <div class="text">
-                        <span class="on">2D</span>
-                        <span class="off">1D</span>
+                        <span class="on">2 Dúzias</span>
+                        <span class="off">1 Dúzia</span>
                     </div>
                 </div>
             </div>
@@ -112,8 +111,16 @@
                     </div>
                 </div>
             </div>
-            
-            <h2 class="ultimos-numeros">Em operação</h2>
+            <div class="space-between">
+                <h2 class="ultimos-numeros">Em operação</h2>
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
             <div class="duzias operacoes">
                 <div>
                     <div class="titulo operacao">
@@ -126,7 +133,7 @@
                 </div>
                 <div>
                     <div class="titulo operacao">
-                       <h2>D2</h2>
+                    <h2>D2</h2>
                     </div>
                     <p id="acumuladoD2">R$ 0,00</p>
                     <div class="entradas">
@@ -145,6 +152,7 @@
             </div>
         </form>
         <div class="teste-numero">
+            <h3>Importar histórico da roleta</h3>
             <textarea rows="1" cols="33" class="codigo" placeholder="Cole o código aqui"></textarea>
             <input type="submit" class="enviar">
             <div class="listarNumeros" style="display:none;"></div>
@@ -152,26 +160,26 @@
     </div>
     <script>
 
-        const btnElmCont = document.querySelector('.button-container');
+        const btnElmCont = document.querySelector('.button-container')
 
         btnElmCont.addEventListener('click', function () {
-        btnElmCont.classList.toggle('on');
+        btnElmCont.classList.toggle('on')
         });
-
+        elemento = document.querySelector('.bancaUsu')
         function formatarMoeda() {
-        var elemento = document.querySelector('.bancaUsu');
-        var valor = elemento.value;
-        
-        valor = valor + '';
-        valor = parseInt(valor.replace(/[\D]+/g,''));
-        valor = valor + '';
-        valor = valor.replace(/([0-9]{2})$/g, ",$1");
+            var elemento = document.querySelector('.bancaUsu')
+            var valor = elemento.value
+            
+            valor = valor + ''
+            valor = parseInt(valor.replace(/[\D]+/g,''))
+            valor = valor + ''
+            valor = valor.replace(/([0-9]{2})$/g, ",$1")
 
-        if (valor.length > 6) {
-            valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-        }
+            if (valor.length > 6) {
+                valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2")
+            }
 
-        elemento.value = valor;
+            elemento.value = valor
         }
         ////// ANALISAR NÚMEROS
         numeross = ''
