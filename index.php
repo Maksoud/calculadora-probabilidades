@@ -23,9 +23,8 @@
                 <div class="small-box">
                     <h5><i class="fas fa-wallet"></i> Banca Inicial</h5>
                     <div class="space-between">
-                        <h2>R$ 1.023,00</h2>
+                        <h2>R$ <input type="text" name="banca" class="bancaUsu" onkeyup="formatarMoeda();" placeholder="valor"></h2>
                         <input type="hidden" id="saldoBanca" value="1023">
-                        <i class="fas fa-edit"></i>
                     </div>
                 </div>
                 <div class="small-box">
@@ -71,7 +70,16 @@
                     <li>?</li><strong>12</strong>
                 </ul>
             </div>
-            <h2 class="ultimos-numeros">Sugestões</h2>
+            <div class="space-between">
+                <h2 class="ultimos-numeros">Sugestões</h2>
+                <div class="button-container on">
+                    <div class="button"></div>
+                    <div class="text">
+                        <span class="on">2D</span>
+                        <span class="off">1D</span>
+                    </div>
+                </div>
+            </div>
             <div class="duzias">
                 <div>
                     <div class="flex titulo space-between nao_selecionado">
@@ -143,7 +151,28 @@
         </div>
     </div>
     <script>
+
+        const btnElmCont = document.querySelector('.button-container');
+
+        btnElmCont.addEventListener('click', function () {
+        btnElmCont.classList.toggle('on');
+        });
+
+        function formatarMoeda() {
+        var elemento = document.querySelector('.bancaUsu');
+        var valor = elemento.value;
         
+        valor = valor + '';
+        valor = parseInt(valor.replace(/[\D]+/g,''));
+        valor = valor + '';
+        valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+        if (valor.length > 6) {
+            valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+        }
+
+        elemento.value = valor;
+        }
         ////// ANALISAR NÚMEROS
         numeross = ''
         numerosConvertidos = []
@@ -242,9 +271,19 @@
 
             for (i = 0; i <= 11; i++) {
                 box_numeros.innerHTML += numerosInvertidos[i] ? '<li>' + numerosInvertidos[i] + '</li>' : '<li>?</li>'
-                box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>'
+                if(i == 0){
+                    box_numeros.innerHTML += '<strong><i class="fas fa-trash-alt excluir"></i></strong>'
+                }else {
+                    box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>'
+                }
+                
                 // console.log(numerosInvertidos)
             }// for (i = 0; i <= 11; i++)
+
+            document.querySelector('.excluir').addEventListener("click", function(){
+                numeros.pop()
+                box_numeros.children[0].innerHTML = '?'
+            })
             // console.log("box_numeros", box_numeros)
 
             /************/
