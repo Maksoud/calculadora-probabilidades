@@ -300,15 +300,19 @@
             /************/
 
             for (i = 0; i <= 11; i++) {
+
                 box_numeros.innerHTML += numerosInvertidos[i] ? '<li>' + numerosInvertidos[i] + '</li>' : '<li>?</li>'
-                if(i == 0){
+                
+                if (i == 0) {
                     box_numeros.innerHTML += '<strong><i class="fas fa-trash-alt excluir"></i></strong>'
-                }else {
+                } else {
                     box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>'
                 }
                 
                 // console.log(numerosInvertidos)
             }// for (i = 0; i <= 11; i++)
+
+            /************/
 
             document.querySelector('.excluir').addEventListener("click", function(){
                 numeros.pop()
@@ -318,7 +322,12 @@
 
             /************/
 
-            if (numeros.length >= 12 || true) {
+            let banca = Number(saldoBanca.value.replace('.', '').replace(/,/g, '.'));
+            // console.log("Banca:", banca);
+
+            /************/
+
+            if (numeros.length >= 12 && typeof saldoBanca.value == 'number') {
 
                 // Create new FormData object:
                 const formData = new FormData(form);
@@ -329,7 +338,7 @@
                     formData.append('numeros[]', numeros[i])
                 }
                 formData.append("userID", <?= $id ?>)
-                formData.append("banca", 1023)
+                formData.append("banca", banca)
                 formData.delete("numeroSorteado")
 
                 // console.log("formData get banca: ", formData.get('banca'));
