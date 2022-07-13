@@ -463,9 +463,6 @@ input[type=number] {
 
   .onoffswitch {
     position: relative; width: 155px;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select: none;
     margin-top: 15px;
 }
 .onoffswitch-checkbox {
