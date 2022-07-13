@@ -149,6 +149,7 @@
         numerosConvertidos = []
         input = document.querySelector('.codigo')
         listarNumeros = document.querySelector('.listarNumeros')
+        
         document.querySelector('.enviar').addEventListener("click", function(){
             if(input.value != undefined){
                 listarNumeros.innerHTML = input.value

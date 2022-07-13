@@ -188,7 +188,9 @@ input::placeholder {
 
 .duzias .titulo p {
     font-size: 12px;
-    padding: 0px;
+    float: right;
+    margin-right: -40px;
+    margin-left: 10px;
 }
 
 .footer {
@@ -382,6 +384,7 @@ input[type=number] {
     box-shadow: 0px 0px 5px #000;
     text-align: center;
     margin: 30px 0;
+    margin-bottom: -12px;
     display: inline-table;
     overflow: hidden;
 }
