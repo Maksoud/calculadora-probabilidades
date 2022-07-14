@@ -44,7 +44,6 @@ exports.post = (req, res, next) => {
             derDuz:    0,
             valorDuz:  0,
             rodadaDuz: 0,
-            apostaDuz: 0,
 
             vitCol:    0,
             derCol:    0,
@@ -71,7 +70,9 @@ exports.post = (req, res, next) => {
             apostaVPs: 0,
         }
 
-        // console.log("novo usuário", User)
+        req.body.estDuzias == 2 ? User[userID].apostaDuz = [] : User[userID].apostaDuz = 0
+
+        // console.log("novo usuário", User[userID])
 
     }// if (typeof User[userID] == "undefined")
 
@@ -84,6 +85,8 @@ exports.post = (req, res, next) => {
         let dados = {
             userID:     req.body.userID,
             numeros:    req.body.numeros,
+            estDuzias:  req.body.estDuzias,
+            testes:     req.body.testes,
             ventr:      User[userID].ventr,
 
             vitDuz:     User[userID].vitDuz,
@@ -118,6 +121,7 @@ exports.post = (req, res, next) => {
         };
 
         dados.banca = User[userID].banca ? User[userID].banca : req.body.banca;
+        typeof req.body.estDuzias != typeof User[userID].apostaDuz ? User[userID].apostaDuz = req.body.estDuzias : ""
 
         // Jogar
         let rodada = roleta.jogar(dados)
