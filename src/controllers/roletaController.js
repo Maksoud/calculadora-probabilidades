@@ -43,6 +43,7 @@ exports.post = (req, res, next) => {
             vitDuz:    0,
             derDuz:    0,
             valorDuz:  0,
+            acumDuz:   0,
             rodadaDuz: 0,
 
             vitCol:    0,
@@ -80,7 +81,12 @@ exports.post = (req, res, next) => {
 
     if (!error) {
 
-        // console.log("User[userID]", User[userID])
+        if (req.body.estDuzias != User[userID].estDuzias) {
+
+            User[userID].estDuzias = req.body.estDuzias
+            req.body.estDuzias == 2 ? User[userID].apostaDuz = [] : User[userID].apostaDuz = null
+
+        }// if (req.body.estDuzias != User[userID].apostaDuz)
 
         let dados = {
             userID:     req.body.userID,
@@ -92,6 +98,7 @@ exports.post = (req, res, next) => {
             vitDuz:     User[userID].vitDuz,
             derDuz:     User[userID].derDuz,
             valorDuz:   User[userID].valorDuz,
+            acumDuz:    User[userID].acumDuz,
             rodadaDuz:  User[userID].rodadaDuz,
             apostaDuz:  User[userID].apostaDuz,
 
@@ -121,7 +128,6 @@ exports.post = (req, res, next) => {
         };
 
         dados.banca = User[userID].banca ? User[userID].banca : req.body.banca;
-        typeof req.body.estDuzias != typeof User[userID].apostaDuz ? User[userID].apostaDuz = req.body.estDuzias : ""
 
         // Jogar
         let rodada = roleta.jogar(dados)
@@ -134,6 +140,7 @@ exports.post = (req, res, next) => {
             User[userID].vitDuz     = rodada.vitDuz
             User[userID].derDuz     = rodada.derDuz
             User[userID].valorDuz   = rodada.valorDuz
+            User[userID].acumDuz    = rodada.acumDuz
             User[userID].rodadaDuz  = rodada.rodadaDuz
             User[userID].apostaDuz  = rodada.apostaDuz
 
@@ -183,6 +190,7 @@ exports.reset = (req, res, next) => {
         vitDuz:    0,
         derDuz:    0,
         valorDuz:  0,
+        acumDuz:   0,
         rodadaDuz: 0,
         apostaDuz: 0,
 

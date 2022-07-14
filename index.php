@@ -302,9 +302,10 @@
                     box_numeros.innerHTML += '<strong><i class="fas fa-trash-alt excluir"></i></strong>'
                 } else {
                     box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>'
-                }
+                }// else if (i == 0)
                 
                 // console.log(numerosInvertidos)
+
             }// for (i = 0; i <= 11; i++)
 
             /************/
@@ -374,52 +375,77 @@
 
                         // console.log("perDuz", resposta.duzias.percDuz)
                         sugestoes = document.querySelectorAll('.nao_selecionado')
-                        if (resposta.apostaDuz == 0) {
-                            sugestoes[0].classList.add('selecionado')
-                            sugestoes[1].classList.remove('selecionado')
-                            sugestoes[2].classList.remove('selecionado')
-                            valorD1.innerHTML = "R$ " + Decimal(resposta.ventr,2)
-                            valorD2.innerHTML = "R$ 0,00"
-                            valorD3.innerHTML = "R$ 0,00"
-                        } else if (resposta.apostaDuz == 1) {
-                            sugestoes[0].classList.remove('selecionado')
-                            sugestoes[1].classList.add('selecionado')
-                            sugestoes[2].classList.remove('selecionado')
-                            valorD1.innerHTML = "R$ 0,00"
-                            valorD2.innerHTML = "R$ " + Decimal(resposta.ventr,2)
-                            valorD3.innerHTML = "R$ 0,00"
-                        } else if (resposta.apostaDuz == 2) {
-                            sugestoes[0].classList.remove('selecionado')
-                            sugestoes[1].classList.remove('selecionado')
-                            sugestoes[2].classList.add('selecionado')
-                            valorD1.innerHTML = "R$ 0,00"
-                            valorD2.innerHTML = "R$ 0,00"
-                            valorD3.innerHTML = "R$ " + Decimal(resposta.ventr,2)
-                        } else {
-                            sugestoes[0].classList.remove('selecionado')
-                            sugestoes[1].classList.remove('selecionado')
-                            sugestoes[2].classList.remove('selecionado')
-                            valorD1.innerHTML = "R$ 0,00"
-                            valorD2.innerHTML = "R$ 0,00"
-                            valorD3.innerHTML = "R$ 0,00"
-                        }// else if (resposta.apostaDuz == 2)
+
+                        if (btnElmDuz.value == 1) {
+
+                            if (resposta.apostaDuz == 0) {
+                                sugestoes[0].classList.add('selecionado')
+                                sugestoes[1].classList.remove('selecionado')
+                                sugestoes[2].classList.remove('selecionado')
+                                valorD1.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                                valorD2.innerHTML = "R$ 0,00"
+                                valorD3.innerHTML = "R$ 0,00"
+                            } else if (resposta.apostaDuz == 1) {
+                                sugestoes[0].classList.remove('selecionado')
+                                sugestoes[1].classList.add('selecionado')
+                                sugestoes[2].classList.remove('selecionado')
+                                valorD1.innerHTML = "R$ 0,00"
+                                valorD2.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                                valorD3.innerHTML = "R$ 0,00"
+                            } else if (resposta.apostaDuz == 2) {
+                                sugestoes[0].classList.remove('selecionado')
+                                sugestoes[1].classList.remove('selecionado')
+                                sugestoes[2].classList.add('selecionado')
+                                valorD1.innerHTML = "R$ 0,00"
+                                valorD2.innerHTML = "R$ 0,00"
+                                valorD3.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                            } else {
+                                sugestoes[0].classList.remove('selecionado')
+                                sugestoes[1].classList.remove('selecionado')
+                                sugestoes[2].classList.remove('selecionado')
+                                valorD1.innerHTML = "R$ 0,00"
+                                valorD2.innerHTML = "R$ 0,00"
+                                valorD3.innerHTML = "R$ 0,00"
+                            }// else if (resposta.apostaDuz == 2)
+
+                        } else if (btnElmDuz.value == 2) {
+
+                            // console.log("resposta.apostaDuz", resposta.apostaDuz);
+                            if (resposta.apostaDuz[0] == 0 && resposta.apostaDuz[1] == 1 || resposta.apostaDuz[0] == 1 && resposta.apostaDuz[1] == 0) {
+                                sugestoes[0].classList.add('selecionado')
+                                sugestoes[1].classList.add('selecionado')
+                                sugestoes[2].classList.remove('selecionado')
+                                valorD1.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                                valorD2.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                                valorD3.innerHTML = "R$ 0,00"
+                            } else if (resposta.apostaDuz[0] == 0 && resposta.apostaDuz[1] == 2 || resposta.apostaDuz[0] == 2 && resposta.apostaDuz[1] == 0) {
+                                sugestoes[0].classList.add('selecionado')
+                                sugestoes[1].classList.remove('selecionado')
+                                sugestoes[2].classList.add('selecionado')
+                                valorD1.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                                valorD2.innerHTML = "R$ 0,00"
+                                valorD3.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                            } else if (resposta.apostaDuz[0] == 1 && resposta.apostaDuz[1] == 2 || resposta.apostaDuz[0] == 2 && resposta.apostaDuz[1] == 1) {
+                                sugestoes[0].classList.remove('selecionado')
+                                sugestoes[1].classList.add('selecionado')
+                                sugestoes[2].classList.add('selecionado')
+                                valorD1.innerHTML = "R$ 0,00"
+                                valorD2.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                                valorD3.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+                            }// else if (resposta.apostaDuz[0] == 1 && resposta.apostaDuz[1] == 2)
+
+                        }// else if (btnElmDuz.value == 2)
 
                         percD1.innerHTML = resposta.duzias.percDuz[0] ? resposta.duzias.percDuz[0] + "%" : "0%"
                         percD2.innerHTML = resposta.duzias.percDuz[1] ? resposta.duzias.percDuz[1] + "%" : "0%"
                         percD3.innerHTML = resposta.duzias.percDuz[2] ? resposta.duzias.percDuz[2] + "%" : "0%"
-
-                        //.replace(/,/g, '.')
 
                         // console.log("valorDuz", resposta.valorDuz)
                         // console.log("rodadaDuz", resposta.rodadaDuz)
                         // console.log("apostaDuz", resposta.apostaDuz)
                         // console.log("ventr", resposta.ventr)
 
-                        if (resposta.apostaDuz) {
-
-                            acumuladoD1.innerHTML = "R$ " + Decimal(resposta.valorDuz,2)
-
-                        }// if (resposta.apostaDuz)
+                        acumuladoD1.innerHTML = "R$ " + Decimal(resposta.acumDuz, 2)
 
                         if (resposta.apostaDuz == 0) {
                             
@@ -447,9 +473,7 @@
                             if (resposta.rodadaDuz == 0) {
                                 acumuladoD1.innerHTML = "0,00"
                                 entradasD1.innerHTML  = "Sem Entradas"
-                                acumuladoD2.innerHTML = "0,00"
                                 entradasD2.innerHTML  = "Sem Entradas"
-                                acumuladoD3.innerHTML = "0,00"
                                 entradasD3.innerHTML  = "Sem Entradas"
                             }// if (resposta.rodadaDuz == 0)
 

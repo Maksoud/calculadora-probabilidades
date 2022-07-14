@@ -28,6 +28,7 @@ exports.jogar = (dados) => {
         dados.vitDuz    = Number(dados.vitDuz)
         dados.derDuz    = Number(dados.derDuz)
         dados.valorDuz  = Number(dados.valorDuz)
+        dados.acumDuz   = Number(dados.acumDuz)
         dados.rodadaDuz = Number(dados.rodadaDuz)
         if (dados.estDuzias == 1) dados.apostaDuz = Number(dados.apostaDuz)
 
