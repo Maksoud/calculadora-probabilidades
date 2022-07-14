@@ -150,7 +150,7 @@
         btnElmDuzCont.addEventListener('click', function () {
             btnElmDuzCont.classList.toggle('on')
             btnElmDuzCont.classList.contains('on') ? btnElmDuz.value = 2 : btnElmDuz.value = 1
-        });
+        })// btnElmDuzCont.addEventListener
 
         /************/
 
@@ -160,12 +160,14 @@
         btnElmOpCont.addEventListener('click', function () {
             btnElmOpCont.classList.toggle('on')
             btnElmOpCont.classList.contains('on') ? btnElmOp.value = 2 : btnElmOp.value = 1
-        });
+        })// btnElmOpCont.addEventListener
 
         /************/
 
         elemento = document.querySelector('.bancaUsu')
+
         function formatarMoeda() {
+
             var elemento = document.querySelector('.bancaUsu')
             var valor = elemento.value
             
@@ -176,39 +178,50 @@
 
             if (valor.length > 6) {
                 valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2")
-            }
+            }// if (valor.length > 6)
 
             elemento.value = valor
-        }
+
+        }// formatarMoeda
+
         ////// ANALISAR NÚMEROS
+
         numeross = ''
         numerosConvertidos = []
         input = document.querySelector('.codigo')
         listarNumeros = document.querySelector('.listarNumeros')
         
         document.querySelector('.enviar').addEventListener("click", function(){
-            if(input.value != undefined){
+            if (input.value != undefined) {
+
                 listarNumeros.innerHTML = input.value
                 numeross = listarNumeros.querySelectorAll('.roulette-history-item__value-textsiwxWvFlm3ohr_UMS23f')
-                for(i = 0; i < numeross.length; i++){
+
+                for (i = 0; i < numeross.length; i++) {
                     numerosConvertidos.push(numeross[i].innerText)
-                }
+                }// for (i = 0; i < numeross.length; i++)
+
                 input.value = ''
-            }
-        })
+
+            }// if (input.value != undefined)
+        })// document.querySelector('.enviar').addEventListener
 
         reload = document.querySelector('.reload')
         inputSorteado = document.querySelector('#numeroSorteado')
 
         setInterval(() => {
-            if(inputSorteado.value > 36 || inputSorteado.value < 0){
+            if (inputSorteado.value > 36 || inputSorteado.value < 0) {
                 inputSorteado.value = ''
-            }
+            }// if (inputSorteado.value > 36 || inputSorteado.value < 0)
         }, 100)
+
+        /************/
 
         inputSorteado.addEventListener("click", () => {
             inputSorteado.value = ''
-        })
+        })// inputSorteado.addEventListener
+
+        /************/
 
         inputSorteado.addEventListener("keypress", () => {
             if (event.key === "Enter") {
@@ -216,7 +229,7 @@
                     inputSorteado.value = ''
                 }, 100)
             }// if (event.key === "Enter")
-        })
+        })// inputSorteado.addEventListener
 
         /************/
 
@@ -480,6 +493,8 @@
 
         })// form.addEventListener
 
+        /************/
+
         reload.addEventListener("click", function(e) {
 
             // Previne comportamento padrão de recarregar página
@@ -535,16 +550,19 @@
                 }
             })
 
-        })
+        })// reload.addEventListener
+
+        /************/
 
         function Decimal(num, decimal) {
 
             decimal = (typeof decimal === "undefined") ? 6 : decimal;
             var places = Math.pow(10, decimal);
 
-            return Math.floor(num * places) / places;
+            return Math.floor(num * places) / places
 
-        }
+        }// Decimal
+
     </script>
 </body>
 </html>

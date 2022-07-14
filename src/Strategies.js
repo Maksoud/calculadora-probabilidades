@@ -237,50 +237,29 @@ exports.duzias = (dados) => {
     // Começo do jogo
     if (dados.rodadaDuz == 0) {
 
+        let percSorted = [...res.percDuz]
+        percSorted.sort((a, b) => a - b)
+
+        duplicated = res.percDuz.some((element, index) => {
+            return res.percDuz.indexOf(element) !== index
+        })
+
+        /************/
+
         // Log.info("Jogo começou")
+        if (duplicated == false) {
 
-        // Começar com a melhor dúzia
-        if (res.percDuz[0] < res.percDuz[1] && res.percDuz[0] < res.percDuz[2]) {
+            // Log.warning("Rodada: " + (dados.rodadaDuz+1))
+            dados.apostaDuz = res.percDuz.indexOf(percSorted[0]);
+            
+            Log.warning("Começando na dúzia "+(dados.apostaDuz+1)+"...")
 
-            Log.warning("Começando na dúzia 1...")
-            Log.warning("Rodada: " + (dados.rodadaDuz+1))
-
-            // dúzia 1 possui maior probabilidade
-            dados.apostaDuz  = 0;
             dados.rodadaDuz += 1;
             dados.valorDuz   = ventr[0];
             dados.banca     -= ventr[0];
             dados.ventr      = ventr[0];
 
-            Log.info("Valor da entrada R$" + dados.valorDuz)
-
-        } else if (res.percDuz[1] < res.percDuz[0] && res.percDuz[1] < res.percDuz[2]) {
-
-            Log.warning("Começando na dúzia 2...")
-            Log.warning("Rodada: " + (dados.rodadaDuz+1))
-
-            // dúzia 2 possui maior probabilidade
-            dados.apostaDuz  = 1;
-            dados.rodadaDuz += 1;
-            dados.valorDuz   = ventr[0];
-            dados.banca     -= ventr[0];
-            dados.ventr      = ventr[0];
-
-            Log.info("Valor da entrada R$" + dados.valorDuz)
-
-        } else if (res.percDuz[2] < res.percDuz[1] && res.percDuz[2] < res.percDuz[0]) {
-
-            Log.warning("Começando na dúzia 3...")
-            Log.warning("Rodada: " + (dados.rodadaDuz+1))
-
-            // dúzia 3 possui maior probabilidade
-            dados.apostaDuz  = 2;
-            dados.rodadaDuz += 1;
-            dados.valorDuz   = ventr[0];
-            dados.banca     -= ventr[0];
-            dados.ventr      = ventr[0];
-
-            Log.info("Valor da entrada R$" + dados.valorDuz)
+            Log.info("Valor da entrada R$ " + dados.valorDuz)
 
         } else {
 
@@ -302,7 +281,7 @@ exports.duzias = (dados) => {
             dados.apostaDuz  = null;
             dados.ventr      = 0;
 
-        }// else if (res.percDuz[2] < 25)
+        }// else if (duplicated == false)
         
     }// if (dados.rodadaDuz == 0)
 
@@ -382,8 +361,8 @@ exports.duasDuzias = (dados) => {
             Log.warning("Não contabilize o 0...")
 
             dados.apostaDuz  = [];
-            dados.ventr      = 0;
             dados.rodadaDuz -= 1;
+            dados.ventr      = 0;
 
         } else {
 
@@ -414,9 +393,9 @@ exports.duasDuzias = (dados) => {
                     // Log.success("Ganhou: " + ((vent2[dados.rodadaDuz-1] * 3) - dados.valorDuz))
                     
                     // último número sorteado é da dúzia 1
+                    dados.rodadaDuz = -1;
                     dados.apostaDuz = [];
                     dados.banca    += (vent2[dados.rodadaDuz-1] * 3); // Acrescenta o lucro
-                    dados.rodadaDuz = -1;
                     dados.valorDuz  = 0;
                     dados.vitDuz++;
 
@@ -454,33 +433,16 @@ exports.duasDuzias = (dados) => {
                     // O último número está na dúzia
                     if (duz[i].includes(dados.numeros[dados.numeros.length-1])) {
 
-                        // A dúzia sorteada tem a menor participação
-                        if (res.percDuz[i] < res.percDuz[i-1] && res.percDuz[i] < res.percDuz[i+1]) {
+                        let percSorted = [...res.percDuz]
+                        percSorted.sort((a, b) => a - b)
+                
+                        duplicated = res.percDuz.some((element, index) => {
+                            return res.percDuz.indexOf(element) !== index
+                        })
 
-                            let tempLog = []
-                            tempLog[Date.now()] = {
-                                banca:      dados.banca,
-                                totalNum:   dados.numeros.length,
-                                ultNum:     dados.numeros[dados.numeros.length-1],
-                                rodadaDuz:  dados.rodadaDuz,
-                                valorDuz:   dados.valorDuz,
-                                apostaDuz:  dados.apostaDuz,
-                                percDuz:    res.percDuz,
-                                acao:       "mudança de dúzia"
-                            }
-                            logRd.push(tempLog)
-        
-                            // Log.info("Mudar jogo para dúzia: " + (i+1))
-                            // Log.warning("Valor da entrada: " + vent2[dados.rodadaDuz])
+                        /************/
 
-                            dados.apostaDuz  = i;
-                            dados.valorDuz  += vent2[dados.rodadaDuz];
-                            dados.banca     -= vent2[dados.rodadaDuz];
-                            dados.ventr      = vent2[dados.rodadaDuz];
-                            
-                            Log.warning("Valor acumulado na dúzia: " + dados.valorDuz)
-
-                        } else if (res.percDuz[i] == res.percDuz[i-1] || res.percDuz[i] == res.percDuz[i+1]) {
+                        if (duplicated) {
 
                             let tempLog = []
                             tempLog[Date.now()] = {
@@ -495,11 +457,11 @@ exports.duasDuzias = (dados) => {
                             }
                             logRd.push(tempLog)
 
-                            // Log.warning("Aguarde o próximo sorteio...")
+                            Log.warning("Aguarde o próximo sorteio...")
 
                             dados.apostaDuz  = [];
-                            dados.ventr      = 0;
                             dados.rodadaDuz -= 1;
+                            dados.ventr      = 0;
                         
                         } else {
         
@@ -512,7 +474,7 @@ exports.duasDuzias = (dados) => {
                             
                             Log.warning("Valor acumulado na dúzia " + dados.valorDuz)
             
-                        }// else if (res.percDuz[i] < res.percDuz[i-1] && res.percDuz[i] < res.percDuz[i+1])
+                        }// else if (duplicated)
         
                     }// if (duz[i].includes(dados.numeros[dados.numeros.length-1]))
                     
@@ -536,131 +498,54 @@ exports.duasDuzias = (dados) => {
     // Começo do jogo
     if (dados.rodadaDuz == 0) {
 
+        let percSorted = [...res.percDuz]
+        percSorted.sort((a, b) => a - b)
+
+        duplicated = res.percDuz.some((element, index) => {
+            return res.percDuz.indexOf(element) !== index
+        })
+
+        /************/
+
         // Log.info("Jogo começou")
+        if (duplicated == false) {
 
-        for (let i = 0; i <= 1; i++) {
+            // Log.warning("Rodada: " + (dados.rodadaDuz+1))
+            dados.apostaDuz[0] = res.percDuz.indexOf(percSorted[0]);
+            dados.apostaDuz[1] = res.percDuz.indexOf(percSorted[1]);
+            
+            Log.warning("Começando na dúzia "+(dados.apostaDuz[0]+1)+" e "+(dados.apostaDuz[1]+1)+"...")
 
-            if (i == 0) {
+            dados.rodadaDuz += 1;
+            dados.valorDuz   = vent2[0];
+            dados.banca     -= vent2[0];
+            dados.ventr      = vent2[0];
 
-                if (res.percDuz[0] < res.percDuz[1] && res.percDuz[0] < res.percDuz[2]) {
+            Log.info("Valor da entrada R$ " + dados.valorDuz)
 
-                    Log.warning("Começando na dúzia 1...")
-                    // Log.warning("Rodada: " + (dados.rodadaDuz+1))
+        } else {
 
-                    // dúzia 1 possui maior probabilidade
-                    dados.apostaDuz[i] = 0;
-                    // dados.rodadaDuz += 1;
-                    dados.valorDuz   = vent2[0];
-                    dados.banca     -= vent2[0];
-                    dados.ventr      = vent2[0];
+            let tempLog = []
+            tempLog[Date.now()] = {
+                banca:      dados.banca,
+                totalNum:   dados.numeros.length,
+                ultNum:     dados.numeros[dados.numeros.length-1],
+                rodadaDuz:  dados.rodadaDuz,
+                valorDuz:   dados.valorDuz,
+                apostaDuz:  dados.apostaDuz,
+                percDuz:    res.percDuz,
+                acao:       "novo jogo empate de dúzias"
+            }
+            logRd.push(tempLog)
 
-                    // Log.info("Valor da entrada R$" + dados.valorDuz)
+            // Log.warning("Aguarde novo sorteio")
 
-                } else if (res.percDuz[1] < res.percDuz[0] && res.percDuz[1] < res.percDuz[2]) {
+            dados.apostaDuz = [];
+            dados.ventr     = 0;
 
-                    Log.warning("Começando na dúzia 2...")
-                    // Log.warning("Rodada: " + (dados.rodadaDuz+1))
+        }// else if (duplicated == false)
 
-                    // dúzia 2 possui maior probabilidade
-                    dados.apostaDuz[i] = 1;
-                    // dados.rodadaDuz += 1;
-                    dados.valorDuz   = vent2[0];
-                    dados.banca     -= vent2[0];
-                    dados.ventr      = vent2[0];
-
-                    // Log.info("Valor da entrada R$" + dados.valorDuz)
-
-                } else if (res.percDuz[2] < res.percDuz[1] && res.percDuz[2] < res.percDuz[0]) {
-
-                    Log.warning("Começando na dúzia 3...")
-                    // Log.warning("Rodada: " + (dados.rodadaDuz+1))
-
-                    // dúzia 3 possui maior probabilidade
-                    dados.apostaDuz[i] = 2;
-                    // dados.rodadaDuz += 1;
-                    dados.valorDuz   = vent2[0];
-                    dados.banca     -= vent2[0];
-                    dados.ventr      = vent2[0];
-
-                    // Log.info("Valor da entrada R$" + dados.valorDuz)
-
-                } else {
-
-                    let tempLog = []
-                    tempLog[Date.now()] = {
-                        banca:      dados.banca,
-                        totalNum:   dados.numeros.length,
-                        ultNum:     dados.numeros[dados.numeros.length-1],
-                        rodadaDuz:  dados.rodadaDuz,
-                        valorDuz:   dados.valorDuz,
-                        apostaDuz:  dados.apostaDuz,
-                        percDuz:    res.percDuz,
-                        acao:       "novo jogo empate de dúzias"
-                    }
-                    logRd.push(tempLog)
-
-                    // Log.warning("Aguarde novo sorteio")
-
-                    dados.apostaDuz[i] = [];
-                    dados.ventr        = 0;
-
-                }// else if (res.percDuz[2] < 25)
-
-            } else if (i == 1) {
-
-                if (dados.apostaDuz.length > 0) { // Quando houver empates não entra na segunda análise
-
-                    if (res.percDuz[0] < dados.apostaDuz[i-1] && dados.apostaDuz[i-1] != 0) {
-
-                        Log.warning("segunda dúzia começa na 1...")
-                        // Log.warning("Rodada: " + (dados.rodadaDuz+1))
-
-                        // dúzia 1 possui maior probabilidade
-                        dados.apostaDuz[i] = 0;
-                        // dados.rodadaDuz += 1;
-                        dados.valorDuz   = vent2[0];
-                        dados.banca     -= vent2[0];
-                        dados.ventr      = vent2[0];
-
-                        // Log.info("Valor da entrada R$" + dados.valorDuz)
-
-                    } else if (res.percDuz[1] < res.percDuz[2] && dados.apostaDuz[i-1] != 1) {
-
-                        Log.warning("segunda dúzia começa na 2...")
-                        // Log.warning("Rodada: " + (dados.rodadaDuz+1))
-
-                        // dúzia 1 possui maior probabilidade
-                        dados.apostaDuz[i] = 0;
-                        // dados.rodadaDuz += 1;
-                        dados.valorDuz   = vent2[0];
-                        dados.banca     -= vent2[0];
-                        dados.ventr      = vent2[0];
-
-                        // Log.info("Valor da entrada R$" + dados.valorDuz)
-
-                    } else if (res.percDuz[2] < dados.apostaDuz[i-1] && dados.apostaDuz[i-1] != 2) {
-
-                        Log.warning("segunda dúzia começa na 3...")
-                        // Log.warning("Rodada: " + (dados.rodadaDuz+1))
-
-                        // dúzia 1 possui maior probabilidade
-                        dados.apostaDuz[i] = 0;
-                        // dados.rodadaDuz += 1;
-                        dados.valorDuz   = vent2[0];
-                        dados.banca     -= vent2[0];
-                        dados.ventr      = vent2[0];
-
-                        // Log.info("Valor da entrada R$" + dados.valorDuz)
-
-                    }// else if (res.percDuz[2] < dados.apostaDuz[i-1] && dados.apostaDuz[i-1] != 2)
-
-                }// if (dados.apostaDuz.length > 0)
-
-            }// else if (i == 1)
-
-        }// for (let i = 0; i <= 1; i++)
-
-        dados.apostaDuz.length == 2 ? dados.rodadaDuz += 1 : ""
+        // dados.apostaDuz.length == 2 ? dados.rodadaDuz += 1 : ""
 
     }// if (dados.rodadaDuz == 0)
 
