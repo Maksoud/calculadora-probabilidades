@@ -238,14 +238,14 @@ exports.duzias = (dados) => {
                     }// else if (duplicated)
 
                 } else if (dados.numeros[dados.numeros.length-1] == 0) {
-        
+
                     // Ignora os zeros
                     dados.apostaDuz  = null
                     dados.ventr      = 0
                     // dados.rodadaDuz -= 1
 
                     Log.warning("Não contabilize o 0...")
-        
+
                 }// else if (dados.numeros[dados.numeros.length-1] == 0)
                 
             }// else if (dados.rodadaDuz < maxRd && dados.rodadaDuz > 0)
@@ -278,18 +278,31 @@ exports.duzias = (dados) => {
         // Log.info("Jogo começou")
         if (duplicated == false) {
 
-            // Log.warning("Rodada: " + (dados.rodadaDuz+1))
-            dados.apostaDuz = res.percDuz.indexOf(percSorted[0])
-            
-            Log.warning("Começando na dúzia "+(dados.apostaDuz+1)+"...")
+            if (dados.numeros[dados.numeros.length-1] == 0) {
 
-            dados.rodadaDuz += 1
-            dados.valorDuz   = ventr[0]
-            dados.acumDuz    = ventr[0]
-            dados.banca     -= ventr[0]
-            dados.ventr      = ventr[0]
+                // Ignora os zeros
+                dados.apostaDuz  = null
+                dados.ventr      = 0
+                // dados.rodadaDuz -= 1
 
-            Log.info("Valor da entrada R$ " + dados.valorDuz)
+                Log.warning("Não começa após o 0...")
+
+            } else {
+
+                // Log.warning("Rodada: " + (dados.rodadaDuz+1))
+                dados.apostaDuz = res.percDuz.indexOf(percSorted[0])
+                
+                Log.warning("Começando na dúzia "+(dados.apostaDuz+1)+"...")
+
+                dados.rodadaDuz += 1
+                dados.valorDuz   = ventr[0]
+                dados.acumDuz    = ventr[0]
+                dados.banca     -= ventr[0]
+                dados.ventr      = ventr[0]
+
+                Log.info("Valor da entrada R$ " + dados.valorDuz)
+
+            }// if (dados.numeros[dados.numeros.length-1] == 0)
 
         } else {
 
@@ -590,19 +603,32 @@ exports.duasDuzias = (dados) => {
         // Log.info("Jogo começou")
         if (duplicated == false) {
 
-            // Log.warning("Rodada: " + (dados.rodadaDuz+1))
-            dados.apostaDuz[0] = res.percDuz.indexOf(percSorted[0]);
-            dados.apostaDuz[1] = res.percDuz.indexOf(percSorted[1]);
-            
-            Log.warning("Começando na dúzia "+(dados.apostaDuz[0]+1)+" e "+(dados.apostaDuz[1]+1)+"...")
+            if (dados.numeros[dados.numeros.length-1] == 0) {
 
-            dados.rodadaDuz += 1
-            dados.valorDuz   = vent2[0]
-            dados.acumDuz    = vent2[0]*2
-            dados.banca     -= vent2[0]*2
-            dados.ventr      = vent2[0]
+                // Ignora os zeros
+                dados.apostaDuz  = null
+                dados.ventr      = 0
+                // dados.rodadaDuz -= 1
 
-            Log.info("Valor da entrada R$ " + dados.valorDuz)
+                Log.warning("Não começa após o 0...")
+
+            } else {
+
+                // Log.warning("Rodada: " + (dados.rodadaDuz+1))
+                dados.apostaDuz[0] = res.percDuz.indexOf(percSorted[0]);
+                dados.apostaDuz[1] = res.percDuz.indexOf(percSorted[1]);
+                
+                Log.warning("Começando na dúzia "+(dados.apostaDuz[0]+1)+" e "+(dados.apostaDuz[1]+1)+"...")
+
+                dados.rodadaDuz += 1
+                dados.valorDuz   = vent2[0]
+                dados.acumDuz    = vent2[0]*2
+                dados.banca     -= vent2[0]*2
+                dados.ventr      = vent2[0]
+
+                Log.info("Valor da entrada R$ " + dados.valorDuz)
+
+            }// if (dados.numeros[dados.numeros.length-1] == 0)
 
         } else {
 
