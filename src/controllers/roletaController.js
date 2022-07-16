@@ -101,6 +101,7 @@ exports.post = (req, res, next) => {
             acumDuz:    User[userID].acumDuz,
             rodadaDuz:  User[userID].rodadaDuz,
             apostaDuz:  User[userID].apostaDuz,
+            apoDuzTemp: User[userID].apoDuzTemp,
 
             vitCol:     User[userID].vitCol,
             derCol:     User[userID].derCol,
@@ -143,6 +144,7 @@ exports.post = (req, res, next) => {
             User[userID].acumDuz    = rodada.acumDuz
             User[userID].rodadaDuz  = rodada.rodadaDuz
             User[userID].apostaDuz  = rodada.apostaDuz
+            User[userID].apoDuzTemp = rodada.apoDuzTemp
 
             User[userID].vitCol     = rodada.vitCol
             User[userID].derCol     = rodada.derCol
