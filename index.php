@@ -277,11 +277,15 @@
             /************/
 
             if (numerosConvertidos.length > 0) {
+
                 numeros = [...numerosConvertidos]
                 numeros.reverse()
                 numerosConvertidos = []
+
             } else {
+
                 numeros.push(numeroSorteado.value)
+
             }// else if (numerosConvertidos.length > 0)
 
             // console.log("numeros", numeros)
@@ -299,9 +303,13 @@
                 box_numeros.innerHTML += numerosInvertidos[i] ? '<li>' + numerosInvertidos[i] + '</li>' : '<li>?</li>'
                 
                 if (i == 0) {
+
                     box_numeros.innerHTML += '<strong><i class="fas fa-trash-alt excluir"></i></strong>'
+
                 } else {
+
                     box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>'
+
                 }// else if (i == 0)
                 
                 // console.log(numerosInvertidos)
@@ -379,66 +387,83 @@
                         if (btnElmDuz.value == 1) {
 
                             if (resposta.apostaDuz == 0) {
+
                                 sugestoes[0].classList.add('selecionado')
                                 sugestoes[1].classList.remove('selecionado')
                                 sugestoes[2].classList.remove('selecionado')
                                 valorD1.innerHTML = "R$ " + Decimal(resposta.ventr,2)
                                 valorD2.innerHTML = "R$ 0,00"
                                 valorD3.innerHTML = "R$ 0,00"
+
                             } else if (resposta.apostaDuz == 1) {
+
                                 sugestoes[0].classList.remove('selecionado')
                                 sugestoes[1].classList.add('selecionado')
                                 sugestoes[2].classList.remove('selecionado')
                                 valorD1.innerHTML = "R$ 0,00"
                                 valorD2.innerHTML = "R$ " + Decimal(resposta.ventr,2)
                                 valorD3.innerHTML = "R$ 0,00"
+
                             } else if (resposta.apostaDuz == 2) {
+
                                 sugestoes[0].classList.remove('selecionado')
                                 sugestoes[1].classList.remove('selecionado')
                                 sugestoes[2].classList.add('selecionado')
                                 valorD1.innerHTML = "R$ 0,00"
                                 valorD2.innerHTML = "R$ 0,00"
                                 valorD3.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+
                             } else {
+
                                 sugestoes[0].classList.remove('selecionado')
                                 sugestoes[1].classList.remove('selecionado')
                                 sugestoes[2].classList.remove('selecionado')
                                 valorD1.innerHTML = "R$ 0,00"
                                 valorD2.innerHTML = "R$ 0,00"
                                 valorD3.innerHTML = "R$ 0,00"
+
                             }// else...
 
                         } else if (btnElmDuz.value == 2) {
 
-                            // console.log("resposta.apostaDuz", resposta.apostaDuz);
+                            // console.log("resposta.apostaDuz", resposta.apostaDuz)
+
                             if (resposta.apostaDuz[0] == 0 && resposta.apostaDuz[1] == 1 || resposta.apostaDuz[0] == 1 && resposta.apostaDuz[1] == 0) {
+
                                 sugestoes[0].classList.add('selecionado')
                                 sugestoes[1].classList.add('selecionado')
                                 sugestoes[2].classList.remove('selecionado')
                                 valorD1.innerHTML = "R$ " + Decimal(resposta.ventr,2)
                                 valorD2.innerHTML = "R$ " + Decimal(resposta.ventr,2)
                                 valorD3.innerHTML = "R$ 0,00"
+
                             } else if (resposta.apostaDuz[0] == 0 && resposta.apostaDuz[1] == 2 || resposta.apostaDuz[0] == 2 && resposta.apostaDuz[1] == 0) {
+
                                 sugestoes[0].classList.add('selecionado')
                                 sugestoes[1].classList.remove('selecionado')
                                 sugestoes[2].classList.add('selecionado')
                                 valorD1.innerHTML = "R$ " + Decimal(resposta.ventr,2)
                                 valorD2.innerHTML = "R$ 0,00"
                                 valorD3.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+
                             } else if (resposta.apostaDuz[0] == 1 && resposta.apostaDuz[1] == 2 || resposta.apostaDuz[0] == 2 && resposta.apostaDuz[1] == 1) {
+
                                 sugestoes[0].classList.remove('selecionado')
                                 sugestoes[1].classList.add('selecionado')
                                 sugestoes[2].classList.add('selecionado')
                                 valorD1.innerHTML = "R$ 0,00"
                                 valorD2.innerHTML = "R$ " + Decimal(resposta.ventr,2)
                                 valorD3.innerHTML = "R$ " + Decimal(resposta.ventr,2)
+
                             } else {
+
                                 sugestoes[0].classList.remove('selecionado')
                                 sugestoes[1].classList.remove('selecionado')
                                 sugestoes[2].classList.remove('selecionado')
                                 valorD1.innerHTML = "R$ 0,00"
                                 valorD2.innerHTML = "R$ 0,00"
                                 valorD3.innerHTML = "R$ 0,00"
+
                             }// else...
 
                         }// else if (btnElmDuz.value == 2)
@@ -454,37 +479,34 @@
 
                         acumuladoD1.innerHTML = "R$ " + Decimal(resposta.acumDuz, 2)
 
-                        if (resposta.apostaDuz == 0) {
+                        if (resposta.apostaDuz == 0 || resposta.apostaDuz[0] == 0 || resposta.apostaDuz[1] == 0 || resposta.apostaDuz[2] == 0) {
                             
                             entradasD1.innerHTML  = (resposta.rodadaDuz) + "ª entrada"
-
                             entradasD2.innerHTML  = "Sem Entradas"
                             entradasD3.innerHTML  = "Sem Entradas"
                         
-                        } else if (resposta.apostaDuz == 1) {
+                        } else if (resposta.apostaDuz == 1 || resposta.apostaDuz[0] == 1 || resposta.apostaDuz[1] == 1 || resposta.apostaDuz[2] == 1) {
 
+                            entradasD1.innerHTML  = "Sem Entradas"
                             entradasD2.innerHTML  = (resposta.rodadaDuz) + "ª entrada"
-
-                            entradasD1.innerHTML  = "Sem Entradas"
                             entradasD3.innerHTML  = "Sem Entradas"
                         
-                        } else if (resposta.apostaDuz == 2) {
+                        } else if (resposta.apostaDuz == 2 || resposta.apostaDuz[0] == 2 || resposta.apostaDuz[1] == 2 || resposta.apostaDuz[2] == 2) {
                         
-                            entradasD3.innerHTML  = (resposta.rodadaDuz) + "ª entrada"
-
                             entradasD1.innerHTML  = "Sem Entradas"
                             entradasD2.innerHTML  = "Sem Entradas"
+                            entradasD3.innerHTML  = (resposta.rodadaDuz) + "ª entrada"
                         
-                        } else {
+                        }// else if (resposta.apostaDuz == 2 || resposta.apostaDuz[0] == 2 || resposta.apostaDuz[1] == 2 || resposta.apostaDuz[2] == 2)
 
-                            if (resposta.rodadaDuz == 0) {
-                                acumuladoD1.innerHTML = "0,00"
-                                entradasD1.innerHTML  = "Sem Entradas"
-                                entradasD2.innerHTML  = "Sem Entradas"
-                                entradasD3.innerHTML  = "Sem Entradas"
-                            }// if (resposta.rodadaDuz == 0)
+                        if (resposta.rodadaDuz == 0 || resposta.rodadaDuz == []) {
 
-                        }// else if (resposta.apostaDuz == 2)
+                            acumuladoD1.innerHTML = "0,00"
+                            entradasD1.innerHTML  = "Sem Entradas"
+                            entradasD2.innerHTML  = "Sem Entradas"
+                            entradasD3.innerHTML  = "Sem Entradas"
+
+                        }// if (resposta.rodadaDuz == 0 || resposta.rodadaDuz == [])
 
                         // console.log("vitCol", resposta.vitCol)
                         // console.log("derCol", resposta.derCol)
@@ -544,8 +566,10 @@
             /************/
 
             fetch('http://localhost:3001/reset', {
+                
                 method: 'POST',
                 body: payload,
+
             })
             .then(res => res.text())
             .then(data => {
@@ -555,8 +579,10 @@
                     box_numeros.innerHTML = ''
 
                     for (i = 0; i <= 11; i++) {
+                        
                         box_numeros.innerHTML += '<li>?</li>'
                         box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>'
+
                     }// for (i = 0; i <= 11; i++)
 
                     saldoLucro.innerHTML = "R$ 0,00"
