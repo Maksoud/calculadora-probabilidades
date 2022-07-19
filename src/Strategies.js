@@ -438,7 +438,7 @@ exports.duasDuzias = (dados) => {
                 
                 // último número sorteado é da dúzia 1
                 dados.apostaDuz  = [];
-                dados.banca     += (vent2[dados.rodadaDuz-1] * 2); // Acrescenta o lucro
+                dados.banca     += (vent2[dados.rodadaDuz-1] * 3); // Acrescenta o lucro
                 dados.rodadaDuz  = 0;
                 dados.ventr      = 0
                 dados.valorDuz   = 0;
