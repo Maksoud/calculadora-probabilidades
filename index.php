@@ -205,21 +205,26 @@ include('config/config.php');
     <script>
         
         const LOCAL_DOMAINS = ["localhost", "127.0.0.1", "::1"]
+        let address = null
+        let port    = null
 
         if (LOCAL_DOMAINS.includes(window.location.hostname)) {
 
-            $address = "http://localhost";
-            $port    = "3001";
+            address = "http://localhost";
+            port    = "3001";
 
         } else {
 
-            $address = "https://68.183.25.32";
-            $port    = "3000";
+            address = "https://68.183.25.32";
+            port    = "3000";
 
         }// else if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', 'localhost', '::1']))
 
-        $serverAddress      = $address + ':' + $port + '/calc';
-        $serverAddressReset = $address + ':' + $port + '/reset';
+        let serverAddress      = address + ':' + port + '/calc';
+        let serverAddressReset = address + ':' + port + '/reset';
+
+        // console.log("serverAddress",serverAddress);
+        // console.log("serverAddressReset",serverAddressReset);
 
         /************/
 
@@ -453,7 +458,7 @@ include('config/config.php');
                 // Create payload as new FormData object:
                 // const payload = new FormData(form);
                 
-                fetch($serverAddress, {
+                fetch(serverAddress, {
                     method: 'POST',
                     body: payload,
                 })
@@ -674,7 +679,7 @@ include('config/config.php');
 
             /************/
             
-            fetch($serverAddressReset, {
+            fetch(serverAddressReset, {
                 
                 method: 'POST',
                 body: payload,
