@@ -4,31 +4,31 @@
 
 	/**********/
 
-	if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', 'localhost', '::1'])) {
+	include('dotEnv.php');
+	use DevCoder\DotEnv;
 
-		$sqlHost = "localhost";
-		$sqlUser = "root";
-		$sqlPass = "";
-		$sqlDb   = "anonymous_roulette";
+	(new DotEnv('.env'))->load();
 
-	} else {
+	$sqlHost = getenv("SQLHOST");
+	$sqlUser = getenv("SQLUSER");
+	$sqlPass = getenv("SQLPASS");
+	$sqlDb   = getenv("SQLDB");
 
-		$sqlHost = "localhost";
-		$sqlUser = "maksoud";
-		$sqlPass = "@2r8425hwer";
-		$sqlDb   = "anonymous_roulette";
-
-	}// else if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', 'localhost', '::1']))
+	// echo $sqlHost;
+	// echo $sqlUser;
+	// echo $sqlPass;
+	// echo $sqlDb;
 
 	/**********/
 	
 	try {
 
-		$conexao = new PDO('mysql:host='.$sqlHost.';dbname='.$sqlDb, $sqlUser, $sqlPass);
+		$conexao = new PDO("mysql:host={$sqlHost};dbname={$sqlDb}", $sqlUser, $sqlPass);
 		$conexao ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	} catch(PDOException $e){
+	} catch(PDOException $e) {
 
+		echo $e;
 		echo 'ERROR: ' . $e->getMessage();
 
 	}

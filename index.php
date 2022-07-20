@@ -203,7 +203,7 @@ include('config/config.php');
         </div>
     </div>
     <script>
-
+        
         const LOCAL_DOMAINS = ["localhost", "127.0.0.1", "::1"]
 
         if (LOCAL_DOMAINS.includes(window.location.hostname)) {
@@ -214,7 +214,7 @@ include('config/config.php');
         } else {
 
             $address = "https://68.183.25.32";
-            $port    = "3001";
+            $port    = "3000";
 
         }// else if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', 'localhost', '::1']))
 
