@@ -9,9 +9,14 @@ exports.jogar = (dados) => {
 
     // Conta zeros
     let zeros = 0
+
+    /************/
+
     dados.numeros.forEach(num => {
         num == 0 ? zeros++ : ""
     })
+
+    /************/
 
     // Aguarda os 12 útimos números sorteados para iniciar a análise probabilística
     if ((dados.numeros.length - zeros) > 12) {
@@ -20,7 +25,7 @@ exports.jogar = (dados) => {
         dados.banca     = Number(dados.banca)
         dados.ventr     = Number(dados.ventr)
         dados.estDuzias = Number(dados.estDuzias)
-        dados.testes    = Number(dados.testes)
+        dados.operacaoTestes = Number(dados.operacaoTestes)
 
         /************/
 
@@ -68,8 +73,41 @@ exports.jogar = (dados) => {
         }// while (dados.numeros.length > 500)
 
         /************/
+        
+        // Testes
+        if (dados.operacaoTestes == 1) {
 
-        dados.duzias = (dados.estDuzias == 1) ? Strategies.duzias(dados) : Strategies.duasDuzias(dados)
+            // console.log("length", dados.numeros.length)
+
+            let numeros = [...dados.numeros]
+            let arrNum  = []
+
+            dados.numeros.forEach((v, i) => {
+
+                // console.log("index", i)
+                // console.log("value", v)
+
+                arrNum.push(v)
+
+                if (i >= 12) {
+
+                    dados.numeros = [...arrNum]
+                    dados.duzias  = (dados.estDuzias == 1) ? Strategies.duzias(dados) : Strategies.duasDuzias(dados)
+
+                }// if (i >= 12)
+
+            })// dados.numeros.forEach
+
+            dados.numeros = [...numeros]
+
+            // Executa o teste somente na importação de números
+            dados.operacaoTestes = 2
+
+        } else {
+
+            dados.duzias = (dados.estDuzias == 1) ? Strategies.duzias(dados) : Strategies.duasDuzias(dados)
+
+        }// else if (dados.operacaoTestes == 1)
 
         // dados.colunas       = Strategies.colunas(dados)
         // dados.metades       = Strategies.metades(dados)

@@ -32,8 +32,12 @@ exports.post = (req, res, next) => {
     // error = typeof req.body.derVPs == "undefined" ? "derVPs não preenchido" : false;
     // error = typeof req.body.valorVPs == "undefined" ? "valorVPs não preenchido" : false;
     // error = typeof req.body.rodadaVPs == "undefined" ? "rodadaVPs não preenchido" : false;
+
+    /************/
     
     userID = req.body.userID;
+
+    /************/
 
     if (typeof User[userID] == "undefined") {
         
@@ -71,13 +75,19 @@ exports.post = (req, res, next) => {
             apostaVPs: 0,
         }
 
+        /************/
+
         req.body.estDuzias == 2 ? User[userID].apostaDuz = [] : User[userID].apostaDuz = 0
 
         // console.log("novo usuário", User[userID])
 
     }// if (typeof User[userID] == "undefined")
 
+    /************/
+
     error ? res.send(error): "no error";
+
+    /************/
 
     if (!error) {
 
@@ -88,11 +98,13 @@ exports.post = (req, res, next) => {
 
         }// if (req.body.estDuzias != User[userID].apostaDuz)
 
+        /************/
+
         let dados = {
             userID:     req.body.userID,
             numeros:    req.body.numeros,
             estDuzias:  req.body.estDuzias,
-            testes:     req.body.testes,
+            operacaoTestes: req.body.operacaoTestes,
             ventr:      User[userID].ventr,
 
             vitDuz:     User[userID].vitDuz,
@@ -130,10 +142,16 @@ exports.post = (req, res, next) => {
 
         dados.banca = User[userID].banca ? User[userID].banca : req.body.banca;
 
+        /************/
+
         // Jogar
         let rodada = roleta.jogar(dados)
 
+        /************/
+
         if (typeof rodada == "object") {
+
+            req.body.operacaoTestes = rodada.operacaoTestes
 
             User[userID].ventr      = rodada.ventr
             User[userID].banca      = rodada.banca
@@ -173,6 +191,8 @@ exports.post = (req, res, next) => {
         }// if (typeof rodada == object)
 
         // console.log("rodada", rodada)
+
+        /************/
 
         res.status(201).send(rodada)
 

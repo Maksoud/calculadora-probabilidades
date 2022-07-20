@@ -13,10 +13,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            <?php
-                echo '<div class="usuario">Olá, '.
-                $nome[0].'</div><div class="assinatura">Válido até '.date('d/m/Y', $expiracao).'.</div>';
-            ?>
+            <?= '<div class="usuario">Olá, '.$nome[0].'</div><div class="assinatura">Válido até '.date('d/m/Y', $expiracao).'.</div>' ?>
         </div>
         <div class="topo">
             <div class="small-box">
@@ -53,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <h2 class="ultimos-numeros">Últimos números <i class="fas fa-redo reload"></i></h2>
+        <h2 class="titulos">Números sorteados <i class="fas fa-redo reload"></i></h2>
         <div class="box-ultimos">
             <ul>
                 <li>?</li><strong>1</strong>
@@ -71,7 +68,7 @@
             </ul>
         </div>
         <div class="space-between">
-            <h2 class="ultimos-numeros">Sugestões</h2>
+            <h2 class="titulos">Estratégia</h2>
             <div id="umaDuasDuz-container" class="button-container on">
                 <div class="button"></div>
                 <input type="hidden" name="umaDuasDuz" value="2">
@@ -113,17 +110,7 @@
                 </div>
             </div>
         </div>
-        <div class="space-between">
-            <h2 class="ultimos-numeros">Em operação</h2>
-            <div id="operacaoTestes-container" class="button-container on">
-                <div class="button"></div>
-                <input type="hidden" name="operacaoTestes" value="2">
-                <div class="text">
-                    <span class="on">Operação</span>
-                    <span class="off">Testes</span>
-                </div>
-            </div>
-        </div>
+        <h2 class="titulos">Valores em operação</h2>
         <div class="duzias operacoes">
             <div>
                 <div class="titulo operacao">
@@ -136,7 +123,17 @@
             </div>
         </div>
         <div class="teste-numero">
-            <h3>Importar histórico da roleta</h3>
+            <div class="space-between">
+                <h2 class="titulos">Importação</h2>
+                <div id="operacaoTestes-container" class="button-container on">
+                    <div class="button"></div>
+                    <input type="hidden" name="operacaoTestes" value="2">
+                    <div class="text">
+                        <span class="on">Operação</span>
+                        <span class="off">Importar</span>
+                    </div>
+                </div>
+            </div>
             <textarea rows="1" cols="33" class="codigo" placeholder="Cole o código aqui"></textarea>
             <input type="submit" class="enviar">
             <div class="listarNumeros" style="display:none;"></div>
@@ -346,7 +343,7 @@
                 formData.append("banca", banca)
                 formData.delete("numeroSorteado")
                 formData.append("estDuzias", Number(btnElmDuz.value))
-                formData.append("testes", Number(btnElmOp.value))
+                formData.append("operacaoTestes", Number(btnElmOp.value))
 
                 // console.log("formData get banca: ", formData.get('banca'));
                 // console.log("formData get numeroSorteado: ", formData.get('numeroSorteado'));
@@ -508,6 +505,13 @@
 
                         }// if (resposta.rodadaDuz == 0 || resposta.rodadaDuz == [])
 
+                        // Testes
+                        // console.log("resposta.operacaoTestes", resposta.operacaoTestes);
+                        if (btnElmOp.value == 1) {
+                            btnElmOpCont.classList.toggle('on')
+                            btnElmOp.value = resposta.operacaoTestes
+                        }// if (btnElmOp.value == 1)
+
                         // console.log("vitCol", resposta.vitCol)
                         // console.log("derCol", resposta.derCol)
                         // console.log("valorCol", resposta.valorCol)
@@ -579,7 +583,7 @@
                     box_numeros.innerHTML = ''
 
                     for (i = 0; i <= 11; i++) {
-                        
+
                         box_numeros.innerHTML += '<li>?</li>'
                         box_numeros.innerHTML += '<strong>' + (i+1) + '</strong>'
 

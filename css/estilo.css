@@ -110,9 +110,10 @@ input::placeholder {
     color: #696969;
 }
 
-.ultimos-numeros {
+.titulos {
     margin-top: 20px;
     padding: 10px 20px;
+    font-size: 22px;
 }
 
 .box-ultimos {
@@ -374,6 +375,10 @@ input[type=number] {
     margin-top: 15px;
 }
 
+.teste-numero {
+    margin: 12px 0;
+}
+
 .teste-numero textarea, .teste-numero input {
     border: none;
     padding: 6px 10px;
@@ -387,9 +392,6 @@ input[type=number] {
     overflow: hidden;
 }
 
-.teste-numero h3 {
-    margin-top: 22px;
-}
 .teste-numero input {
     float: right;
     margin-top: -5px;
