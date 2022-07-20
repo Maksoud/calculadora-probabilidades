@@ -1,4 +1,6 @@
-<?php include('config/config.php'); ?>
+<?php 
+include('config/config.php');
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -201,6 +203,25 @@
         </div>
     </div>
     <script>
+
+        const LOCAL_DOMAINS = ["localhost", "127.0.0.1", "::1"]
+
+        if (LOCAL_DOMAINS.includes(window.location.hostname)) {
+
+            $address = "http://localhost";
+            $port    = "3001";
+
+        } else {
+
+            $address = "https://68.183.25.32";
+            $port    = "3001";
+
+        }// else if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', 'localhost', '::1']))
+
+        $serverAddress      = $address + ':' + $port + '/calc';
+        $serverAddressReset = $address + ':' + $port + '/reset';
+
+        /************/
 
         // Dúzias
         const btnElmDuzCont = document.getElementById('umaDuasDuz-container')
@@ -432,7 +453,7 @@
                 // Create payload as new FormData object:
                 // const payload = new FormData(form);
                 
-                fetch('http://localhost:3001/calc', {
+                fetch($serverAddress, {
                     method: 'POST',
                     body: payload,
                 })
@@ -652,8 +673,8 @@
             }// if (btnElmOp.value == 1)
 
             /************/
-
-            fetch('http://localhost:3001/reset', {
+            
+            fetch($serverAddressReset, {
                 
                 method: 'POST',
                 body: payload,
