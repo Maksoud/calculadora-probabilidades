@@ -369,10 +369,16 @@ input[type=number] {
     font-weight: bold;
 }
 
-.reload {
-    font-size: 18px;
+#reload {
+    font-size: 16px;
     float: right;
-    margin-top: 15px;
+    border-radius: 50%;
+    box-shadow: 1px 2px rgb(89, 89, 89);
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    background-color: #00a3ff;
+    color: #fff;
 }
 
 .teste-numero {
@@ -420,47 +426,47 @@ input[type=number] {
     margin-top: 20px;
 }
 .button-container .button {
-position: relative;
-border: 3px solid #9b9c9b;
-height: 25px;
-width: 50px;
-margin-right: 5px;
-border-radius: 40px;
+    position: relative;
+    border: 3px solid #00b733;
+    height: 25px;
+    width: 50px;
+    margin-right: 5px;
+    border-radius: 40px;
 }
 .button-container.on .button {
-border-color: #0dcaf0;
+    border-color: #00a3ff;
 }
 .button-container .button:before {
-content: '';
-position: absolute;
-height: 21px;
-width: 20px;
-background-color: #9b9c9b;
-border-radius: 38px;
-top: 50%;
-transform: translateY(-50%);
-left: 1px;
-transition: left .3s linear;
+    content: '';
+    position: absolute;
+    height: 21px;
+    width: 20px;
+    background-color: #00b733;
+    border-radius: 38px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1px;
+    transition: left .3s linear;
 }
 .button-container.on .button:before {
-background-color: #0dcaf0;
-left: 24px;
+    background-color: #00a3ff;
+    left: 24px;
 }
 
 .button-container .text {
-font-family: 'Lato', sans-serif;
-font-weight: 900;
-font-size: 16px;
-color: #9b9c9b;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    color: #00b733;
 }
 .button-container.on .text {
-color: #0dcaf0;
+    color: #00a3ff;
 }
 .button-container:not(.on) .text .on {
-display: none;
+    display: none;
 }
 .button-container.on .text .off {
-display: none;
+    display: none;
 }
 
 /* .onoffswitch {

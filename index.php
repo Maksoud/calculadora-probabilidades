@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <h2 class="titulos">Números sorteados <i class="fas fa-redo reload"></i></h2>
+        <h2 class="titulos">Números sorteados <button id="reload" class="fas fa-redo reload"></button></h2>
         <div class="box-ultimos">
             <ul>
                 <li>?</li><strong>1</strong>
@@ -68,7 +68,7 @@
             </ul>
         </div>
         <div class="space-between">
-            <h2 class="titulos">Estratégia</h2>
+            <h2 class="titulos">Estratégia: Dúzias</h2>
             <div id="umaDuasDuz-container" class="button-container on">
                 <div class="button"></div>
                 <input type="hidden" name="umaDuasDuz" value="2">
@@ -110,15 +110,76 @@
                 </div>
             </div>
         </div>
+        <div class="space-between">
+            <h2 class="titulos">Estratégia: Colunas</h2>
+            <div id="umaDuasCol-container" class="button-container on">
+                <div class="button"></div>
+                <input type="hidden" name="umaDuasCol" value="2">
+                <div class="text">
+                    <span class="on">2 Colunas</span>
+                    <span class="off">1 Coluna</span>
+                </div>
+            </div>
+        </div>
+        <div class="duzias">
+            <div>
+                <div class="flex titulo space-between nao_selecionado">
+                    <h2>C1</h2>
+                    <p id="percD1">0%</p>
+                </div>
+                <p id="valorD1">R$ 0,00</p>
+                <div class="entradas">
+                    <p id="entradasC1">-</p>
+                </div>
+            </div>
+            <div>
+                <div class="flex titulo space-between nao_selecionado">
+                    <h2>C2</h2>
+                    <p id="percD2">0%</p>
+                </div>
+                <p id="valorD2">R$ 0,00</p>
+                <div class="entradas">
+                    <p id="entradasC2">-</p>
+                </div>
+            </div>
+            <div>
+                <div class="flex titulo space-between nao_selecionado">
+                    <h2>C3</h2>
+                    <p id="percD3">0%</p>
+                </div>
+                <p id="valorD3">R$ 0,00</p>
+                <div class="entradas">
+                    <p id="entradasC3">-</p>
+                </div>
+            </div>
+        </div>
         <h2 class="titulos">Valores em operação</h2>
         <div class="duzias operacoes">
             <div>
                 <div class="titulo operacao">
-                    <h2>Acumulado</h2>
+                    <h2>Dúzias</h2>
                 </div>
                 <p id="acumuladoD1">R$ 0,00</p>
                 <div class="entradas">
                     <p>Até 9 entradas</p>
+                </div>
+            </div>
+            <div>
+                <div class="titulo operacao">
+                    <h2>Colunas</h2>
+                </div>
+                <p id="acumuladoD1">R$ 0,00</p>
+                <div class="entradas">
+                    <p>Até 9 entradas</p>
+                </div>
+            </div>
+            <div>
+                <div class="titulo operacao">
+                    <h2>Zero</h2>
+                </div>
+                <p id="acumuladoD1">R$ 0,00</p>
+                <div class="entradas">
+                    <p>Todas entradas</p>
                 </div>
             </div>
         </div>
@@ -141,6 +202,7 @@
     </div>
     <script>
 
+        // Dúzias
         const btnElmDuzCont = document.getElementById('umaDuasDuz-container')
         const btnElmDuz     = document.getElementsByName('umaDuasDuz')[0]
 
@@ -151,6 +213,18 @@
 
         /************/
 
+        // Colunas
+        const btnElmColCont = document.getElementById('umaDuasCol-container')
+        const btnElmCol     = document.getElementsByName('umaDuasCol')[0]
+
+        btnElmColCont.addEventListener('click', function () {
+            btnElmColCont.classList.toggle('on')
+            btnElmColCont.classList.contains('on') ? btnElmCol.value = 2 : btnElmCol.value = 1
+        })// btnElmColCont.addEventListener
+
+        /************/
+
+        // Testes de importação
         const btnElmOpCont = document.getElementById('operacaoTestes-container')
         const btnElmOp     = document.getElementsByName('operacaoTestes')[0]
 
@@ -203,7 +277,10 @@
             }// if (input.value != undefined)
         })// document.querySelector('.enviar').addEventListener
 
-        reload = document.querySelector('.reload')
+        reload = document.querySelector('#reload')
+
+        /************/
+
         inputSorteado = document.querySelector('#numeroSorteado')
 
         setInterval(() => {
@@ -566,6 +643,13 @@
             const formData = new FormData(form);
             formData.append("userID", <?= $id ?>)
             const payload = new URLSearchParams(formData)
+
+            /************/
+
+            if (btnElmOp.value == 1) {
+                btnElmOpCont.classList.toggle('on')
+                btnElmOp.value = 2
+            }// if (btnElmOp.value == 1)
 
             /************/
 

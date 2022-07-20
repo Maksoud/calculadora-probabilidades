@@ -208,6 +208,7 @@ exports.reset = (req, res, next) => {
         numeros:   [],
 
         ventr:     0,
+        operacaoTestes: 2,
 
         vitDuz:    0,
         derDuz:    0,
@@ -215,6 +216,7 @@ exports.reset = (req, res, next) => {
         acumDuz:   0,
         rodadaDuz: 0,
         apostaDuz: 0,
+        apoDuzTemp:0,
 
         vitCol:    0,
         derCol:    0,
@@ -240,6 +242,10 @@ exports.reset = (req, res, next) => {
         rodadaVPs: 0,
         apostaVPs: 0,
     }
+
+    /************/
+
+    res.status(201).send(User[userID])
 
 }
 
