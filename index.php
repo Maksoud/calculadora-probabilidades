@@ -70,7 +70,11 @@
                 </ul>
             </div>
             <div class="space-between">
-                <h2 class="titulos">Estratégia: Dúzias</h2>
+                <div id="estDuz-container" class="button-container on">
+                    <div class="button"></div>
+                    <input type="hidden" name="estDuz" value="2">
+                </div>
+                <h2 class="titulos">Dúzias</h2>
                 <div id="umaDuasDuz-container" class="button-container on">
                     <div class="button"></div>
                     <input type="hidden" name="umaDuasDuz" value="2">
@@ -113,7 +117,11 @@
                 </div>
             </div>
             <div class="space-between">
-                <h2 class="titulos">Estratégia: Colunas</h2>
+                <div id="estCol-container" class="button-container on">
+                    <div class="button"></div>
+                    <input type="hidden" name="estCol" value="2">
+                </div>
+                <h2 class="titulos">Colunas</h2>
                 <div id="umaDuasCol-container" class="button-container on">
                     <div class="button"></div>
                     <input type="hidden" name="umaDuasCol" value="2">
@@ -177,9 +185,9 @@
                 </div>
                 <div>
                     <div class="titulo operacao">
-                        <h2>Zero</h2>
+                        <h2>Total</h2>
                     </div>
-                    <p id="acumuladoZero">R$ 0,00</p>
+                    <p id="acumuladoTotal">R$ 0,00</p>
                     <div class="entradas">
                         <p>Todas entradas</p>
                     </div>

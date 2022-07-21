@@ -22,6 +22,17 @@ let serverAddressReset = address + ':' + port + '/reset'
 
 /************/
 
+// Liga/Desliga Dúzias
+const btnEstDuzCont = document.getElementById('estDuz-container')
+const btnEstDuz     = document.getElementsByName('estDuz')[0]
+
+btnEstDuzCont.addEventListener('click', function () {
+    btnEstDuzCont.classList.toggle('on')
+    btnEstDuzCont.classList.contains('on') ? btnEstDuz.value = 2 : btnEstDuz.value = 1
+})// btnEstDuzCont.addEventListener
+
+/************/
+
 // Dúzias
 const btnElmDuzCont = document.getElementById('umaDuasDuz-container')
 const btnElmDuz     = document.getElementsByName('umaDuasDuz')[0]
@@ -30,6 +41,17 @@ btnElmDuzCont.addEventListener('click', function () {
     btnElmDuzCont.classList.toggle('on')
     btnElmDuzCont.classList.contains('on') ? btnElmDuz.value = 2 : btnElmDuz.value = 1
 })// btnElmDuzCont.addEventListener
+
+/************/
+
+// Liga/Desliga Colunas
+const btnEstColCont = document.getElementById('estCol-container')
+const btnEstCol    = document.getElementsByName('estCol')[0]
+
+btnEstColCont.addEventListener('click', function () {
+    btnEstColCont.classList.toggle('on')
+    btnEstColCont.classList.contains('on') ? btnEstCol.value = 2 : btnEstCol.value = 1
+})// btnEstColCont.addEventListener
 
 /************/
 
@@ -160,7 +182,7 @@ let entradasC3        = document.getElementById('entradasC3')
 
 let acumuladoDuz      = document.getElementById('acumuladoDuz')
 let acumuladoCol      = document.getElementById('acumuladoCol')
-let acumuladoZero     = document.getElementById('acumuladoZero')
+let acumuladoTotal    = document.getElementById('acumuladoTotal')
 
 let box_numeros       = document.querySelector('.box-ultimos ul')
 let numeros           = []
@@ -252,6 +274,7 @@ form.addEventListener('submit', function(e) {
         formData.append("banca", banca)
         formData.delete("numeroSorteado")
         formData.append("estDuzias", Number(btnElmDuz.value))
+        formData.append("estColunas", Number(btnElmCol.value))
         formData.append("operacaoTestes", Number(btnElmOp.value))
 
         // Convert formData object to URL-encoded string:
@@ -293,6 +316,11 @@ form.addEventListener('submit', function(e) {
                 sugestoesCol = document.querySelectorAll('.colunas .nao_selecionado')
 
                 resposta = Colunas(resposta, sugestoesCol)
+
+                /************/
+
+                // Valor acumulado
+                acumuladoTotal.innerHTML = "R$ " + Decimal((resposta.acumDuz+resposta.acumCol), 2)
 
                 /************/
 

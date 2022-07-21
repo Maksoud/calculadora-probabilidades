@@ -8,9 +8,11 @@
     max-width: 400px;
     padding-bottom: 30px;
 }
+
 .topo {
     display: flex;
 }
+
 .small-box {
     background-color: rgb(44, 41, 41);
     color: white;
@@ -21,27 +23,34 @@
     margin: 0 10px;
     padding-bottom: 5px;
 }
+
 .small-box h5 {
     font-size: 10px;
 }
+
 .small-box h2 {
     font-size: 18px;
 }
+
 .small-box i {
     margin-top: -10px;
 }
+
 .space-between {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .banca {
     text-align: left;
 }
+
 .banca p {
     margin-block-start: 0px;
     margin-block-end: 0px;
 }
+
 .numeros div {
     display: inline-flex;
     margin: 0 10px;
@@ -145,6 +154,8 @@ input::placeholder {
     margin: 12px 0;
 }
 
+/*********/
+
 .duzias, .colunas {
     text-align: center;
     margin-top: 15px;
@@ -193,6 +204,8 @@ input::placeholder {
     margin-right: -40px;
     margin-left: 10px;
 }
+
+/*********/
 
 .footer {
     display: flex;
@@ -369,6 +382,8 @@ input[type=number] {
     font-weight: bold;
 }
 
+/*********/
+
 #reload {
     font-size: 16px;
     float: right;
@@ -380,6 +395,8 @@ input[type=number] {
     background-color: #00a3ff;
     color: #fff;
 }
+
+/*********/
 
 .teste-numero {
     margin: 12px 0;
@@ -403,6 +420,8 @@ input[type=number] {
     margin-top: -5px;
 }
 
+/*********/
+
 .bancaUsu {
     outline: none;
     display: inline-block;
@@ -419,38 +438,44 @@ input[type=number] {
     color: white;
 }
 
+/*********/
+
 .button-container {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 17px;
 }
+
 .button-container .button {
     position: relative;
     border: 3px solid #00b733;
-    height: 25px;
-    width: 50px;
-    margin-right: 5px;
-    border-radius: 40px;
+    height: 20px;
+    width: 35px;
+    margin-right: 7px;
+    border-radius: 25px;
 }
+
 .button-container.on .button {
     border-color: #00a3ff;
 }
+
 .button-container .button:before {
     content: '';
     position: absolute;
-    height: 21px;
-    width: 20px;
+    height: 18px;
+    width: 17px;
     background-color: #00b733;
-    border-radius: 38px;
+    border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
-    left: 1px;
+    left: -3px;
     transition: left .3s linear;
 }
+
 .button-container.on .button:before {
     background-color: #00a3ff;
-    left: 24px;
+    left: 13px;
 }
 
 .button-container .text {
@@ -459,58 +484,61 @@ input[type=number] {
     font-size: 16px;
     color: #00b733;
 }
+
 .button-container.on .text {
     color: #00a3ff;
 }
+
 .button-container:not(.on) .text .on {
     display: none;
 }
+
 .button-container.on .text .off {
     display: none;
 }
 
-/* .onoffswitch {
-    position: relative; width: 155px;
-    margin-top: 15px;
+/*********/
+
+#estDuz-container {
+    margin-right: -135px;
+    margin-left: 20px;
 }
-.onoffswitch-checkbox {
-    display: none;
+
+#estDuz-container.on .button {
+    border-color: #00b733;
 }
-.onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+
+#estDuz-container .button {
+    border: 3px solid #fd0000;
 }
-.onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
+
+#estDuz-container.on .button:before{
+    background-color: #00b733;
 }
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 12px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    box-sizing: border-box;
+
+#estDuz-container .button:before{
+    background-color: #fd0000;
 }
-.onoffswitch-inner:before {
-    content: "Modo operação";
-    padding-left: 10px;
-    background-color: #00b733; color: #FFFFFF;
+
+/*********/
+
+#estCol-container {
+    margin-right: -115px;
+    margin-left: 20px;
 }
-.onoffswitch-inner:after {
-    content: "Modo teste";
-    padding-right: 10px;
-    background-color: #fd0000; color: #FFFFFF;
-    text-align: right;
+
+#estCol-container.on .button {
+    border-color: #00b733;
 }
-.onoffswitch-switch {
-    display: block; width: 46px; margin: 2px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
-    right: 101px;
-    border: 2px solid #999999; border-radius: 20px;
-    transition: all 0.3s ease-in 0s; 
+
+#estCol-container .button {
+    border: 3px solid #fd0000;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
+
+#estCol-container.on .button:before{
+    background-color: #00b733;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
-} */
+
+#estCol-container .button:before{
+    background-color: #fd0000;
+}
