@@ -93,6 +93,7 @@ exports.jogar = (dados) => {
 
                     dados.numeros = [...arrNum]
                     dados.duzias  = (dados.estDuzias == 1) ? Strategies.duzias(dados) : Strategies.duasDuzias(dados)
+                    dados.colunas = (dados.estColunas == 1) ? Strategies.colunas(dados) : Strategies.duasColunas(dados)
 
                 }// if (i >= 12)
 
@@ -105,7 +106,8 @@ exports.jogar = (dados) => {
 
         } else {
 
-            dados.duzias = (dados.estDuzias == 1) ? Strategies.duzias(dados) : Strategies.duasDuzias(dados)
+            dados.duzias  = (dados.estDuzias == 1) ? Strategies.duzias(dados) : Strategies.duasDuzias(dados)
+            dados.colunas = (dados.estColunas == 1) ? Strategies.colunas(dados) : Strategies.duasColunas(dados)
 
         }// else if (dados.operacaoTestes == 1)
 

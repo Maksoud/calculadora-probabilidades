@@ -679,10 +679,653 @@ exports.duasDuzias = (dados) => {
 
 exports.colunas = (dados) => {
 
+    let res = {
+        colunas: [],
+        percCol: [],
+    };
+
+    // Log.info("dados.numeros", dados.numeros);
+    Log.info("Último número sorteado: " + dados.numeros[dados.numeros.length-1]) 
+
+    /************/
+
+    // Separa cada número sorteado em colunas
+    dados.numeros.forEach( num => {
+        typeof res.colunas[0] == "undefined" ? res.colunas[0] = [] : "";
+        typeof res.colunas[1] == "undefined" ? res.colunas[1] = [] : "";
+        typeof res.colunas[2] == "undefined" ? res.colunas[2] = [] : "";
+        col[0].includes(num) ? res.colunas[0].push(num) : "";
+        col[1].includes(num) ? res.colunas[1].push(num) : "";
+        col[2].includes(num) ? res.colunas[2].push(num) : "";
+    });
+
+    // Log.info("colunas", res.colunas);
+
+    /************/
+
+    // Obtém o tamanho da coluna
+    let countCol = [];
+    for (let i = 0; i <= 2; i++) {
+        countCol[i] = res.colunas[i].length;
+    }// for (let i = 0; i <= 2; i++)
+
+    // Log.info("countCol", countCol);
+
+    /************/
+
+    let somaColunas = (countCol[0] + countCol[1] + countCol[2]);
+
+    /************/
+
+    // Obtém o percentual do tamanho da coluna
+    for (let i = 0; i <= 2; i++) {
+        res.percCol[i] = Decimals((countCol[i] / somaColunas * 100), 0)
+    }// for (let i = 0; i <= 2; i++)
+
+    // Log.info("perCol", res.percCol);
+
+    /************/
+
+    if (typeof dados.apoColTemp != "undefined" && dados.apoColTemp != null) {
+        // console.log("dados.apoColTemp", dados.apoColTemp)
+        dados.apostaCol  = dados.apoColTemp
+        dados.apoColTemp = null
+    }// (typeof dados.apoColTemp != "undefined" && dados.apoColTemp != null)
+
+    /************/
+
+    // Verifica se a coluna iniciou a rodada
+    if (dados.rodadaCol > 0) {
+
+        // Verifica as 3 colunas
+        for (let i = 0; i <= 2; i++) {
+
+            // Log.info("dados", dados)
+
+            // último número sorteado é da coluna apostada
+            if (col[i].includes(dados.numeros[dados.numeros.length-1]) && dados.apostaCol == i && dados.ventr > 0) {
+
+                let tempLog = []
+                tempLog[Date.now()] = {
+                    banca:     dados.banca,
+                    totalNum:  dados.numeros.length,
+                    ultNum:    dados.numeros[dados.numeros.length-1],
+                    rodadaCol: dados.rodadaCol,
+                    valorCol:  dados.valorCol,
+                    acumCol:   dados.acumCol,
+                    apostaCol: dados.apostaCol,
+                    percCol:   res.percCol,
+                    acao:      "vitoria"
+                }
+                logRd.push(tempLog)
+
+                Log.success("coluna sorteada: " + (i+1))
+                // Log.info("Valor acumulado na coluna: " + dados.acumCol)
+                // Log.info("Valor da entrada anterior: " + ventr[dados.rodadaCol-1])
+                // Log.success("Ganhou: " + ((ventr[dados.rodadaCol-1] * 3) - dados.valorCol))
+                
+                // último número sorteado é da coluna 1
+                dados.apostaCol  = null
+                dados.banca     += (ventr[dados.rodadaCol-1] * 3) // Acrescenta o lucro
+                dados.rodadaCol  = 0
+                dados.ventr      = 0
+                dados.valorCol   = 0
+                dados.acumCol    = 0
+                dados.vitCol++
+
+                // Log.info("Novo saldo da banca " + dados.banca)
+    
+            } else if (dados.rodadaCol >= maxRd && dados.ventr > 0) {
+
+                let tempLog = []
+                tempLog[Date.now()] = {
+                    banca:     dados.banca,
+                    totalNum:  dados.numeros.length,
+                    ultNum:    dados.numeros[dados.numeros.length-1],
+                    rodadaCol: dados.rodadaCol,
+                    valorCol:  dados.valorCol,
+                    acumCol:   dados.acumCol,
+                    apostaCol: dados.apostaCol,
+                    percCol:   res.percCol,
+                    acao:      "derrota"
+                }
+                logRd.push(tempLog)
+
+                // Log.warning("perdeu! " + dados.acumCol)
+                // Log.info("Novo saldo da banca " + dados.banca)
+    
+                // perdeu
+                dados.apostaCol = null
+                dados.rodadaCol = 0
+                dados.ventr     = 0
+                // dados.banca    -= dados.valorCol
+                dados.valorCol  = 0
+                dados.acumCol   = 0
+                dados.derCol++
+                
+            } else if (dados.rodadaCol < maxRd && dados.rodadaCol > 0) {
+
+                // Log.info("rodada menor que o máximo -> " + dados.rodadaCol);
+    
+                // O último número está na coluna
+                if (col[i].includes(dados.numeros[dados.numeros.length-1])) {
+
+                    let percSorted = [...res.percCol]
+                    percSorted.sort((a, b) => a - b)
+            
+                    let duplicated = res.percCol.some((element, index) => {
+                        return res.percCol.indexOf(element) !== index
+                    })
+
+                    /************/
+
+                    if (duplicated) {
+
+                        let tempLog = []
+                        tempLog[Date.now()] = {
+                            banca:     dados.banca,
+                            totalNum:  dados.numeros.length,
+                            ultNum:    dados.numeros[dados.numeros.length-1],
+                            rodadaCol: dados.rodadaCol,
+                            valorCol:  dados.valorCol,
+                            acumCol:   dados.acumCol,
+                            apostaCol: dados.apostaCol,
+                            percCol:   res.percCol,
+                            acao:      "empate colunas"
+                        }
+                        logRd.push(tempLog)
+
+                        Log.warning("Aguarde o próximo sorteio...")
+
+                        dados.apoColTemp = dados.apostaCol
+                        dados.apostaCol  = null
+                        dados.ventr      = 0
+                        // dados.rodadaCol -= 1
+                    
+                    } else {
+
+                        // A coluna sorteada tem a menor participação
+                        // if (dados.apostaCol != res.percCol.indexOf(percSorted[0])) {
+                        if (res.percCol[i] < res.percCol[i-1] && res.percCol[i] < res.percCol[i+1]) {
+
+                            let tempLog = []
+                            tempLog[Date.now()] = {
+                                banca:     dados.banca,
+                                totalNum:  dados.numeros.length,
+                                ultNum:    dados.numeros[dados.numeros.length-1],
+                                rodadaCol: dados.rodadaCol,
+                                valorCol:  dados.valorCol,
+                                acumCol:   dados.acumCol,
+                                apostaCol: dados.apostaCol,
+                                percCol:   res.percCol,
+                                acao:      "mudança de coluna"
+                            }
+                            logRd.push(tempLog)
+        
+                            Log.info("Mudar jogo para coluna: " + (i+1))
+                            Log.warning("Valor da entrada: " + ventr[dados.rodadaCol])
+
+                            dados.apostaCol = i
+                            dados.valorCol += ventr[dados.rodadaCol]
+                            dados.acumCol  += ventr[dados.rodadaCol]
+                            dados.banca    -= ventr[dados.rodadaCol]
+                            dados.ventr     = ventr[dados.rodadaCol]
+                            
+                            Log.warning("Valor acumulado na coluna: " + dados.acumCol)
+
+                        } else {
+
+                            Log.info("Continuar na coluna: " + (dados.apostaCol+1))
+                            Log.warning("Valor da entrada: R$ " + ventr[dados.rodadaCol])
+                            
+                            dados.valorCol += ventr[dados.rodadaCol]
+                            dados.acumCol  += ventr[dados.rodadaCol]
+                            dados.banca    -= ventr[dados.rodadaCol]
+                            dados.ventr     = ventr[dados.rodadaCol]
+                            
+                            Log.warning("Valor acumulado na coluna: R$ " + dados.acumCol)
+
+                        }// else if (res.percCol[i] < res.percCol[i-1] && res.percCol[i] < res.percCol[i+1])
+
+                    }// else if (duplicated)
+
+                } else if (dados.numeros[dados.numeros.length-1] == 0) {
+
+                    // Ignora os zeros
+                    dados.apostaCol  = null
+                    dados.ventr      = 0
+                    // dados.rodadaCol -= 1
+
+                    Log.warning("Não contabilize o 0...")
+
+                }// else if (dados.numeros[dados.numeros.length-1] == 0)
+                
+            }// else if (dados.rodadaCol < maxRd && dados.rodadaCol > 0)
+    
+        }// for (let i = 0; i <= 2; i++)
+
+        /************/
+
+        // Log.warning("Rodada: " + (dados.rodadaCol+1))
+
+        // incrementa rodada até a 'maxRd' entrada
+        if (dados.ventr > 0) dados.rodadaCol += 1
+            
+    }// if (dados.rodadaCol > 0)
+
+    /************/
+
+    // Começo do jogo
+    if (dados.rodadaCol == 0) {
+
+        let percSorted = [...res.percCol]
+        percSorted.sort((a, b) => a - b)
+
+        duplicated = res.percCol.some((element, index) => {
+            return res.percCol.indexOf(element) !== index
+        })
+
+        /************/
+
+        // Log.info("Jogo começou")
+        if (duplicated == false) {
+
+            if (dados.numeros[dados.numeros.length-1] == 0) {
+
+                // Ignora os zeros
+                dados.apostaCol  = null
+                dados.ventr      = 0
+                // dados.rodadaCol -= 1
+
+                Log.warning("Não começa após o 0...")
+
+            } else {
+
+                // Log.warning("Rodada: " + (dados.rodadaCol+1))
+                dados.apostaCol = res.percCol.indexOf(percSorted[0])
+                
+                Log.warning("Começando na coluna "+(dados.apostaCol+1)+"...")
+
+                dados.rodadaCol += 1
+                dados.valorCol   = ventr[0]
+                dados.acumCol    = ventr[0]
+                dados.banca     -= ventr[0]
+                dados.ventr      = ventr[0]
+
+                Log.info("Valor da entrada R$ " + dados.valorCol)
+
+            }// if (dados.numeros[dados.numeros.length-1] == 0)
+
+        } else {
+
+            let tempLog = []
+            tempLog[Date.now()] = {
+                banca:     dados.banca,
+                totalNum:  dados.numeros.length,
+                ultNum:    dados.numeros[dados.numeros.length-1],
+                rodadaCol: dados.rodadaCol,
+                valorCol:  dados.valorCol,
+                acumCol:   dados.acumCol,
+                apostaCol: dados.apostaCol,
+                percCol:   res.percCol,
+                acao:      "novo jogo empate de colunas"
+            }
+            logRd.push(tempLog)
+
+            Log.warning("Aguarde novo sorteio")
+
+            dados.apostaCol = null
+            dados.ventr     = 0
+
+        }// else if (duplicated == false)
+        
+    }// if (dados.rodadaCol == 0)
+
+    /************/
+
+    // Log.info("Percentual de participação da coluna 1: " + res.percCol[0] + "%");
+    // Log.info("Percentual de participação da coluna 2: " + res.percCol[1] + "%");
+    // Log.info("Percentual de participação da coluna 3: " + res.percCol[2] + "%");
+
+    // Exibe o último histórico de operação
+    // logRd.length > 0 ? Log.warning("Histórico", logRd[logRd.length-1]) : ""
+
+    /************/
+
     // Retorna o resultado
-    return null;
+    return res;
     
 };// colunas
+
+/************/
+
+exports.duasColunas = (dados) => {
+
+    let res = {
+        colunas:  [],
+        percCol: [],
+    };
+
+    // Log.info("dados.numeros", dados.numeros);
+    Log.info("Último número sorteado: " + dados.numeros[dados.numeros.length-1]) 
+
+    /************/
+
+    // Separa cada número sorteado em dúzias
+    dados.numeros.forEach( num => {
+        typeof res.colunas[0] == "undefined" ? res.colunas[0] = [] : "";
+        typeof res.colunas[1] == "undefined" ? res.colunas[1] = [] : "";
+        typeof res.colunas[2] == "undefined" ? res.colunas[2] = [] : "";
+        col[0].includes(num) ? res.colunas[0].push(num) : "";
+        col[1].includes(num) ? res.colunas[1].push(num) : "";
+        col[2].includes(num) ? res.colunas[2].push(num) : "";
+    });
+
+    // Log.info("colunas", res.colunas);
+
+    /************/
+
+    // Obtém o tamanho da dúzia
+    let countCol = [];
+    for (let i = 0; i <= 2; i++) {
+        countCol[i] = res.colunas[i].length;
+    }// for (let i = 0; i <= 2; i++)
+
+    // Log.info("countCol", countCol);
+
+    /************/
+
+    let somaColunas = (countCol[0] + countCol[1] + countCol[2]);
+
+    /************/
+
+    // Obtém o percentual do tamanho da dúzia
+    for (let i = 0; i <= 2; i++) {
+        res.percCol[i] = Decimals((countCol[i] / somaColunas * 100), 0);
+    }// for (let i = 0; i <= 2; i++)
+
+    // Log.info("perCol", res.percCol);
+
+    /************/
+
+    if (typeof dados.apoColTemp != "undefined" && dados.apoColTemp != null) {
+        // console.log("dados.apoColTemp", dados.apoColTemp)
+        dados.apostaCol  = dados.apoColTemp
+        dados.apoColTemp = null
+    }// (typeof dados.apoColTemp != "undefined" && dados.apoColTemp != null)
+
+    /************/
+
+    // Verifica se a dúzia iniciou a rodada
+    if (dados.rodadaCol > 0) {
+
+        // Verifica as 3 dúzias
+        for (let i = 0; i <= 2; i++) {
+
+            // Log.info("dados", dados)
+
+            // último número sorteado é da dúzia apostada
+            if (col[i].includes(dados.numeros[dados.numeros.length-1]) && (dados.apostaCol[0] == i || dados.apostaCol[1] == i)) {
+
+                let tempLog = []
+                tempLog[Date.now()] = {
+                    banca:     dados.banca,
+                    totalNum:  dados.numeros.length,
+                    ultNum:    dados.numeros[dados.numeros.length-1],
+                    rodadaCol: dados.rodadaCol,
+                    valorCol:  dados.valorCol,
+                    acumCol:   dados.acumCol,
+                    apostaCol: dados.apostaCol,
+                    percCol:   res.percCol,
+                    acao:      "vitoria"
+                }
+                logRd.push(tempLog)
+
+                // Log.success("Coluna sorteada: " + (i+1))
+                // Log.info("Valor acumulado na dúzia: R$ " + dados.acumCol)
+                // Log.info("Valor da entrada anterior: R$ " + vent2[dados.rodadaCol-1])
+                // Log.success("Ganhou: R$ " + ((vent2[dados.rodadaCol-1] * 3) - dados.acumCol))
+                // Log.info("Saldo anterior da banca: R$ " + dados.banca)
+                // Log.info("Valor a ser adicionado à banca: R$ " + (vent2[dados.rodadaCol-1] * 2))
+                
+                // último número sorteado é da dúzia 1
+                dados.apostaCol  = [];
+                dados.banca     += (vent2[dados.rodadaCol-1] * 3); // Acrescenta o lucro
+                dados.rodadaCol  = 0;
+                dados.ventr      = 0
+                dados.valorCol   = 0;
+                dados.acumCol    = 0;
+                dados.vitCol++;
+                
+                // Log.info("Novo saldo da banca " + dados.banca)
+    
+            } else if (dados.rodadaCol >= maxRd) {
+
+                let tempLog = []
+                tempLog[Date.now()] = {
+                    banca:     dados.banca,
+                    totalNum:  dados.numeros.length,
+                    ultNum:    dados.numeros[dados.numeros.length-1],
+                    rodadaCol: dados.rodadaCol,
+                    valorCol:  dados.valorCol,
+                    acumCol:   dados.acumCol,
+                    apostaCol: dados.apostaCol,
+                    percCol:   res.percCol,
+                    acao:      "derrota"
+                }
+                logRd.push(tempLog)
+
+                // Log.warning("perdeu! " + dados.valorCol)
+                // Log.info("Novo saldo da banca " + dados.banca)
+    
+                // perdeu
+                dados.apostaCol = []
+                dados.rodadaCol = 0
+                dados.ventr     = 0
+                // dados.banca    -= dados.valorCol
+                dados.valorCol  = 0
+                dados.acumCol   = 0
+                dados.derCol++
+                
+            } else if (dados.rodadaCol < maxRd && dados.rodadaCol > 0) {
+
+                // Log.info("rodada menor que o máximo -> " + dados.rodadaCol);
+    
+                // O último número está na dúzia
+                if (col[i].includes(dados.numeros[dados.numeros.length-1])) {
+
+                    let percSorted = [...res.percCol]
+                    percSorted.sort((a, b) => a - b)
+            
+                    let duplicated = res.percCol.some((element, index) => {
+                        return res.percCol.indexOf(element) !== index
+                    })
+
+                    /************/
+
+                    if (duplicated) {
+
+                        let tempLog = []
+                        tempLog[Date.now()] = {
+                            banca:     dados.banca,
+                            totalNum:  dados.numeros.length,
+                            ultNum:    dados.numeros[dados.numeros.length-1],
+                            rodadaCol: dados.rodadaCol,
+                            valorCol:  dados.valorCol,
+                            acumCol:   dados.acumCol,
+                            apostaCol: dados.apostaCol,
+                            percCol:   res.percCol,
+                            acao:      "empate dúzias"
+                        }
+                        logRd.push(tempLog)
+
+                        // Log.warning("Aguarde o próximo sorteio...")
+
+                        dados.apoColTemp = dados.apostaCol
+                        dados.apostaCol  = [];
+                        dados.ventr      = 0;
+                        // dados.rodadaCol -= 1;
+                    
+                    } else {
+
+                        // A dúzia sorteada tem a menor participação
+                        // if (dados.apostaCol[0] != res.percCol.indexOf(percSorted[0]) && dados.apostaCol[1] != res.percCol.indexOf(percSorted[1])) {
+                        if (res.percCol[i] < res.percCol[i-1] && res.percCol[i] < res.percCol[i+1]) {
+
+                            let tempLog = []
+                            tempLog[Date.now()] = {
+                                banca:     dados.banca,
+                                totalNum:  dados.numeros.length,
+                                ultNum:    dados.numeros[dados.numeros.length-1],
+                                rodadaCol: dados.rodadaCol,
+                                valorCol:  dados.valorCol,
+                                acumCol:   dados.acumCol,
+                                apostaCol: dados.apostaCol,
+                                percCol:   res.percCol,
+                                acao:      "mudança de coluna"
+                            }
+                            logRd.push(tempLog)
+        
+                            Log.info("Mudar jogo para coluna: " + (dados.apostaCol[0]+1)+" e "+(dados.apostaCol[1]+1))
+                            Log.warning("Valor da entrada: " + vent2[dados.rodadaCol])
+
+                            dados.apostaCol[0] = res.percCol.indexOf(percSorted[0])
+                            dados.apostaCol[1] = res.percCol.indexOf(percSorted[1])
+                            dados.valorCol    += vent2[dados.rodadaCol]
+                            dados.acumCol     += vent2[dados.rodadaCol]*2
+                            dados.banca       -= vent2[dados.rodadaCol]*2
+                            dados.ventr        = vent2[dados.rodadaCol]
+                            
+                            Log.warning("Valor acumulado na dúzia: " + dados.acumCol)
+
+                        } else {
+    
+                            Log.info("Continuar na dúzia: " + (dados.apostaCol[0]+1)+" e "+(dados.apostaCol[1]+1))
+                            Log.warning("Valor da entrada: " + vent2[dados.rodadaCol])
+                            
+                            dados.valorCol += vent2[dados.rodadaCol]
+                            dados.acumCol  += vent2[dados.rodadaCol]*2
+                            dados.banca    -= vent2[dados.rodadaCol]*2
+                            dados.ventr     = vent2[dados.rodadaCol]
+
+                        }// else if (res.percCol[i] < res.percCol[i-1] && res.percCol[i] < res.percCol[i+1])
+                        
+                        // Log.warning("Valor acumulado na dúzia: R$ " + dados.acumCol)
+        
+                    }// else if (duplicated)
+    
+                } else if (dados.numeros[dados.numeros.length-1] == 0) {
+        
+                    // Ignora os zeros
+                    dados.apostaCol  = [];
+                    dados.ventr      = 0;
+                    // dados.rodadaCol -= 1;
+
+                    Log.warning("Não contabilize o 0...")
+        
+                }// if (col[i].includes(dados.numeros[dados.numeros.length-1]))
+                
+            }// else if (dados.rodadaCol < maxRd && dados.rodadaCol > 0)
+    
+        }// for (let i = 0; i <= 2; i++)
+
+        /************/
+
+        // Log.warning("Rodada: " + (dados.rodadaCol+1))
+
+        // incrementa rodada até a 'maxRd' entrada
+        if (dados.ventr > 0) dados.rodadaCol += 1;
+            
+    }// if (dados.rodadaCol > 0)
+
+    /************/
+
+    // Começo do jogo
+    if (dados.rodadaCol == 0) {
+
+        let percSorted = [...res.percCol]
+        percSorted.sort((a, b) => a - b)
+
+        duplicated = res.percCol.some((element, index) => {
+            return res.percCol.indexOf(element) !== index
+        })
+
+        /************/
+
+        // Log.info("Jogo começou")
+        if (duplicated == false) {
+
+            if (dados.numeros[dados.numeros.length-1] == 0) {
+
+                // Ignora os zeros
+                dados.apostaCol  = null
+                dados.ventr      = 0
+                // dados.rodadaCol -= 1
+
+                Log.warning("Não começa após o 0...")
+
+            } else {
+
+                // Log.warning("Rodada: " + (dados.rodadaCol+1))
+                dados.apostaCol[0] = res.percCol.indexOf(percSorted[0]);
+                dados.apostaCol[1] = res.percCol.indexOf(percSorted[1]);
+                
+                Log.warning("Começando na dúzia "+(dados.apostaCol[0]+1)+" e "+(dados.apostaCol[1]+1)+"...")
+
+                dados.rodadaCol += 1
+                dados.valorCol   = vent2[0]
+                dados.acumCol    = vent2[0]*2
+                dados.banca     -= vent2[0]*2
+                dados.ventr      = vent2[0]
+
+                Log.info("Valor da entrada R$ " + dados.valorCol)
+
+            }// if (dados.numeros[dados.numeros.length-1] == 0)
+
+        } else {
+
+            let tempLog = []
+            tempLog[Date.now()] = {
+                banca:      dados.banca,
+                totalNum:   dados.numeros.length,
+                ultNum:     dados.numeros[dados.numeros.length-1],
+                rodadaCol:  dados.rodadaCol,
+                valorCol:   dados.valorCol,
+                acumCol:    dados.acumCol,
+                apostaCol:  dados.apostaCol,
+                percCol:    res.percCol,
+                acao:       "novo jogo empate de dúzias"
+            }
+            logRd.push(tempLog)
+
+            Log.warning("Aguarde novo sorteio")
+
+            dados.apostaCol = []
+            dados.ventr     = 0
+
+        }// else if (duplicated == false)
+
+        // dados.apostaCol.length == 2 ? dados.rodadaCol += 1 : ""
+
+    }// if (dados.rodadaCol == 0)
+
+    /************/
+
+    // Log.warning("Dados", dados)
+
+    // Log.info("Percentual de participação da dúzia 1: " + res.percCol[0] + "%");
+    // Log.info("Percentual de participação da dúzia 2: " + res.percCol[1] + "%");
+    // Log.info("Percentual de participação da dúzia 3: " + res.percCol[2] + "%");
+
+    // Exibe o último histórico de operação
+    // logRd.length > 0 ? Log.warning("Histórico", logRd[logRd.length-1]) : ""
+
+    /************/
+
+    // Retorna o resultado
+    return res
+
+};// duasColunas
 
 /************/
 
