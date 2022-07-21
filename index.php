@@ -127,9 +127,9 @@
                 <div>
                     <div class="flex titulo space-between nao_selecionado">
                         <h2>C1</h2>
-                        <p id="percD1">0%</p>
+                        <p id="percC1">0%</p>
                     </div>
-                    <p id="valorD1">R$ 0,00</p>
+                    <p id="valorC1">R$ 0,00</p>
                     <div class="entradas">
                         <p id="entradasC1">-</p>
                     </div>
@@ -137,9 +137,9 @@
                 <div>
                     <div class="flex titulo space-between nao_selecionado">
                         <h2>C2</h2>
-                        <p id="percD2">0%</p>
+                        <p id="percC2">0%</p>
                     </div>
-                    <p id="valorD2">R$ 0,00</p>
+                    <p id="valorC2">R$ 0,00</p>
                     <div class="entradas">
                         <p id="entradasC2">-</p>
                     </div>
@@ -147,9 +147,9 @@
                 <div>
                     <div class="flex titulo space-between nao_selecionado">
                         <h2>C3</h2>
-                        <p id="percD3">0%</p>
+                        <p id="percC3">0%</p>
                     </div>
-                    <p id="valorD3">R$ 0,00</p>
+                    <p id="valorC3">R$ 0,00</p>
                     <div class="entradas">
                         <p id="entradasC3">-</p>
                     </div>
