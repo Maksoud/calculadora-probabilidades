@@ -145,13 +145,13 @@ input::placeholder {
     margin: 12px 0;
 }
 
-.duzias {
+.duzias, .colunas {
     text-align: center;
     margin-top: 15px;
     width: 100%;
 }
 
-.duzias div {
+.duzias div, .colunas div {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -162,7 +162,7 @@ input::placeholder {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
 }
 
-.duzias .titulo {
+.duzias .titulo, .colunas .titulo {
     padding: 2px 6px;
     border-radius: 10px;
     font-size: 18px;
@@ -173,21 +173,21 @@ input::placeholder {
     margin-bottom: 6px;
 }
 
-.duzias .titulo svg {
+.duzias .titulo svg, .colunas .titulo svg {
     margin-top: -4px;
 }
 
-.duzias .titulo h2 {
+.duzias .titulo h2, .colunas .titulo h2 {
     font-size: 18px;
 }
 
-.duzias p {
+.duzias p, .colunas p {
     padding: 5px;
     margin-top: -5px;
     margin-bottom: 0px;
 }
 
-.duzias .titulo p {
+.duzias .titulo p, .colunas .titulo p {
     font-size: 12px;
     float: right;
     margin-right: -40px;

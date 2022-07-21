@@ -1,27 +1,27 @@
 require('dotenv').config()
-const app  = require('./src/app');
-const port = normalizaPort(process.env.PORT || '3001');
+const app  = require('../src/app')
+const port = normalizaPort(process.env.PORT || '3001')
 
 /**********************************/
 
 function normalizaPort(val) {
 
-    const port = parseInt(val, 10);
+    const port = parseInt(val, 10)
     
     if (isNaN(port)) {
-        return val;
+        return val
     }// if (isNaN(port))
     
     if (port >= 0) {
-        return port;
+        return port
     }// if (port >= 0)
     
-    return false;
+    return false
 
 }// normalizaPort
 
 /**********************************/
 
 app.listen(port, function () {
-    console.log(`Servidor ativo na porta ${port}...`);
+    console.log(`Servidor ativo na porta ${port}...`)
 })
