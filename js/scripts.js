@@ -28,7 +28,7 @@ const btnEstDuz     = document.getElementsByName('estDuz')[0]
 
 btnEstDuzCont.addEventListener('click', function () {
     btnEstDuzCont.classList.toggle('on')
-    btnEstDuzCont.classList.contains('on') ? btnEstDuz.value = 2 : btnEstDuz.value = 1
+    btnEstDuzCont.classList.contains('on') ? btnEstDuz.value = 1 : btnEstDuz.value = 0
 })// btnEstDuzCont.addEventListener
 
 /************/
@@ -50,7 +50,7 @@ const btnEstCol    = document.getElementsByName('estCol')[0]
 
 btnEstColCont.addEventListener('click', function () {
     btnEstColCont.classList.toggle('on')
-    btnEstColCont.classList.contains('on') ? btnEstCol.value = 2 : btnEstCol.value = 1
+    btnEstColCont.classList.contains('on') ? btnEstCol.value = 1 : btnEstCol.value = 0
 })// btnEstColCont.addEventListener
 
 /************/
@@ -306,16 +306,24 @@ form.addEventListener('submit', function(e) {
                 /************/
 
                 // Dúzias
-                sugestoesDuz = document.querySelectorAll('.duzias .nao_selecionado')
+                if (btnEstDuz.value == 1) {
 
-                resposta = Duzias(resposta, sugestoesDuz)
+                    sugestoesDuz = document.querySelectorAll('.duzias .nao_selecionado')
+
+                    resposta = Duzias(resposta, sugestoesDuz)
+
+                }// if (btnEstDuz.value)
 
                 /************/
 
                 // Colunas
-                sugestoesCol = document.querySelectorAll('.colunas .nao_selecionado')
+                if (btnEstCol.value == 1) {
 
-                resposta = Colunas(resposta, sugestoesCol)
+                    sugestoesCol = document.querySelectorAll('.colunas .nao_selecionado')
+
+                    resposta = Colunas(resposta, sugestoesCol)
+
+                }// if (btnEstCol.value)
 
                 /************/
 

@@ -75,7 +75,7 @@
                     <input type="hidden" name="estDuz" value="2">
                 </div>
                 <h2 class="titulos">Dúzias</h2>
-                <div id="umaDuasDuz-container" class="button-container on">
+                <div id="umaDuasDuz-container" class="button-container">
                     <div class="button"></div>
                     <input type="hidden" name="umaDuasDuz" value="2">
                     <div class="text">
@@ -117,12 +117,12 @@
                 </div>
             </div>
             <div class="space-between">
-                <div id="estCol-container" class="button-container on">
+                <div id="estCol-container" class="button-container">
                     <div class="button"></div>
                     <input type="hidden" name="estCol" value="2">
                 </div>
                 <h2 class="titulos">Colunas</h2>
-                <div id="umaDuasCol-container" class="button-container on">
+                <div id="umaDuasCol-container" class="button-container">
                     <div class="button"></div>
                     <input type="hidden" name="umaDuasCol" value="2">
                     <div class="text">
