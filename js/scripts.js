@@ -127,7 +127,7 @@ inputSorteado.addEventListener("keypress", () => {
 
 /************/
 
-let userID            = document.getElementsByName('userID')
+let userID            = document.getElementsByName('userID')[0].value
 
 let saldoBanca        = document.getElementById('saldoBanca')
 let saldoLucro        = document.getElementById('saldoLucro')
@@ -137,11 +137,18 @@ let contaWin          = document.getElementById('contaWin')
 let contaLoss         = document.getElementById('contaLoss')
 
 let percD1            = document.getElementById('percD1')
-let valorD1           = document.getElementById('valorD1')
 let percD2            = document.getElementById('percD2')
-let valorD2           = document.getElementById('valorD2')
 let percD3            = document.getElementById('percD3')
+let valorD1           = document.getElementById('valorD1')
+let valorD2           = document.getElementById('valorD2')
 let valorD3           = document.getElementById('valorD3')
+
+let percC1            = document.getElementById('percC1')
+let percC2            = document.getElementById('percC2')
+let percC3            = document.getElementById('percC3')
+let valorC1           = document.getElementById('valorC1')
+let valorC2           = document.getElementById('valorC2')
+let valorC3           = document.getElementById('valorC3')
 
 let entradasD1        = document.getElementById('entradasD1')
 let entradasD2        = document.getElementById('entradasD2')
@@ -270,7 +277,7 @@ form.addEventListener('submit', function(e) {
 
                 /************/
 
-                contaWin.innerHTML = resposta.vitDuz ? resposta.vitDuz : "0"
+                contaWin.innerHTML  = resposta.vitDuz ? resposta.vitDuz : "0"
                 contaLoss.innerHTML = resposta.derDuz ? resposta.derDuz : "0"
 
                 /************/

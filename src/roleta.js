@@ -21,10 +21,11 @@ exports.jogar = (dados) => {
     // Aguarda os 12 útimos números sorteados para iniciar a análise probabilística
     if ((dados.numeros.length - zeros) > 12) {
 
-        dados.numeros   = dados.numeros.map(Number)
-        dados.banca     = Number(dados.banca)
-        dados.ventr     = Number(dados.ventr)
-        dados.estDuzias = Number(dados.estDuzias)
+        dados.numeros    = dados.numeros.map(Number)
+        dados.banca      = Number(dados.banca)
+        dados.ventr      = Number(dados.ventr)
+        dados.estDuzias  = Number(dados.estDuzias)
+        dados.estColunas = Number(dados.estColunas)
         dados.operacaoTestes = Number(dados.operacaoTestes)
 
         /************/
@@ -41,13 +42,15 @@ exports.jogar = (dados) => {
         dados.vitCol    = Number(dados.vitCol)
         dados.derCol    = Number(dados.derCol)
         dados.valorCol  = Number(dados.valorCol)
+        dados.acumCol   = Number(dados.acumCol)
         dados.rodadaCol = Number(dados.rodadaCol)
-        dados.apostaCol = Number(dados.apostaCol)
+        if (dados.estColunas == 1) dados.apostaCol = Number(dados.apostaCol)
 
         // Metades
         dados.vitMet    = Number(dados.vitMet)
         dados.derMet    = Number(dados.derMet)
         dados.valorMet  = Number(dados.valorMet)
+        dados.acumMet   = Number(dados.acumMet)
         dados.rodadaMet = Number(dados.rodadaMet)
         dados.apostaMet = Number(dados.apostaMet)
 
@@ -55,6 +58,7 @@ exports.jogar = (dados) => {
         dados.vitPIs    = Number(dados.vitPIs)
         dados.derPIs    = Number(dados.derPIs)
         dados.valorPIs  = Number(dados.valorPIs)
+        dados.acumPIs   = Number(dados.acumPIs)
         dados.rodadaPIs = Number(dados.rodadaPIs)
         dados.apostaPIs = Number(dados.apostaPIs)
 
@@ -62,6 +66,7 @@ exports.jogar = (dados) => {
         dados.vitVPs    = Number(dados.vitVPs)
         dados.derVPs    = Number(dados.derVPs)
         dados.valorVPs  = Number(dados.valorVPs)
+        dados.acumVPs   = Number(dados.acumVPs)
         dados.rodadaVPs = Number(dados.rodadaVPs)
         dados.apostaVPs = Number(dados.apostaVPs)
 
@@ -111,7 +116,6 @@ exports.jogar = (dados) => {
 
         }// else if (dados.operacaoTestes == 1)
 
-        // dados.colunas       = Strategies.colunas(dados)
         // dados.metades       = Strategies.metades(dados)
         // dados.paresImpares  = Strategies.paresImpares(dados)
         // dados.vermelhoPreto = Strategies.vermelhoPreto(dados)
